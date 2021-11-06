@@ -22,7 +22,8 @@ public:
 private:
 	enum RoleNames {
 		PathRole = Qt::UserRole,
+		UriRole,
 	};
-	QHash<int, QByteArray> role_names {{PathRole, "path"}};
+	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}};
 	std::vector<Path> paths;
 };

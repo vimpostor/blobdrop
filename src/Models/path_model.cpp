@@ -14,8 +14,9 @@ QVariant PathModel::data(const QModelIndex& index, int role) const
 {
 	const auto& p = paths[index.row()];
 	switch (role) {
-	case PathRole: return QString::fromStdString(p.path);
-	default: return QVariant();
+		case PathRole: return QString::fromStdString(p.path);
+		case UriRole: return "file://" + QString::fromStdString(p.path);
+		default: return QVariant();
 	};
 }
 

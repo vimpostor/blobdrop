@@ -38,7 +38,7 @@ ApplicationWindow {
 				Drag.active: mouseArea.drag.active
 				Drag.hotSpot.x: 0
 				Drag.hotSpot.y: 0
-				Drag.mimeData: { "text/uri-list": "file://" + path }
+				Drag.mimeData: { "text/uri-list": uri }
 				Drag.dragType: Drag.Automatic
 			}
 		}
