@@ -36,7 +36,10 @@ ApplicationWindow {
 			Item {
 				id: draggable
 				anchors.fill: parent
-				Drag.active: mouseArea.drag.active
+				Binding on Drag.active {
+					value: mouseArea.drag.active
+					delayed: true
+				}
 				Drag.hotSpot.x: 0
 				Drag.hotSpot.y: 0
 				Drag.mimeData: { "text/uri-list": uri }
