@@ -22,6 +22,7 @@ ApplicationWindow {
 			Rectangle {
 				anchors.fill: parent
 				color: used ? Material.accent : Material.primary
+				Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
 				Text {
 					anchors.centerIn: parent
 					text: path
