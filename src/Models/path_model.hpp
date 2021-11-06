@@ -18,12 +18,14 @@ public:
 	virtual QVariant data(const QModelIndex& index, int role) const override;
 	virtual QHash<int, QByteArray> roleNames() const override;
 
+	Q_INVOKABLE void taint_used(int i);
 	void add_path(Path p);
 private:
 	enum RoleNames {
 		PathRole = Qt::UserRole,
 		UriRole,
+		UsedRole,
 	};
-	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}};
+	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {UsedRole, "used"}};
 	std::vector<Path> paths;
 };

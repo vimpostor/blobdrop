@@ -21,7 +21,7 @@ ApplicationWindow {
 			anchors.right: parent.right
 			Rectangle {
 				anchors.fill: parent
-				color: Material.primary
+				color: used ? Material.accent : Material.primary
 				Text {
 					anchors.centerIn: parent
 					text: path
@@ -40,6 +40,9 @@ ApplicationWindow {
 				Drag.hotSpot.y: 0
 				Drag.mimeData: { "text/uri-list": uri }
 				Drag.dragType: Drag.Automatic
+				Drag.onDragFinished: (dropAction) => {
+					PathModel.taint_used(index)
+				}
 			}
 		}
 	}
