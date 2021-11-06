@@ -17,8 +17,7 @@ ApplicationWindow {
 		model: PathModel
 		delegate: Item {
 			height: 64
-			anchors.left: parent.left
-			anchors.right: parent.right
+			width: ListView.view.width
 			Rectangle {
 				anchors.fill: parent
 				color: used ? Material.accent : Material.primary
