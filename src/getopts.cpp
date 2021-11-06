@@ -9,10 +9,7 @@ void parse(QCoreApplication& app) {
 	p.addVersionOption();
 	p.process(app);
 
-	const auto paths = p.positionalArguments();
-	for (auto& i : paths) {
-		PathRegistry::get()->add_path(i.toStdString());
-	}
+	std::ranges::for_each(p.positionalArguments(), [](auto i){ PathRegistry::get()->add_path(i.toStdString()); });
 }
 
 }
