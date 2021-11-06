@@ -6,6 +6,8 @@
 
 #include "path.hpp"
 #include "path_registry.hpp"
+#include "settings.hpp"
+#include "backend.hpp"
 
 class PathModel : public QAbstractListModel {
 	Q_OBJECT
