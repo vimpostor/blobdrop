@@ -17,7 +17,9 @@ int main(int argc, char* argv[])
 		qputenv(materialVariantName, "Dense");
 	}
 	QGuiApplication app(argc, argv);
-	Getopts::parse(app);
+	if (!Getopts::parse(app)) {
+		return EXIT_FAILURE;
+	}
 
 	QGuiApplication::setWindowIcon(QIcon::fromTheme("blobdrop", QIcon(":/blobdrop")));
 

@@ -1,9 +1,11 @@
 #pragma once
 
+#include <iostream>
 #include <QCommandLineParser>
 
 #include "path_registry.hpp"
+#include "settings.hpp"
 
 namespace Getopts {
-	void parse(QCoreApplication& app);
+	bool parse(QCoreApplication& app);
 }
