@@ -7,6 +7,16 @@ import Backend
 ApplicationWindow {
 	id: root
 	visible: true
+	Connections {
+		target: Stdin
+		function onClosedChanged() {
+			if (Stdin.closed) {
+				title = "blobdrop"
+			} else {
+				title = "blobdrop (Reading stdin...)"
+			}
+		}
+	}
 	width: 485
 	height: 300
 	Material.theme: Material.System

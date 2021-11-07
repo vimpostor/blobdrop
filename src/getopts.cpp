@@ -10,9 +10,9 @@ bool parse(QCoreApplication& app) {
 	p.addHelpOption();
 	p.addVersionOption();
 
-	QCommandLineOption auto_quit_opt(QStringList() << "x" << "auto-quit", "Whether to quit after dragging and dropping. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used", "number");
+	QCommandLineOption auto_quit_opt(QStringList() << "x" << "auto-quit", "Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used", "number");
 
-	p.addOption({auto_quit_opt});
+	p.addOptions({auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
