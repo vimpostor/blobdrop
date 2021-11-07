@@ -36,7 +36,7 @@ void PathModel::taint_used(int i) {
 }
 
 void PathModel::add_path(Path p) {
-	beginInsertRows(QModelIndex(), paths.size(), paths.size() + 1);
+	beginInsertRows(QModelIndex(), paths.size(), paths.size());
 	paths.emplace_back(p);
 	endInsertRows();
 }
