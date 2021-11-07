@@ -29,6 +29,7 @@ ApplicationWindow {
 			height: 64
 			width: ListView.view.width
 			Rectangle {
+				id: rectangle
 				anchors.fill: parent
 				color: used ? Material.accent : Material.primary
 				Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
@@ -41,6 +42,12 @@ ApplicationWindow {
 				id: mouseArea
 				anchors.fill: parent
 				drag.target: draggable
+				hoverEnabled: true
+				onEntered: {
+					rectangle.grabToImage(function(result) {
+						draggable.Drag.imageSource = result.url;
+					}, Qt.size(50, 30));
+				}
 			}
 			Item {
 				id: draggable

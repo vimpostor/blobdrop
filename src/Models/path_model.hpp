@@ -27,7 +27,8 @@ private:
 		PathRole = Qt::UserRole,
 		UriRole,
 		UsedRole,
+		ThumbnailRole,
 	};
-	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {UsedRole, "used"}};
+	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {UsedRole, "used"}, {ThumbnailRole, "thumbnail"}};
 	std::vector<Path> paths;
 };
