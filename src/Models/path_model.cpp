@@ -17,6 +17,7 @@ QVariant PathModel::data(const QModelIndex& index, int role) const {
 		case UriRole: return "file://" + QString::fromStdString(p.path);
 		case UsedRole: return p.used;
 		case ThumbnailRole: return p.thumbnail;
+		case ExistsRole: return p.exists;
 		default: return QVariant();
 	};
 }

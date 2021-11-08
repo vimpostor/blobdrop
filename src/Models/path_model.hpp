@@ -28,7 +28,8 @@ private:
 		UriRole,
 		UsedRole,
 		ThumbnailRole,
+		ExistsRole,
 	};
-	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {UsedRole, "used"}, {ThumbnailRole, "thumbnail"}};
+	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {UsedRole, "used"}, {ThumbnailRole, "thumbnail"}, {ExistsRole, "exists"}};
 	std::vector<Path> paths;
 };

@@ -9,4 +9,5 @@ public:
 	std::filesystem::path path;
 	bool used = false;
 	QUrl thumbnail;
+	bool exists = false;
 };
