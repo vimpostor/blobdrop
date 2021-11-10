@@ -22,6 +22,17 @@ ApplicationWindow {
 	Material.theme: Material.System
 	Material.primary: Material.Green
 	Material.accent: Material.Cyan
+	DropArea {
+		anchors.fill: parent
+		onDropped: (drop) => {
+			Stdout.print_urls(drop.urls);
+		}
+		Rectangle {
+			anchors.fill: parent
+			color: parent.containsDrag ? Material.accent : Material.background
+			Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
+		}
+	}
 	ListView {
 		anchors.fill: parent
 		model: PathModel
