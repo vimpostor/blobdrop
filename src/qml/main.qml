@@ -29,7 +29,7 @@ ApplicationWindow {
 		}
 		Rectangle {
 			anchors.fill: parent
-			color: parent.containsDrag ? Material.accent : Material.background
+			color: parent.containsDrag && parent.drag.source === null ? Material.accent : Material.background
 			Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
 		}
 	}
