@@ -44,6 +44,28 @@ ApplicationWindow {
 		id: pathView
 		anchors.fill: parent
 		model: PathModel
+		header: Rectangle {
+			id: headerRect
+			height: 32
+			width: parent.width
+			visible: pathView.count
+			color: Material.color(Material.Grey)
+			Text {
+				anchors.centerIn: parent
+				text: "Drag all " + pathView.count + " items"
+			}
+			DragArea {
+				anchors.fill: parent
+				target: headerRect
+				dragUri: PathModel.foldedUriList
+				onPreDragStarted: {
+					PathModel.refresh_folded_paths();
+				}
+				onDragFinished: (dropAction) => {
+					PathModel.taint_all_used();
+				}
+			}
+		}
 		delegate: Item {
 			height: 64
 			width: ListView.view.width
