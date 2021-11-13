@@ -1,7 +1,7 @@
 #include "stdin.hpp"
 
 Stdin::Stdin(QObject* parent) {
-	socket = std::make_unique<QSocketNotifier>(fileno(stdin), QSocketNotifier::Read);
+	this->socket = std::make_unique<QSocketNotifier>(fileno(stdin), QSocketNotifier::Read);
 	connect(socket.get(), &QSocketNotifier::activated, this, &Stdin::read);
 }
 
