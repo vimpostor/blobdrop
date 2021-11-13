@@ -57,30 +57,11 @@ ApplicationWindow {
 					text: path
 				}
 			}
-			MouseArea {
-				id: mouseArea
+			DragArea {
 				anchors.fill: parent
-				drag.target: draggable
-				hoverEnabled: true
-				preventStealing: true
-				onEntered: {
-					rectangle.grabToImage(function(result) {
-						draggable.Drag.imageSource = result.url;
-					}, Qt.size(50, 30));
-				}
-			}
-			Item {
-				id: draggable
-				anchors.fill: parent
-				Binding on Drag.active {
-					value: mouseArea.drag.active
-					delayed: true
-				}
-				Drag.hotSpot.x: 0
-				Drag.hotSpot.y: 0
-				Drag.mimeData: { "text/uri-list": uri }
-				Drag.dragType: Drag.Automatic
-				Drag.onDragFinished: (dropAction) => {
+				target: rectangle
+				dragUri: uri
+				onDragFinished: (dropAction) => {
 					PathModel.taint_used(index)
 				}
 			}
