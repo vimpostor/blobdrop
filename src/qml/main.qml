@@ -34,39 +34,39 @@ ApplicationWindow {
 		}
 	}
 	Label {
-		anchors {left: parent.left; right: parent.right; margins: 48; verticalCenter: parent.verticalCenter}
+		anchors { left: parent.left; right: parent.right; margins: 48; verticalCenter: parent.verticalCenter }
 		horizontalAlignment: Text.AlignHCenter
 		visible: !pathView.count
 		text: "Pass file names as arguments or pipe them to stdin to make them appear here and drag them anywhere from there.\nAlternatively use this window as a sink by dropping files here."
 		wrapMode: Text.WordWrap
 	}
-	ListView {
-		id: pathView
-		anchors.fill: parent
-		model: PathModel
-		header: Rectangle {
-			id: headerRect
-			height: visible ? 32 : 0
-			Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
-			width: parent.width
-			visible: pathView.count > 1
-			color: Material.color(Material.Grey)
-			Text {
-				anchors.centerIn: parent
-				text: "Drag all " + pathView.count + " items"
+	Rectangle {
+		id: headerRect
+		anchors { left: parent.left; right: parent.right; top: parent.top }
+		height: visible ? 32 : 0
+		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
+		visible: pathView.count > 1
+		color: Material.color(Material.Grey)
+		Text {
+			anchors.centerIn: parent
+			text: "Drag all " + pathView.count + " items"
+		}
+		DragArea {
+			anchors.fill: parent
+			target: headerRect
+			dragUri: PathModel.foldedUriList
+			onPreDragStarted: {
+				PathModel.refresh_folded_paths();
 			}
-			DragArea {
-				anchors.fill: parent
-				target: headerRect
-				dragUri: PathModel.foldedUriList
-				onPreDragStarted: {
-					PathModel.refresh_folded_paths();
-				}
-				onDragFinished: (dropAction) => {
-					PathModel.taint_all_used();
-				}
+			onDragFinished: (dropAction) => {
+				PathModel.taint_all_used();
 			}
 		}
+	}
+	ListView {
+		id: pathView
+		anchors { left: parent.left; right: parent.right; top: headerRect.bottom; bottom: parent.bottom }
+		model: PathModel
 		delegate: Item {
 			height: 64
 			width: ListView.view.width
