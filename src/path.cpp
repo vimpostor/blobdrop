@@ -7,3 +7,7 @@ Path::Path(const std::string& p) : path(std::filesystem::absolute(p)) {
 		std::cerr << ex.what() << std::endl;
 	}
 }
+
+std::string Path::get_uri() const {
+	return "file://" + static_cast<std::string>(path);
+}

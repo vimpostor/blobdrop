@@ -46,9 +46,10 @@ ApplicationWindow {
 		model: PathModel
 		header: Rectangle {
 			id: headerRect
-			height: 32
+			height: visible ? 32 : 0
+			Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
 			width: parent.width
-			visible: pathView.count
+			visible: pathView.count > 1
 			color: Material.color(Material.Grey)
 			Text {
 				anchors.centerIn: parent

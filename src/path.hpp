@@ -11,4 +11,6 @@ public:
 	bool used = false;
 	QUrl thumbnail;
 	bool exists = false;
+
+	std::string get_uri() const;
 };

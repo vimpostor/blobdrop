@@ -14,7 +14,7 @@ QVariant PathModel::data(const QModelIndex& index, int role) const {
 	const auto& p = paths[index.row()];
 	switch (role) {
 		case PathRole: return QString::fromStdString(p.path);
-		case UriRole: return "file://" + QString::fromStdString(p.path);
+		case UriRole: return QString::fromStdString(p.get_uri());
 		case UsedRole: return p.used;
 		case ThumbnailRole: return p.thumbnail;
 		case ExistsRole: return p.exists;
@@ -41,7 +41,7 @@ void PathModel::taint_all_used() {
 void PathModel::refresh_folded_paths() {
 	folded_uri_list.clear();
 	for (auto& p : paths) {
-		folded_uri_list.append("file://" + QString::fromStdString(p.path) + "\n");
+		folded_uri_list.append(QString::fromStdString(p.get_uri()) + "\n");
 	}
 	emit foldedUriListChanged(folded_uri_list);
 }
