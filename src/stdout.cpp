@@ -7,5 +7,8 @@ void Stdout::print_urls(const QList<QUrl>& urls) {
 			url = url.substr(7);
 		}
 		std::cout << url << std::endl;
+		if (Settings::get()->keep_dropped_files) {
+			PathRegistry::get()->add_path(url);
+		}
 	}
 }

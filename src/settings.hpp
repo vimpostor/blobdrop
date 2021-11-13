@@ -12,4 +12,5 @@ public:
 
 	SINGLETON(Settings)
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
+	bool keep_dropped_files = false;
 };

@@ -3,6 +3,9 @@
 #include <iostream>
 #include <qqml.h>
 
+#include "settings.hpp"
+#include "path_registry.hpp"
+
 class Stdout : public QObject {
 	Q_OBJECT
 	QML_ELEMENT
