@@ -54,6 +54,7 @@ ApplicationWindow {
 				anchors.fill: parent
 				drag.target: draggable
 				hoverEnabled: true
+				preventStealing: true
 				onEntered: {
 					rectangle.grabToImage(function(result) {
 						draggable.Drag.imageSource = result.url;
