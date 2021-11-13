@@ -33,7 +33,15 @@ ApplicationWindow {
 			Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
 		}
 	}
+	Label {
+		anchors {left: parent.left; right: parent.right; margins: 48; verticalCenter: parent.verticalCenter}
+		horizontalAlignment: Text.AlignHCenter
+		visible: !pathView.count
+		text: "Pass file names as arguments or pipe them to stdin to make them appear here and drag them anywhere from there.\nAlternatively use this window as a sink by dropping files here."
+		wrapMode: Text.WordWrap
+	}
 	ListView {
+		id: pathView
 		anchors.fill: parent
 		model: PathModel
 		delegate: Item {
