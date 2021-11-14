@@ -65,6 +65,7 @@ ApplicationWindow {
 		anchors { left: parent.left; right: parent.right; top: headerRect.bottom; bottom: parent.bottom }
 		model: PathModel
 		visible: count
+		clip: true
 		delegate: Item {
 			height: 64
 			width: ListView.view.width
