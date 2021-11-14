@@ -26,6 +26,8 @@ int main(int argc, char* argv[])
 	QQmlApplicationEngine engine;
 	engine.addImportPath(QStringLiteral(":/"));
 
+	qmlRegisterSingletonInstance("Settings", 1, 0, "Settings", Settings::get());
+
 	engine.load(QUrl(QLatin1String("qrc:/Backend/src/qml/main.qml")));
 	if (engine.rootObjects().isEmpty())
 		return -1;
