@@ -66,6 +66,7 @@ ApplicationWindow {
 		model: PathModel
 		visible: count
 		clip: true
+		spacing: 2
 		delegate: Item {
 			height: 64
 			width: ListView.view.width
@@ -77,12 +78,18 @@ ApplicationWindow {
 				Text {
 					anchors.centerIn: parent
 					text: path
+					ToolTip.text: path
+					ToolTip.visible: dragArea.containsMouse
+					ToolTip.delay: 1500
+					ToolTip.timeout: 2000
 				}
 			}
 			DragArea {
+				id: dragArea
 				anchors.fill: parent
 				target: rectangle
 				dragUri: uri
+				hoverEnabled: true
 				onDragFinished: (dropAction) => {
 					PathModel.taint_used(index)
 				}
