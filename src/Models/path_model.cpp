@@ -39,10 +39,7 @@ void PathModel::taint_all_used() {
 }
 
 void PathModel::refresh_folded_paths() {
-	folded_uri_list.clear();
-	for (auto& p : paths) {
-		folded_uri_list.append(QString::fromStdString(p.get_uri()) + "\n");
-	}
+	folded_uri_list = std::accumulate(paths.cbegin(), paths.cend(), QString(), [&](QString s, const auto p){ return s.append(QString::fromStdString(p.get_uri()) + "\n"); });
 	emit foldedUriListChanged(folded_uri_list);
 }
 
