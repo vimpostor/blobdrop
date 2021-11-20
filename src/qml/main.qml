@@ -21,7 +21,7 @@ ApplicationWindow {
 	height: 300
 	Material.theme: Material.System
 	Material.primary: Material.Green
-	Material.accent: Material.Cyan
+	Material.accent: Material.Pink
 	DropArea {
 		anchors.fill: parent
 		onDropped: (drop) => {
@@ -29,7 +29,7 @@ ApplicationWindow {
 		}
 		Rectangle {
 			anchors.fill: parent
-			color: parent.containsDrag && parent.drag.source === null ? Material.accent : Material.background
+			color: parent.containsDrag && parent.drag.source === null ? Material.primary : Material.background
 			Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
 		}
 	}
@@ -43,7 +43,7 @@ ApplicationWindow {
 		height: visible ? 32 : 0
 		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
 		visible: pathView.count > 1
-		color: Material.color(Material.Grey)
+		color: Material.accent
 		Text {
 			anchors.centerIn: parent
 			text: "Drag all " + pathView.count + " items"
@@ -73,7 +73,7 @@ ApplicationWindow {
 			Rectangle {
 				id: rectangle
 				anchors.fill: parent
-				color: !exists ? Material.color(Material.Red) : used ? Material.accent : Material.primary
+				color: !exists ? Material.color(Material.Red) : used ? Material.primary : Material.color(Material.Grey)
 				Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
 				Text {
 					anchors.centerIn: parent
