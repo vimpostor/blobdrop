@@ -18,6 +18,12 @@ cmake --build build
 cmake --install build
 ```
 
+# Usage
+
+```bash
+blobdrop [files-to-drop]
+```
+
 # Alternatives
 
 [dragon](https://github.com/mwh/dragon) - A GTK implementation of the same concept
