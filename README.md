@@ -21,8 +21,10 @@ cmake --install build
 # Usage
 
 ```bash
-blobdrop [files-to-drop]
+blobdrop [files-to-drag]
 ```
+
+For more options see `blobdrop -h`.
 
 # Alternatives
 
