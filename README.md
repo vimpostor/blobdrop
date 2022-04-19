@@ -9,7 +9,7 @@ Arch users can simply install the `blobdrop-git` AUR package.
 
 ## Building from source
 
-Make sure you have Qt 6.2 with the Declarative and Svg modules installed.
+Make sure you have the latest Qt with the Declarative and Svg modules installed.
 
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release
