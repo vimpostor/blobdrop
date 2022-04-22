@@ -23,10 +23,7 @@ qt6_add_resources(RESOURCES ${RSRC})
 
 qt_add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
 
-qt_add_qml_module(${PROJECT_NAME} URI "Backend" VERSION 1.0 QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
-
-# Workaround until qml compilation segfault is resolved: https://bugreports.qt.io/browse/QTBUG-102554
-set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
+qt_add_qml_module(${PROJECT_NAME} URI "Backend" VERSION 1.0 QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp" DEPENDENCIES QtQml)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_PREFIXED_MODULES})
 
