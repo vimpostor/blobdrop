@@ -30,3 +30,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_PREFIXED_MODULES})
 # install
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME} RUNTIME)
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/doc/man/" TYPE MAN)
