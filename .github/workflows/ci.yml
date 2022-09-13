@@ -1,0 +1,14 @@
+name: Continuous Integration
+on: [push, pull_request]
+jobs:
+  build:
+    strategy:
+      matrix:
+        cxx: [g++, clang++]
+    runs-on: ubuntu-latest
+    env:
+      CXX: ${{ matrix.cxx }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build --build-arg cxx=$CXX -t blobdrop .
