@@ -11,9 +11,10 @@ bool parse(QCoreApplication& app) {
 	p.addVersionOption();
 
 	QCommandLineOption auto_quit_opt(QStringList() << "x" << "auto-quit", "Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used", "number");
+	QCommandLineOption no_ontop_opt(QStringList() << "t" << "no-ontop", "Do not keep the window on top of other windows");
 	QCommandLineOption keep_opt(QStringList() << "k" << "keep", "Keep dropped files around in sink mode.");
 
-	p.addOptions({auto_quit_opt, keep_opt});
+	p.addOptions({auto_quit_opt, no_ontop_opt, keep_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -28,6 +29,9 @@ bool parse(QCoreApplication& app) {
 			std::cerr << "auto-quit needs to be a number" << std::endl;
 			return false;
 		}
+	}
+	if (p.isSet(no_ontop_opt)) {
+		Settings::get()->always_on_top = false;
 	}
 	if (p.isSet(keep_opt)) {
 		Settings::get()->keep_dropped_files = true;

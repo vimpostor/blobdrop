@@ -2,12 +2,13 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
+import Settings
 import Backend
 
 ApplicationWindow {
 	id: root
 	visible: true
-	flags: Qt.Window | Qt.WindowStaysOnTopHint
+	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0)
 	Connections {
 		target: Stdin
 		function onClosedChanged() {
