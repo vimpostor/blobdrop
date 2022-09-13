@@ -7,6 +7,7 @@ import Backend
 ApplicationWindow {
 	id: root
 	visible: true
+	flags: Qt.Window | Qt.WindowStaysOnTopHint
 	Connections {
 		target: Stdin
 		function onClosedChanged() {
