@@ -11,9 +11,9 @@ ListView {
 	spacing: 6
 	header: Button {
 		width: parent.width
-		height: pathView.count ? 40 : 0
+		height: pathView.count > 1 ? 40 : 0
 		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
-		visible: pathView.count
+		visible: pathView.count > 1
 		highlighted: true
 		Text {
 			anchors.centerIn: parent
