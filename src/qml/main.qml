@@ -9,16 +9,7 @@ ApplicationWindow {
 	id: root
 	visible: true
 	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0)
-	Connections {
-		target: Stdin
-		function onClosedChanged() {
-			if (Stdin.closed) {
-				title = "blobdrop"
-			} else {
-				title = "blobdrop (Reading stdin...)"
-			}
-		}
-	}
+	title: Stdin.closed ? "blobdrop" : "Reading from stdin..."
 	width: 485
 	height: 300
 	Material.theme: Material.System
