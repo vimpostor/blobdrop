@@ -39,36 +39,34 @@ ApplicationWindow {
 		anchors { left: parent.left; right: parent.right; margins: 48; verticalCenter: parent.verticalCenter }
 		visible: !pathView.count
 	}
-	Rectangle {
-		id: headerRect
-		anchors { left: parent.left; right: parent.right; top: parent.top }
-		height: visible ? 32 : 0
-		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
-		visible: pathView.count > 1
-		color: Material.accent
-		Text {
-			anchors.centerIn: parent
-			text: "Drag all " + pathView.count + " items"
-		}
-		DragArea {
-			anchors.fill: parent
-			target: headerRect
-			dragUri: PathModel.foldedUriList
-			onPreDragStarted: {
-				PathModel.refresh_folded_paths();
-			}
-			onDragFinished: (dropAction) => {
-				PathModel.taint_all_used();
-			}
-		}
-	}
 	ListView {
 		id: pathView
-		anchors { left: parent.left; right: parent.right; top: headerRect.bottom; bottom: parent.bottom }
+		anchors.fill: parent
 		model: PathModel
 		visible: count
-		clip: true
 		spacing: 2
+		header: Rectangle {
+			width: parent.width
+			height: pathView.count ? 32 : 0
+			Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
+			visible: pathView.count
+			color: Material.accent
+			Text {
+				anchors.centerIn: parent
+				text: "Drag all " + pathView.count + " items"
+			}
+			DragArea {
+				anchors.fill: parent
+				target: parent
+				dragUri: PathModel.foldedUriList
+				onPreDragStarted: {
+					PathModel.refresh_folded_paths();
+				}
+				onDragFinished: (dropAction) => {
+					PathModel.taint_all_used();
+				}
+			}
+		}
 		delegate: Item {
 			height: 64
 			width: ListView.view.width
