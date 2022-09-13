@@ -8,13 +8,13 @@ ListView {
 	id: pathView
 	model: PathModel
 	visible: count
-	spacing: 2
-	header: Rectangle {
+	spacing: 6
+	header: Button {
 		width: parent.width
-		height: pathView.count ? 32 : 0
+		height: pathView.count ? 40 : 0
 		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
 		visible: pathView.count
-		color: Material.accent
+		highlighted: true
 		Text {
 			anchors.centerIn: parent
 			text: "Drag all " + pathView.count + " items"
@@ -34,11 +34,10 @@ ListView {
 	delegate: Item {
 		height: 64
 		width: ListView.view.width
-		Rectangle {
-			id: rectangle
+		Pane {
+			id: pane
 			anchors.fill: parent
-			color: !exists ? Material.color(Material.Red) : used ? Material.primary : Material.color(Material.Grey)
-			Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
+			Material.elevation: 6
 			Text {
 				anchors.centerIn: parent
 				text: path
@@ -47,11 +46,17 @@ ListView {
 				ToolTip.delay: 1500
 				ToolTip.timeout: 2000
 			}
+			Rectangle {
+				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
+				width: 8
+				color: !exists ? Material.color(Material.Red) : used ? Material.primary : Material.color(Material.Grey)
+				Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
+			}
 		}
 		DragArea {
 			id: dragArea
 			anchors.fill: parent
-			target: rectangle
+			target: pane
 			dragUri: uri
 			hoverEnabled: true
 			onDragFinished: (dropAction) => {

@@ -11,7 +11,7 @@ ApplicationWindow {
 	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0)
 	title: Stdin.closed ? "blobdrop" : "Reading from stdin..."
 	width: 485
-	height: 300
+	height: 400
 	Material.theme: Material.System
 	Material.primary: Material.Green
 	Material.accent: Material.Pink
@@ -33,5 +33,7 @@ ApplicationWindow {
 	PathView {
 		id: pathView
 		anchors.fill: parent
+		anchors.leftMargin: 4
+		anchors.rightMargin: 4
 	}
 }

@@ -29,7 +29,9 @@ int main(int argc, char* argv[])
 	qmlRegisterSingletonInstance("Settings", 1, 0, "Settings", Settings::get());
 
 	engine.load(QUrl(QLatin1String("qrc:/Backend/src/qml/main.qml")));
-	if (engine.rootObjects().isEmpty())
-		return -1;
+	if (engine.rootObjects().isEmpty()) {
+		return EXIT_FAILURE;
+	}
+
 	return QGuiApplication::exec();
 }
