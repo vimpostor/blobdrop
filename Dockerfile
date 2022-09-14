@@ -6,5 +6,5 @@ ENV CXX=$cxx
 
 ADD . /build
 WORKDIR /build
-RUN pacman -Syu --noconfirm doxygen imagemagick
+RUN pacman -Syu --noconfirm imagemagick
 RUN scripts/build.sh

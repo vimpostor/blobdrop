@@ -14,3 +14,5 @@ jobs:
       run: docker build --build-arg cxx=$CXX -t blobdrop .
     - name: Format code
       run: docker run fftune sh -c 'scripts/format-code.sh'
+    - name: Build documentation
+      run: docker run fftune sh -c 'cd doc && doxygen'
