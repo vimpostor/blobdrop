@@ -12,3 +12,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build --build-arg cxx=$CXX -t blobdrop .
+    - name: Format code
+      run: docker run fftune sh -c 'scripts/format-code.sh'
