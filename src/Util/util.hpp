@@ -13,3 +13,7 @@
 		static TYPE s {true}; \
 		return &s; \
 	}
+
+namespace Util {
+const char *home_dir();
+}

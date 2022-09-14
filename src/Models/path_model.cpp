@@ -17,6 +17,8 @@ QVariant PathModel::data(const QModelIndex &index, int role) const {
 		return QString::fromStdString(p.path);
 	case UriRole:
 		return QString::fromStdString(p.get_uri());
+	case PrettyRole:
+		return QString::fromStdString(p.pretty_print());
 	case UsedRole:
 		return p.used;
 	case ThumbnailRole:

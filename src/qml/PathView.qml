@@ -40,7 +40,7 @@ ListView {
 			Material.elevation: 6
 			Text {
 				anchors.centerIn: parent
-				text: path
+				text: pretty
 				ToolTip.text: path
 				ToolTip.visible: dragArea.containsMouse
 				ToolTip.delay: 1500

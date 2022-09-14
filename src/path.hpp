@@ -13,4 +13,5 @@ public:
 	bool exists = false;
 
 	std::string get_uri() const;
+	std::string pretty_print() const;
 };
