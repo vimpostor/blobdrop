@@ -1,4 +1,5 @@
-project(blobdrop)
+cmake_policy(SET CMP0048 NEW)
+project(blobdrop VERSION 0.1 DESCRIPTION "Drag and drop files directly out of the terminal")
 cmake_minimum_required(VERSION 3.21)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -13,6 +14,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 include_directories("src" "src/Models")
+add_compile_definitions(BLOBDROP_VERSION="${PROJECT_VERSION}")
 
 file(GLOB_RECURSE SRCS "src/*.cpp")
 file(GLOB_RECURSE HDRS "src/*.hpp")

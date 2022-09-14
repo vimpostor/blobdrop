@@ -5,10 +5,12 @@
 #include <QQuickStyle>
 
 #include "getopts.hpp"
+#include "version.hpp"
 
 int main(int argc, char *argv[]) {
 	QCoreApplication::setOrganizationName("blobdrop");
 	QCoreApplication::setApplicationName("blobdrop");
+	QCoreApplication::setApplicationVersion(Version::version_string());
 	QQuickStyle::setStyle(QLatin1String("Material"));
 	constexpr const char *materialVariantName = "QT_QUICK_CONTROLS_MATERIAL_VARIANT";
 	if (!qEnvironmentVariableIsSet(materialVariantName)) {
