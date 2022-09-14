@@ -1,13 +1,13 @@
 #pragma once
 
-#include <vector>
-#include <qqml.h>
 #include <QAbstractListModel>
+#include <qqml.h>
+#include <vector>
 
+#include "backend.hpp"
 #include "path.hpp"
 #include "path_registry.hpp"
 #include "settings.hpp"
-#include "backend.hpp"
 
 class PathModel : public QAbstractListModel {
 	Q_OBJECT
@@ -16,10 +16,10 @@ class PathModel : public QAbstractListModel {
 
 	Q_PROPERTY(QString foldedUriList MEMBER folded_uri_list NOTIFY foldedUriListChanged)
 public:
-	PathModel(QObject* parent = nullptr);
+	PathModel(QObject *parent = nullptr);
 
-	virtual int rowCount(const QModelIndex&) const override;
-	virtual QVariant data(const QModelIndex& index, int role) const override;
+	virtual int rowCount(const QModelIndex &) const override;
+	virtual QVariant data(const QModelIndex &index, int role) const override;
 	virtual QHash<int, QByteArray> roleNames() const override;
 
 	Q_INVOKABLE void taint_used(int i);

@@ -4,15 +4,22 @@
 
 namespace Getopts {
 
-bool parse(QCoreApplication& app) {
+bool parse(QCoreApplication &app) {
 	QCommandLineParser p;
 	p.setApplicationDescription("Quickly drag and drop files from the terminal to applications.");
 	p.addHelpOption();
 	p.addVersionOption();
 
-	QCommandLineOption auto_quit_opt(QStringList() << "x" << "auto-quit", "Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used", "number");
-	QCommandLineOption no_ontop_opt(QStringList() << "t" << "no-ontop", "Do not keep the window on top of other windows");
-	QCommandLineOption keep_opt(QStringList() << "k" << "keep", "Keep dropped files around in sink mode.");
+	QCommandLineOption auto_quit_opt(QStringList() << "x"
+												   << "auto-quit",
+		"Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used",
+		"number");
+	QCommandLineOption no_ontop_opt(QStringList() << "t"
+												  << "no-ontop",
+		"Do not keep the window on top of other windows");
+	QCommandLineOption keep_opt(QStringList() << "k"
+											  << "keep",
+		"Keep dropped files around in sink mode.");
 
 	p.addOptions({auto_quit_opt, no_ontop_opt, keep_opt});
 	p.process(app);
@@ -37,7 +44,7 @@ bool parse(QCoreApplication& app) {
 		Settings::get()->keep_dropped_files = true;
 	}
 	// add all trailing arguments to the path list
-	std::ranges::for_each(p.positionalArguments(), [](auto i){ PathRegistry::get()->add_path(i.toStdString()); });
+	std::ranges::for_each(p.positionalArguments(), [](auto i) { PathRegistry::get()->add_path(i.toStdString()); });
 	return true;
 }
 

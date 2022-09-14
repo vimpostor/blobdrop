@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <QSocketNotifier>
+#include <iostream>
 #include <qqml.h>
 
 #include "path_registry.hpp"
@@ -12,7 +12,7 @@ class Stdin : public QObject {
 	QML_SINGLETON
 	Q_PROPERTY(bool closed MEMBER m_closed NOTIFY closedChanged)
 public:
-	Stdin(QObject* parent = nullptr);
+	Stdin(QObject *parent = nullptr);
 signals:
 	void closedChanged();
 private:

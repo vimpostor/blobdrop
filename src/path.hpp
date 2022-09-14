@@ -1,12 +1,12 @@
 #pragma once
 
-#include <iostream>
-#include <filesystem>
 #include <QUrl>
+#include <filesystem>
+#include <iostream>
 
 class Path {
 public:
-	Path(const std::string& p);
+	Path(const std::string &p);
 	std::filesystem::path path;
 	bool used = false;
 	QUrl thumbnail;
