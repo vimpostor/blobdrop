@@ -13,9 +13,15 @@ MouseArea {
 	preventStealing: true
 	onPressed: {
 		preDragStarted();
+		var w = target.width;
+		var h = target.height;
+		if (w > 64) {
+			w = 64;
+			h = h / w * 64;
+		}
 		target.grabToImage(function(result) {
 			draggable.Drag.imageSource = result.url;
-		});
+		}, Qt.size(w, h));
 	}
 	Item {
 		id: draggable
