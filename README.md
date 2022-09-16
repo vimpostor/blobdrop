@@ -4,7 +4,7 @@
 
 Drag and drop your files directly from the terminal.
 
-![Screenshot](https://user-images.githubusercontent.com/21310755/148108749-f472f9ef-d039-48ba-8dd8-4fe820ecb654.png)
+![Screenshot](https://user-images.githubusercontent.com/21310755/190696396-51a2d827-53fc-4988-88f1-2770a23750f4.png)
 # Installation
 
 Arch users can simply install the [blobdrop-git](https://aur.archlinux.org/packages/blobdrop-git) AUR package.
