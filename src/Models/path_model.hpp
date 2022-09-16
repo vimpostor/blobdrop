@@ -34,10 +34,11 @@ private:
 		UriRole,
 		PrettyRole,
 		UsedRole,
+		IconRole,
 		ThumbnailRole,
 		ExistsRole,
 	};
-	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {PrettyRole, "pretty"}, {UsedRole, "used"}, {ThumbnailRole, "thumbnail"}, {ExistsRole, "exists"}};
+	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {PrettyRole, "pretty"}, {UsedRole, "used"}, {IconRole, "iconName"}, {ThumbnailRole, "thumbnail"}, {ExistsRole, "exists"}};
 	std::vector<Path> paths;
 	QString folded_uri_list;
 	void check_should_quit();

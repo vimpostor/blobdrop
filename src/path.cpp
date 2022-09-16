@@ -1,8 +1,13 @@
 #include "path.hpp"
 
 #include <cstring>
+#include <QMimeType>
+#include <iostream>
+#include <QDebug>
+#include <QMimeDatabase>
 
 #include "Util/util.hpp"
+#include "mimedb.hpp"
 
 Path::Path(const std::string &p)
 	: path(std::filesystem::absolute(p)) {
@@ -11,6 +16,7 @@ Path::Path(const std::string &p)
 	} catch (const std::filesystem::filesystem_error &ex) {
 		std::cerr << ex.what() << std::endl;
 	}
+	iconName = MimeDb::get()->getIcon(path);
 }
 
 std::string Path::get_uri() const {

@@ -38,6 +38,7 @@ ListView {
 			id: pane
 			anchors.fill: parent
 			Material.elevation: 6
+			padding: 0
 			Text {
 				anchors.centerIn: parent
 				text: pretty
@@ -45,6 +46,16 @@ ListView {
 				ToolTip.visible: dragArea.containsMouse
 				ToolTip.delay: 1500
 				ToolTip.timeout: 2000
+			}
+			Button {
+				anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
+				width: height
+				icon.name: iconName
+				icon.color: "transparent"
+				icon.width: parent.height
+				icon.height: parent.height
+				flat: true
+				enabled: false
 			}
 			Rectangle {
 				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
