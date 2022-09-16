@@ -1,10 +1,10 @@
 #include "path.hpp"
 
-#include <cstring>
-#include <QMimeType>
-#include <iostream>
 #include <QDebug>
 #include <QMimeDatabase>
+#include <QMimeType>
+#include <cstring>
+#include <iostream>
 
 #include "Util/util.hpp"
 #include "mimedb.hpp"

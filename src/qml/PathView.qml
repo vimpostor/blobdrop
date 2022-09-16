@@ -48,6 +48,7 @@ ListView {
 				ToolTip.timeout: 2000
 			}
 			Button {
+				id: iconButton
 				anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
 				width: height
 				icon.name: iconName
@@ -67,7 +68,7 @@ ListView {
 		DragArea {
 			id: dragArea
 			anchors.fill: parent
-			target: pane
+			target: iconButton
 			dragUri: uri
 			hoverEnabled: true
 			onDragFinished: (dropAction) => {

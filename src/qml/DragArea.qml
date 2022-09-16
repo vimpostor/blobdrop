@@ -15,7 +15,7 @@ MouseArea {
 		preDragStarted();
 		target.grabToImage(function(result) {
 			draggable.Drag.imageSource = result.url;
-		}, Qt.size(50, 30));
+		});
 	}
 	Item {
 		id: draggable
