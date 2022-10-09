@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-git ls-files| grep -E '.*\.[ch]pp'| xargs clang-format -style=file -i
+git ls-files| grep -E '.*\.[ch]pp$'| xargs clang-format -style=file -i
 
 # return only with EXIT_SUCCESS if there were no changes
 # otherwise show the changes and return with error code
