@@ -10,7 +10,7 @@
 class MimeDb {
 public:
 	SINGLETON(MimeDb)
-	std::string getIcon(const std::filesystem::path& p) const;
+	std::string getIcon(const std::filesystem::path &p) const;
 private:
 	QMimeDatabase db;
 };
