@@ -21,7 +21,7 @@ public:
 	STRICT_SINGLETON(Settings)
 
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
-	bool always_on_top = true;
+	bool always_on_top = false;
 	bool keep_dropped_files = false;
 signals:
 	void alwaysOnTopChanged(bool alwaysOnTop);
