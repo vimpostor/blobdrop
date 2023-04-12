@@ -14,7 +14,7 @@ ListView {
 		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
 		visible: pathView.count > 1
 		highlighted: true
-		Text {
+		Label {
 			anchors.centerIn: parent
 			text: "Drag all " + pathView.count + " items"
 		}
@@ -38,7 +38,7 @@ ListView {
 			anchors.fill: parent
 			Material.elevation: 6
 			padding: 0
-			Text {
+			Label {
 				anchors.centerIn: parent
 				text: pretty
 				ToolTip.text: path
