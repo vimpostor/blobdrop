@@ -31,5 +31,5 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 
 # Alternatives
 
-[dragon](https://github.com/mwh/dragon) - A GTK implementation of the same concept
-[ripdrag](https://github.com/nik012003/ripdrag) - Like dragon, but rewritten in Rust
+- [dragon](https://github.com/mwh/dragon), A GTK implementation of the same concept
+- [ripdrag](https://github.com/nik012003/ripdrag), Like dragon, but rewritten in Rust
