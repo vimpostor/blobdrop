@@ -19,9 +19,8 @@ int main(int argc, char *argv[]) {
 	QGuiApplication::setWindowIcon(QIcon::fromTheme("blobdrop", QIcon(":/blobdrop")));
 
 	QQmlApplicationEngine engine;
-	engine.addImportPath(QStringLiteral(":/"));
 
-	engine.load(QUrl(QLatin1String("qrc:/Backend/src/qml/main.qml")));
+	engine.load(QUrl(QStringLiteral("qrc:/src/qml/main.qml")));
 	if (engine.rootObjects().isEmpty()) {
 		return EXIT_FAILURE;
 	}
