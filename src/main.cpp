@@ -11,12 +11,6 @@ int main(int argc, char *argv[]) {
 	QCoreApplication::setOrganizationName("blobdrop");
 	QCoreApplication::setApplicationName("blobdrop");
 	QCoreApplication::setApplicationVersion(Version::version_string());
-	QQuickStyle::setStyle(QLatin1String("Material"));
-	constexpr const char *materialVariantName = "QT_QUICK_CONTROLS_MATERIAL_VARIANT";
-	if (!qEnvironmentVariableIsSet(materialVariantName)) {
-		// dense Material style, more suited for desktop targets
-		qputenv(materialVariantName, "Dense");
-	}
 	QGuiApplication app(argc, argv);
 	if (!Getopts::parse(app)) {
 		return EXIT_FAILURE;
