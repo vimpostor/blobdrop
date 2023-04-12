@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-import Settings
 import Backend
 
 ApplicationWindow {

@@ -20,6 +20,7 @@ public:
 
 	STRICT_SINGLETON(Settings)
 
+	static Settings *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
 	bool always_on_top = false;
 	bool keep_dropped_files = false;
