@@ -13,6 +13,12 @@ Path::Path(const std::string &p)
 		std::cerr << ex.what() << std::endl;
 	}
 	iconName = MimeDb::get()->getIcon(path);
+
+	// If this is an image, initialize the thumbnail
+	if (MimeDb::get()->getMimetype(path).name().startsWith("image")) {
+		// Just reuse the file itself, QML itself can later create an image on demand from this
+		thumbnail = get_url();
+	}
 }
 
 std::string Path::get_uri() const {

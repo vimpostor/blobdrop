@@ -50,7 +50,8 @@ ListView {
 				id: iconButton
 				anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
 				width: height
-				icon.name: iconName
+				icon.name: thumbnail == "" ? iconName : ""
+				icon.source: thumbnail
 				icon.color: "transparent"
 				icon.width: parent.height
 				icon.height: parent.height

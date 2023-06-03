@@ -11,6 +11,7 @@ class MimeDb {
 public:
 	SINGLETON(MimeDb)
 	std::string getIcon(const std::filesystem::path &p) const;
+	QMimeType getMimetype(const std::filesystem::path &p) const;
 private:
 	QMimeDatabase db;
 };
