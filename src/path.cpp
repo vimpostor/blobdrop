@@ -1,5 +1,7 @@
 #include "path.hpp"
 
+#include <QDesktopServices>
+
 #include "Util/util.hpp"
 #include "mimedb.hpp"
 
@@ -17,6 +19,10 @@ std::string Path::get_uri() const {
 	return "file://" + static_cast<std::string>(path);
 }
 
+QUrl Path::get_url() const {
+	return QUrl(QString::fromStdString(get_uri()));
+}
+
 std::string Path::pretty_print() const {
 	std::string result = path.string();
 	const auto home = Util::home_dir();
@@ -24,4 +30,8 @@ std::string Path::pretty_print() const {
 		result.replace(0, std::strlen(home), "~");
 	}
 	return result;
+}
+
+bool Path::open() const {
+	return QDesktopServices::openUrl(get_url());
 }

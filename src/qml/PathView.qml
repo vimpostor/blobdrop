@@ -70,6 +70,7 @@ ListView {
 			target: iconButton
 			dragUri: uri
 			hoverEnabled: true
+			onClicked: PathModel.open(index);
 			onDragFinished: (dropAction) => {
 				PathModel.taint_used(index)
 			}

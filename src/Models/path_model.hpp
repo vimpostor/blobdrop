@@ -25,6 +25,7 @@ public:
 	Q_INVOKABLE void taint_used(int i);
 	Q_INVOKABLE void taint_all_used();
 	Q_INVOKABLE void refresh_folded_paths();
+	Q_INVOKABLE void open(int i) const;
 	void add_path(Path p);
 signals:
 	void foldedUriListChanged(QString foldedUriList);

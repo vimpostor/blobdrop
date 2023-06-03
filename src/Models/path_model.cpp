@@ -53,6 +53,12 @@ void PathModel::refresh_folded_paths() {
 	emit foldedUriListChanged(folded_uri_list);
 }
 
+void PathModel::open(int i) const {
+	if (!paths[i].open()) {
+		qDebug() << "Failed to open path" << paths[i].get_uri();
+	};
+}
+
 void PathModel::add_path(Path p) {
 	beginInsertRows(QModelIndex(), paths.size(), paths.size());
 	paths.emplace_back(p);

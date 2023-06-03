@@ -14,5 +14,7 @@ public:
 	std::string iconName;
 
 	std::string get_uri() const;
+	QUrl get_url() const;
 	std::string pretty_print() const;
+	bool open() const;
 };
