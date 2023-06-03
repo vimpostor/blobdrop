@@ -7,7 +7,7 @@ ApplicationWindow {
 	id: root
 	visible: true
 	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0)
-	title: Stdin.closed ? "blobdrop" : "Reading from stdin..."
+	title: Stdin.closed ? "Blobdrop" : "Reading from stdin..."
 	width: 485
 	height: 350
 	Material.theme: Material.System
