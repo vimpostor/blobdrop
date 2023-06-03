@@ -14,7 +14,7 @@ Arch users can simply install the [blobdrop-git](https://aur.archlinux.org/packa
 Make sure you have the latest Qt with the Declarative and Svg modules installed.
 
 ```bash
-cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake -B build
 cmake --build build
 
 # install the build/blobdrop binary

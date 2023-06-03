@@ -17,10 +17,18 @@ ListView {
 		Label {
 			anchors.centerIn: parent
 			text: "Drag all " + pathView.count + " items"
+			Button {
+				id: dragallDummy
+				visible: false
+				icon.name: "emblem-documents"
+				icon.color: "transparent"
+				width: 64
+				height: 64
+			}
 		}
 		DragArea {
 			anchors.fill: parent
-			target: parent
+			target: dragallDummy
 			dragUri: PathModel.foldedUriList
 			onPreDragStarted: {
 				PathModel.refresh_folded_paths();
