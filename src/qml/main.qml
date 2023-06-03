@@ -13,6 +13,10 @@ ApplicationWindow {
 	Material.theme: Material.System
 	Material.primary: Material.Green
 	Material.accent: Material.Pink
+	Shortcut {
+		sequence: StandardKey.Quit
+		onActivated: Qt.quit();
+	}
 	DropArea {
 		anchors.fill: parent
 		onDropped: (drop) => {
