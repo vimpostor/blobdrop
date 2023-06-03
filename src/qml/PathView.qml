@@ -50,13 +50,20 @@ ListView {
 				id: iconButton
 				anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
 				width: height
-				icon.name: thumbnail == "" ? iconName : ""
+				visible: thumbnail == ""
+				icon.name: iconName
 				icon.source: thumbnail
 				icon.color: "transparent"
 				icon.width: parent.height
 				icon.height: parent.height
 				flat: true
 				enabled: false
+			}
+			Image {
+				anchors.fill: iconButton
+				visible: !iconButton.visible
+				source: thumbnail
+				asynchronous: true
 			}
 			Rectangle {
 				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
