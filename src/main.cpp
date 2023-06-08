@@ -21,10 +21,10 @@ int main(int argc, char *argv[]) {
 	QQmlApplicationEngine engine;
 	engine.addImportPath(QStringLiteral(":/"));
 
-	engine.load(QUrl(QLatin1String("qrc:/Backend/src/qml/main.qml")));
+	engine.loadFromModule("Backend", "Main");
 	if (engine.rootObjects().isEmpty()) {
 		return EXIT_FAILURE;
 	}
 
-	return QGuiApplication::exec();
+	return app.exec();
 }
