@@ -71,6 +71,7 @@ ListView {
 				anchors.fill: iconButton
 				visible: !iconButton.visible
 				source: thumbnail
+				fillMode: Image.PreserveAspectCrop
 				asynchronous: true
 			}
 			Rectangle {
