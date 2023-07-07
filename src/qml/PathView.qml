@@ -33,8 +33,10 @@ ListView {
 			onPreDragStarted: {
 				PathModel.refresh_folded_paths();
 			}
+			onDragStarted: Settings.alwaysOnBottom = true
 			onDragFinished: (dropAction) => {
 				PathModel.taint_all_used();
+				Settings.alwaysOnBottom = false;
 			}
 		}
 	}
@@ -88,8 +90,10 @@ ListView {
 			dragUri: uri
 			hoverEnabled: true
 			onClicked: PathModel.open(index);
+			onDragStarted: Settings.alwaysOnBottom = true
 			onDragFinished: (dropAction) => {
 				PathModel.taint_used(index)
+				Settings.alwaysOnBottom = false;
 			}
 		}
 	}

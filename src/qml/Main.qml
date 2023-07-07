@@ -6,7 +6,7 @@ import Backend
 ApplicationWindow {
 	id: root
 	visible: true
-	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0)
+	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0) | (Settings.alwaysOnBottom ? Qt.WindowStaysOnBottomHint : 0)
 	title: Stdin.closed ? "Blobdrop" : "Reading from stdin..."
 	width: 485
 	height: 350

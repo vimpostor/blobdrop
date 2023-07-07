@@ -10,6 +10,7 @@ class Settings : public QObject {
 	QML_SINGLETON
 
 	Q_PROPERTY(bool alwaysOnTop MEMBER always_on_top NOTIFY alwaysOnTopChanged)
+	Q_PROPERTY(bool alwaysOnBottom MEMBER always_on_bottom NOTIFY alwaysOnBottomChanged)
 	Q_PROPERTY(bool keepDroppedFiles MEMBER keep_dropped_files NOTIFY keepDroppedFilesChanged)
 public:
 	enum class AutoQuitBehavior {
@@ -23,8 +24,10 @@ public:
 	static Settings *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
 	bool always_on_top = false;
+	bool always_on_bottom = false;
 	bool keep_dropped_files = false;
 signals:
 	void alwaysOnTopChanged(bool alwaysOnTop);
+	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);
 };
