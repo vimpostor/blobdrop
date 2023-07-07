@@ -20,8 +20,11 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
+	QCommandLineOption persistent_opt(QStringList() << "p"
+											  << "persistent",
+		"Do not auto-hide the main window while dragging.");
 
-	p.addOptions({auto_quit_opt, ontop_opt, keep_opt});
+	p.addOptions({auto_quit_opt, ontop_opt, keep_opt, persistent_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -43,6 +46,10 @@ bool parse(QCoreApplication &app) {
 	if (p.isSet(keep_opt)) {
 		Settings::get()->keep_dropped_files = true;
 	}
+	if (p.isSet(persistent_opt)) {
+		Settings::get()->disable_always_on_bottom();
+	}
+
 	// add all trailing arguments to the path list
 	std::ranges::for_each(p.positionalArguments(), [](auto i) { PathRegistry::get()->add_path(i.toStdString()); });
 	return true;

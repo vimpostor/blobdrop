@@ -23,7 +23,7 @@ public:
 
 	static Settings *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
-	void prepare_quit();
+	void disable_always_on_bottom();
 	void setAlwaysOnBottom(const bool v);
 
 	bool always_on_top = false;
@@ -34,5 +34,5 @@ signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);
 private:
-	bool is_about_to_quit = false;
+	bool supress_always_on_bottom = false;
 };

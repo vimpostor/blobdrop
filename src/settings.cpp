@@ -8,12 +8,12 @@ Settings *Settings::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) {
 	return res;
 }
 
-void Settings::prepare_quit() {
-	is_about_to_quit = true;
+void Settings::disable_always_on_bottom() {
+	supress_always_on_bottom = true;
 }
 
 void Settings::setAlwaysOnBottom(const bool v) {
-	if (!is_about_to_quit) {
+	if (!supress_always_on_bottom) {
 		always_on_bottom = v;
 		emit alwaysOnBottomChanged(always_on_bottom);
 	}
