@@ -89,6 +89,7 @@ ListView {
 			target: iconButton
 			dragUri: uri
 			hoverEnabled: true
+			acceptedButtons: Qt.LeftButton | Qt.RightButton
 			onClicked: PathModel.open(index);
 			onDragStarted: Settings.alwaysOnBottom = true
 			onDragFinished: (dropAction) => {
