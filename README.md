@@ -4,10 +4,10 @@
 
 Drag and drop your files directly from the terminal.
 
-![Screenshot](https://user-images.githubusercontent.com/21310755/190696396-51a2d827-53fc-4988-88f1-2770a23750f4.png)
+![Screenshot](https://user-images.githubusercontent.com/21310755/252060266-04120929-fa7b-4534-9b89-dd3fb7a2e605.png)
 # Installation
 
-Note: For Arch Linux users there is an [AUR package](https://aur.archlinux.org/packages/blobdrop-git), for Nix users there is a flake in this repo.
+Note: For Arch Linux users there is an [AUR package](https://aur.archlinux.org/packages/blobdrop-git), for Nix users there is a [flake](flake.nix) available.
 
 ## Building from source
 
@@ -42,7 +42,7 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 - Optionally keep the window on top
 - Quickly open files with a single click
 - Respect system dark mode
-- Efficient implementation, can scroll through a list of several thousand files without dropping frames
+- Efficient implementation, can scroll through a list of several thousand files without dropping any frames
 
 # Alternatives
 
