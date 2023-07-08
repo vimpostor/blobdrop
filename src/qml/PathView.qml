@@ -63,8 +63,8 @@ ListView {
 				visible: thumbnail == ""
 				icon.name: iconName
 				icon.color: "transparent"
-				icon.width: parent.height
-				icon.height: parent.height
+				icon.width: 2 * parent.height
+				icon.height: 2 * parent.height
 				flat: true
 				enabled: false
 			}
