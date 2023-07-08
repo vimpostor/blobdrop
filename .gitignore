@@ -50,4 +50,3 @@ latex/
 
 .cache/
 .gitattributes
-flake.lock
