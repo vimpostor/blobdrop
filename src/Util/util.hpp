@@ -1,5 +1,8 @@
 #pragma once
 
+#include <filesystem>
+#include <string>
+
 #define SINGLETON(TYPE) \
 	static TYPE *get() { \
 		static TYPE s; \
@@ -15,5 +18,7 @@
 	}
 
 namespace Util {
+
 const char *home_dir();
+std::string pwd();
 }

@@ -18,4 +18,11 @@ const char *home_dir() {
 	return result;
 }
 
+std::string pwd() {
+	static std::string result;
+	if (result.empty()) {
+		result = std::filesystem::current_path().string() + "/";
+	}
+	return result;
+}
 }
