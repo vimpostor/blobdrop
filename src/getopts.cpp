@@ -21,7 +21,7 @@ bool parse(QCoreApplication &app) {
 											  << "keep",
 		"Keep dropped files around in sink mode.");
 	QCommandLineOption persistent_opt(QStringList() << "p"
-											  << "persistent",
+													<< "persistent",
 		"Do not auto-hide the main window while dragging.");
 
 	p.addOptions({auto_quit_opt, ontop_opt, keep_opt, persistent_opt});
