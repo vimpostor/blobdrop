@@ -8,7 +8,7 @@ ApplicationWindow {
 	visible: true
 	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0) | (Settings.alwaysOnBottom ? Qt.WindowStaysOnBottomHint : 0)
 	title: Stdin.closed ? "Blobdrop" : "Reading from stdin..."
-	width: 485
+	width: 400
 	height: 350
 	Material.theme: Material.System
 	Material.primary: Material.Green
