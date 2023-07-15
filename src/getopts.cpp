@@ -16,15 +16,18 @@ bool parse(QCoreApplication &app) {
 		"number");
 	QCommandLineOption ontop_opt(QStringList() << "t"
 											   << "ontop",
-		"Keep the window on top of other windows");
+		"Keep the window on top of other windows.");
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
 	QCommandLineOption persistent_opt(QStringList() << "p"
 													<< "persistent",
 		"Do not auto-hide the main window while dragging.");
+	QCommandLineOption frameless_opt(QStringList() << "f"
+												   << "frameless",
+		"Show a frameless window.");
 
-	p.addOptions({auto_quit_opt, ontop_opt, keep_opt, persistent_opt});
+	p.addOptions({auto_quit_opt, ontop_opt, keep_opt, persistent_opt, frameless_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -48,6 +51,9 @@ bool parse(QCoreApplication &app) {
 	}
 	if (p.isSet(persistent_opt)) {
 		Settings::get()->disable_always_on_bottom();
+	}
+	if (p.isSet(frameless_opt)) {
+		Settings::get()->enable_frameless();
 	}
 
 	// add all trailing arguments to the path list
