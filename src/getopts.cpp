@@ -10,24 +10,24 @@ bool parse(QCoreApplication &app) {
 	p.addHelpOption();
 	p.addVersionOption();
 
-	QCommandLineOption auto_quit_opt(QStringList() << "x"
-												   << "auto-quit",
-		"Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used",
-		"number");
-	QCommandLineOption ontop_opt(QStringList() << "t"
-											   << "ontop",
-		"Keep the window on top of other windows.");
+	QCommandLineOption frameless_opt(QStringList() << "f"
+												   << "frameless",
+		"Show a frameless window.");
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
 	QCommandLineOption persistent_opt(QStringList() << "p"
 													<< "persistent",
 		"Do not auto-hide the main window while dragging.");
-	QCommandLineOption frameless_opt(QStringList() << "f"
-												   << "frameless",
-		"Show a frameless window.");
+	QCommandLineOption ontop_opt(QStringList() << "t"
+											   << "ontop",
+		"Keep the window on top of other windows.");
+	QCommandLineOption auto_quit_opt(QStringList() << "x"
+												   << "auto-quit",
+		"Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used",
+		"number");
 
-	p.addOptions({auto_quit_opt, ontop_opt, keep_opt, persistent_opt, frameless_opt});
+	p.addOptions({frameless_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
