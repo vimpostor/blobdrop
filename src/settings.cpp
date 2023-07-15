@@ -18,7 +18,3 @@ void Settings::setAlwaysOnBottom(const bool v) {
 		emit alwaysOnBottomChanged(always_on_bottom);
 	}
 }
-
-void Settings::enable_frameless() {
-	frameless = true;
-}

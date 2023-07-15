@@ -53,7 +53,7 @@ bool parse(QCoreApplication &app) {
 		Settings::get()->disable_always_on_bottom();
 	}
 	if (p.isSet(frameless_opt)) {
-		Settings::get()->enable_frameless();
+		Settings::get()->frameless = true;
 	}
 
 	// add all trailing arguments to the path list
