@@ -78,7 +78,7 @@ ListView {
 			Rectangle {
 				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
 				width: 8
-				color: !exists ? Material.color(Material.Red) : used ? Material.primary : Material.color(Material.Grey)
+				color: used ? Material.primary : exists ? Material.color(Material.Grey) : Material.color(Material.Red)
 				Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
 			}
 		}
