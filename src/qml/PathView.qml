@@ -52,7 +52,7 @@ ListView {
 				anchors.centerIn: parent
 				text: pretty
 				ToolTip.text: path
-				ToolTip.visible: dragArea.containsMouse
+				ToolTip.visible: dragArea.containsMouse && (count > 1)
 				ToolTip.delay: 1500
 				ToolTip.timeout: 2000
 			}
