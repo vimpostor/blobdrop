@@ -31,3 +31,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_PREFIXED_MODULES})
 # install
 install(TARGETS ${PROJECT_NAME} RUNTIME)
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/doc/man/" TYPE MAN)
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/assets/completions/" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}")
