@@ -42,6 +42,7 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 - Optionally keep the window on top
 - Quickly open files with a single click
 - Respect system dark mode
+- Shell completions
 - Efficient implementation, can scroll through a list of several thousand files without dropping any frames
 
 # Alternatives
