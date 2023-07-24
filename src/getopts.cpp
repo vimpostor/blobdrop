@@ -1,4 +1,5 @@
 #include "getopts.hpp"
+#include "settings.hpp"
 
 #include <bits/ranges_algo.h>
 
@@ -16,6 +17,9 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
+	QCommandLineOption notify_opt(QStringList() << "n"
+												<< "notification",
+		"Send a notification for dragging.");
 	QCommandLineOption persistent_opt(QStringList() << "p"
 													<< "persistent",
 		"Do not auto-hide the main window while dragging.");
@@ -27,7 +31,7 @@ bool parse(QCoreApplication &app) {
 		"Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used",
 		"number");
 
-	p.addOptions({frameless_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, keep_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -48,6 +52,9 @@ bool parse(QCoreApplication &app) {
 	}
 	if (p.isSet(keep_opt)) {
 		Settings::get()->keep_dropped_files = true;
+	}
+	if (p.isSet(notify_opt)) {
+		Settings::get()->send_notification = true;
 	}
 	if (p.isSet(persistent_opt)) {
 		Settings::get()->disable_always_on_bottom();

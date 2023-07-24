@@ -59,6 +59,11 @@ void PathModel::open(int i) const {
 	};
 }
 
+void PathModel::send_notification() {
+	refresh_folded_paths();
+	Backend::get()->send_drag_notification(folded_uri_list);
+}
+
 void PathModel::add_path(Path p) {
 	beginInsertRows(QModelIndex(), paths.size(), paths.size());
 	paths.emplace_back(p);

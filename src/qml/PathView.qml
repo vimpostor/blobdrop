@@ -30,6 +30,12 @@ ListView {
 			anchors.fill: parent
 			target: dragallDummy
 			dragUri: PathModel.foldedUriList
+			Component.onCompleted: {
+				if (Settings.sendNotification) {
+					PathModel.send_notification();
+					Qt.quit();
+				}
+			}
 			onPreDragStarted: {
 				PathModel.refresh_folded_paths();
 			}

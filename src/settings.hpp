@@ -13,6 +13,7 @@ class Settings : public QObject {
 	Q_PROPERTY(bool alwaysOnBottom MEMBER always_on_bottom WRITE setAlwaysOnBottom NOTIFY alwaysOnBottomChanged)
 	Q_PROPERTY(bool keepDroppedFiles MEMBER keep_dropped_files NOTIFY keepDroppedFilesChanged)
 	Q_PROPERTY(bool frameless MEMBER frameless CONSTANT)
+	Q_PROPERTY(bool sendNotification MEMBER send_notification CONSTANT)
 public:
 	enum class AutoQuitBehavior {
 		Never,
@@ -31,6 +32,7 @@ public:
 	bool always_on_bottom = false;
 	bool keep_dropped_files = false;
 	bool frameless = false;
+	bool send_notification = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);
