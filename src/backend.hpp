@@ -10,5 +10,5 @@ public:
 	SINGLETON(Backend)
 
 	void quit_delayed();
-	void send_drag_notification(const QString &uri);
+	void send_drag_notification(const QList<QString> &uris);
 };

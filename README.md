@@ -43,6 +43,7 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 - Quickly open files with a single click
 - Respect system dark mode
 - Shell completions
+- Optional notification drag frontend
 - Efficient implementation, can scroll through a list of several thousand files without dropping any frames
 
 # Alternatives

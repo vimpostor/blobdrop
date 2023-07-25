@@ -61,7 +61,8 @@ void PathModel::open(int i) const {
 
 void PathModel::send_notification() {
 	refresh_folded_paths();
-	Backend::get()->send_drag_notification(folded_uri_list);
+	const auto uri_list = folded_uri_list.split(QChar::LineFeed, Qt::SkipEmptyParts);
+	Backend::get()->send_drag_notification(uri_list);
 }
 
 void PathModel::add_path(Path p) {
