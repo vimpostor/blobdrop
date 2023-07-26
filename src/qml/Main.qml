@@ -14,7 +14,7 @@ ApplicationWindow {
 	Material.primary: Material.Green
 	Material.accent: Material.Pink
 	Shortcut {
-		sequence: StandardKey.Quit
+		sequences: [StandardKey.Quit, StandardKey.Cancel]
 		onActivated: Qt.quit();
 	}
 	DropArea {
