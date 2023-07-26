@@ -1,7 +1,7 @@
 #compdef blobdrop
 
 _blobdrop() {
-	_arguments '-h[show help]' '-v[show version]' '-f[show frameless window]' '-k[keep dropped files]' '-n[send notification]' '-p[disable autohiding during drag]' '-t[keep window on top]' '-x[autoquit behaviour]:num:((0\:"do not autoquit" 1\:"after first drag" 2\:"after all items have been dragged"))' '*: arg:_files'
+	_arguments {-h,--help}'[show help]' {-v,--version}'[show version]' {-f,--frameless}'[show frameless window]' {-k,--keep}'[keep dropped files]' {-n,--notification}'[send notification]' {-p,--persistent}'[disable autohiding during drag]' {-t,--ontop}'[keep window on top]' {-x,--auto-quit}'[autoquit behaviour]:num:((0\:"do not autoquit" 1\:"after first drag" 2\:"after all items have been dragged"))' '*: arg:_files'
 	return 0
 }
 
