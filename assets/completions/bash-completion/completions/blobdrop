@@ -1,0 +1,33 @@
+_blobdrop() {
+	local cur prev words cword split
+	local opts="
+		-h --help
+		-v --version
+		-f --frameless
+		-k --keep
+		-n --notification
+		-p --persistent
+		-t --ontop
+		-x --auto-quit
+	"
+	_init_completion -s
+
+	case "$prev" in
+		-x|--auto-quit)
+			COMPREPLY=($(compgen -W '0 1 2' -- "$cur"))
+			return
+			;;
+	esac
+
+	case "$cur" in
+		-*)
+			COMPREPLY=($(compgen -W "$opts" -- "$cur"))
+			[[ ${COMPREPLY-} == *= ]] || compopt +o nospace
+			;;
+		*)
+			COMPREPLY=($(compgen -f -- "$cur"))
+	esac
+	return 0
+}
+
+complete -F _blobdrop -o bashdefault -o default blobdrop
