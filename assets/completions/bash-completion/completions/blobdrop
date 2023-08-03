@@ -5,6 +5,7 @@ _blobdrop() {
 		-v --version
 		-f --frameless
 		-k --keep
+		-l --link
 		-n --notification
 		-p --persistent
 		-t --ontop

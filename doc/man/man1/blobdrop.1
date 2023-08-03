@@ -9,6 +9,7 @@ blobdrop \- Quickly drag and drop files from the terminal to applications
 [\-v]
 [\-f]
 [\-k]
+[\-l]
 [\-n]
 [\-p]
 [\-t]
@@ -35,6 +36,9 @@ Show a frameless window.
 .TP
 .B \-k, \-\-keep
 When using sink mode, keep dropped files around by default.
+.TP
+.B \-l, \-\-link
+Print paths to stdout via OSC8 hyperlinks.
 .TP
 .B \-n, \-\-notification
 Send a notification for dragging.

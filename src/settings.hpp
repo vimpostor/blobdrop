@@ -12,6 +12,7 @@ class Settings : public QObject {
 	Q_PROPERTY(bool alwaysOnTop MEMBER always_on_top CONSTANT)
 	Q_PROPERTY(bool alwaysOnBottom MEMBER always_on_bottom WRITE setAlwaysOnBottom NOTIFY alwaysOnBottomChanged)
 	Q_PROPERTY(bool keepDroppedFiles MEMBER keep_dropped_files NOTIFY keepDroppedFilesChanged)
+	Q_PROPERTY(bool printHyperlinks MEMBER print_hyperlinks CONSTANT)
 	Q_PROPERTY(bool frameless MEMBER frameless CONSTANT)
 	Q_PROPERTY(bool sendNotification MEMBER send_notification CONSTANT)
 public:
@@ -31,6 +32,7 @@ public:
 	bool always_on_top = false;
 	bool always_on_bottom = false;
 	bool keep_dropped_files = false;
+	bool print_hyperlinks = false;
 	bool frameless = false;
 	bool send_notification = false;
 signals:

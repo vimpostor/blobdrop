@@ -1,6 +1,7 @@
 #include "util.hpp"
 
 #include <cstdlib>
+#include <iostream>
 #include <pwd.h>
 #include <unistd.h>
 
@@ -24,5 +25,9 @@ std::string pwd() {
 		result = std::filesystem::current_path().string() + "/";
 	}
 	return result;
+}
+
+std::string print_osc8_link(const std::string &url, const std::string &text) {
+	return "\e]8;;" + url + "\e\\" + text + "\e]8;;\e\\";
 }
 }

@@ -21,4 +21,5 @@ namespace Util {
 
 const char *home_dir();
 std::string pwd();
+std::string print_osc8_link(const std::string &url, const std::string &text);
 }

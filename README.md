@@ -44,6 +44,7 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 - Respect system dark mode
 - Shell completions
 - Optional notification drag frontend
+- Optional OSC8 hyperlink frontend
 - Efficient implementation, can scroll through a list of several thousand files without dropping any frames
 
 # Alternatives

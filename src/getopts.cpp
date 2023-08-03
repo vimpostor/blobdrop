@@ -17,6 +17,9 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
+	QCommandLineOption link_opt(QStringList() << "l"
+											  << "link",
+		"Print paths to stdout via OSC8 hyperlinks.");
 	QCommandLineOption notify_opt(QStringList() << "n"
 												<< "notification",
 		"Send a notification for dragging.");
@@ -31,7 +34,7 @@ bool parse(QCoreApplication &app) {
 		"Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used",
 		"number");
 
-	p.addOptions({frameless_opt, keep_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, keep_opt, link_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -52,6 +55,9 @@ bool parse(QCoreApplication &app) {
 	}
 	if (p.isSet(keep_opt)) {
 		Settings::get()->keep_dropped_files = true;
+	}
+	if (p.isSet(link_opt)) {
+		Settings::get()->print_hyperlinks = true;
 	}
 	if (p.isSet(notify_opt)) {
 		Settings::get()->send_notification = true;

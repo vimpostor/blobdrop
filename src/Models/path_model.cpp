@@ -59,6 +59,12 @@ void PathModel::open(int i) const {
 	};
 }
 
+void PathModel::print_hyperlinks() {
+	for (auto &i : paths) {
+		std::cout << Util::print_osc8_link(i.get_uri(), i.pretty_print()) << std::endl;
+	}
+}
+
 void PathModel::send_notification() {
 	refresh_folded_paths();
 	const auto uri_list = folded_uri_list.split(QChar::LineFeed, Qt::SkipEmptyParts);
