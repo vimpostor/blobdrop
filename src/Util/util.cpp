@@ -1,6 +1,7 @@
 #include "util.hpp"
 
 #include <cstdlib>
+#include <format>
 #include <iostream>
 #include <pwd.h>
 #include <unistd.h>
@@ -28,6 +29,6 @@ std::string pwd() {
 }
 
 std::string print_osc8_link(const std::string &url, const std::string &text) {
-	return "\e]8;;" + url + "\e\\" + text + "\e]8;;\e\\";
+	return std::format("\e]8;;{}\e\\{}\e]8;;\e\\", url, text);
 }
 }
