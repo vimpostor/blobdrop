@@ -14,7 +14,7 @@
 
 				blobdrop = pkgs.gcc13Stdenv.mkDerivation {
 					pname = "blobdrop";
-					version = "1.0";
+					version = "2.0";
 
 					src = ./.;
 
