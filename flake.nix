@@ -12,7 +12,7 @@
 			packages = rec {
 				default = blobdrop;
 
-				blobdrop = pkgs.stdenv.mkDerivation {
+				blobdrop = pkgs.gcc13Stdenv.mkDerivation {
 					pname = "blobdrop";
 					version = "1.0";
 
