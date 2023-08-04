@@ -43,9 +43,14 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 - Quickly open files with a single click
 - Respect system dark mode
 - Shell completions
-- Optional notification drag frontend
-- Optional OSC8 hyperlink frontend
-- Efficient implementation, can scroll through a list of several thousand files without dropping any frames
+
+### Frontends
+
+Blobdrop implements multiple frontends to drag the files from:
+
+- From a normal window (default)
+- Inside a desktop notification, using the `x-kde-urls` Notifications extension
+- As an OSC8 hyper link in the terminal emulator, but currently there exists no terminal emulator that can drag and drop OSC8 links
 
 # Alternatives
 
