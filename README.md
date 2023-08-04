@@ -50,7 +50,7 @@ Blobdrop implements multiple frontends to drag the files from:
 
 - [From a normal window](https://github.com/vimpostor/blobdrop/assets/21310755/d86f5039-05cd-4444-9e43-cc51cf4073db) (default)
 - [Inside a desktop notification](https://github.com/vimpostor/blobdrop/assets/21310755/482b4bc1-2f15-43e3-b980-1f573c494a91), using the `x-kde-urls` Notifications extension
-- As an OSC8 hyper link in the terminal emulator, but currently there exists no terminal emulator that can drag and drop OSC8 links
+- As an [OSC8 hyper link](https://github.com/vimpostor/blobdrop/commit/3ba601c690571460fc8cd130abb57c7a15c67cf1) in the terminal emulator, but currently there exists no terminal emulator that can drag and drop OSC8 links
 
 # Alternatives
 
