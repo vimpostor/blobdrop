@@ -71,6 +71,7 @@ ListView {
 				width: height
 				visible: thumbnail == ""
 				icon.name: iconName
+				icon.source: "qrc:///blobdrop" // fallback icon
 				icon.color: "transparent"
 				icon.width: 2 * parent.height
 				icon.height: 2 * parent.height
