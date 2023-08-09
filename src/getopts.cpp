@@ -31,7 +31,7 @@ bool parse(QCoreApplication &app) {
 		"Keep the window on top of other windows.");
 	QCommandLineOption auto_quit_opt(QStringList() << "x"
 												   << "auto-quit",
-		"Whether to autoquit after a drag is finished. 0 = disable, 1 = after first drag, 2 (default) = after all paths have been used",
+		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
 		"number");
 
 	p.addOptions({frameless_opt, keep_opt, link_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
@@ -39,16 +39,23 @@ bool parse(QCoreApplication &app) {
 
 	if (p.isSet(auto_quit_opt)) {
 		const auto opt = p.value(auto_quit_opt);
-		if (std::ranges::all_of(opt.toStdString(), ::isdigit)) {
-			if (opt.toInt() > 2) {
-				std::cerr << "auto-quit needs to be one of {0,1,2}" << std::endl;
-				return false;
-			}
-			Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(opt.toInt());
-		} else {
-			std::cerr << "auto-quit needs to be a number" << std::endl;
+		constexpr std::array str_repr = {"never", "first", "all"};
+		int choice = std::ranges::find(str_repr, opt.toStdString()) - str_repr.cbegin();
+		if (std::ranges::all_of(opt.toStdString(), ::isdigit) && opt.toInt() < 3) {
+			/**
+			 * Previously this option used {0,1,2} as parameter instead of strings.
+			 * Eventually we only want to accept the string parameters,
+			 * but for compatibility reasons we accept both for now.
+			 * TODO: Remove this for version 3.0
+			 */
+			std::cerr << "The integer parameters {0,1,2} are deprecated and will be removed in a future release." << std::endl
+					  << "Please use the equivalent string options {never,first,all} instead." << std::endl;
+			choice = opt.toInt();
+		} else if (choice > 2) {
+			std::cerr << "auto-quit needs to be one of {never,first,all}" << std::endl;
 			return false;
 		}
+		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
 	}
 	if (p.isSet(ontop_opt)) {
 		Settings::get()->always_on_top = true;

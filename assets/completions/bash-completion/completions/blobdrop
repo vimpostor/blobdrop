@@ -15,7 +15,7 @@ _blobdrop() {
 
 	case "$prev" in
 		-x|--auto-quit)
-			COMPREPLY=($(compgen -W '0 1 2' -- "$cur"))
+			COMPREPLY=($(compgen -W 'never first all' -- "$cur"))
 			return
 			;;
 	esac

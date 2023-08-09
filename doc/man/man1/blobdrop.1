@@ -43,7 +43,7 @@ Do not auto-hide the main window while dragging.
 Keep the window on top of other windows.
 .TP
 .B \-x, \-\-auto-quit \fINUM
-Changes the conditions when blobdrop will automatically quit. For 0 it will never automatically quit, for 1 it will quit after the first drag and for 2 (default value) it will quit once every path has been dragged at least once.
+Changes the conditions when blobdrop will automatically quit. Must be one of {never, first, all}. For never it will never automatically quit, for first it will quit after the first drag and for all (default value) it will quit once every path has been dragged at least once.
 
 .SH EXIT STATUS
 Returns zero on success.

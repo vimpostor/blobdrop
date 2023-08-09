@@ -6,4 +6,4 @@ complete -c blobdrop -s '-l' -l 'link' -d 'print OSC8 hyperlinks'
 complete -c blobdrop -s '-n' -l 'notification' -d 'send notification'
 complete -c blobdrop -s '-p' -l 'persistent' -d 'disable autohiding during drag'
 complete -c blobdrop -s '-t' -l 'ontop' -d 'keep window on top'
-complete -c blobdrop -s '-x' -l 'auto-quit' -d 'autoquit behaviour' -x -a "0\t'do not autoquit' 1\t'after first drag' 2\t'after all items have been dragged'"
+complete -c blobdrop -s '-x' -l 'auto-quit' -d 'autoquit behaviour' -x -a "never\t'do not autoquit' first\t'after first drag' all\t'after all items have been dragged'"
