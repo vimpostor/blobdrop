@@ -78,7 +78,7 @@ void PathModel::drag_immediately() {
 	mimedata->setUrls(urls);
 	drag->setMimeData(mimedata);
 	// The object is destroyed by Qt as soon as the drag is finished
-	connect(drag, &QObject::destroyed, this, [=]() { check_should_quit(); });
+	connect(drag, &QObject::destroyed, this, [this]() { check_should_quit(); });
 
 	drag->exec();
 }
