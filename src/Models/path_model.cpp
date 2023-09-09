@@ -1,5 +1,7 @@
 #include "path_model.hpp"
-#include <bits/ranges_algo.h>
+
+#include <QDrag>
+#include <QMimeData>
 
 PathModel::PathModel(QObject *parent) {
 	paths = PathRegistry::get()->paths;
@@ -57,6 +59,28 @@ void PathModel::open(int i) const {
 	if (!paths[i].open()) {
 		qDebug() << "Failed to open path" << paths[i].get_uri();
 	};
+}
+
+void PathModel::drag_immediately() {
+	/**
+	 * Qt takes ownership both over the QDrag as well as the QMimeData
+	 * So no, this is not a memory leak.
+	 */
+	auto drag = new QDrag(this);
+	auto mimedata = new QMimeData();
+
+	QList<QUrl> urls;
+	for (auto &i : paths) {
+		urls.push_back(i.get_url());
+		i.used = true;
+	}
+
+	mimedata->setUrls(urls);
+	drag->setMimeData(mimedata);
+	// The object is destroyed by Qt as soon as the drag is finished
+	connect(drag, &QObject::destroyed, this, [=]() { check_should_quit(); });
+
+	drag->exec();
 }
 
 void PathModel::print_hyperlinks() {

@@ -15,6 +15,7 @@ class Settings : public QObject {
 	Q_PROPERTY(bool printHyperlinks MEMBER print_hyperlinks CONSTANT)
 	Q_PROPERTY(bool frameless MEMBER frameless CONSTANT)
 	Q_PROPERTY(bool sendNotification MEMBER send_notification CONSTANT)
+	Q_PROPERTY(bool immediateDrag MEMBER immediate_drag CONSTANT)
 public:
 	enum class AutoQuitBehavior {
 		Never,
@@ -35,6 +36,7 @@ public:
 	bool print_hyperlinks = false;
 	bool frameless = false;
 	bool send_notification = false;
+	bool immediate_drag = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);

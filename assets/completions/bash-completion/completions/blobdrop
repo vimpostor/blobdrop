@@ -4,6 +4,7 @@ _blobdrop() {
 		-h --help
 		-v --version
 		-f --frameless
+		-i --immediate
 		-k --keep
 		-l --link
 		-n --notification

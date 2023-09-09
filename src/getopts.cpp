@@ -14,6 +14,9 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption frameless_opt(QStringList() << "f"
 												   << "frameless",
 		"Show a frameless window.");
+	QCommandLineOption immediate_opt(QStringList() << "i"
+												   << "immediate",
+		"Drag immediately.");
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
@@ -34,7 +37,7 @@ bool parse(QCoreApplication &app) {
 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
 		"number");
 
-	p.addOptions({frameless_opt, keep_opt, link_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, immediate_opt, keep_opt, link_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -63,12 +66,15 @@ bool parse(QCoreApplication &app) {
 	if (p.isSet(keep_opt)) {
 		Settings::get()->keep_dropped_files = true;
 	}
-	if (p.isSet(link_opt)) {
+
+	if (p.isSet(immediate_opt)) {
+		Settings::get()->immediate_drag = true;
+	} else if (p.isSet(link_opt)) {
 		Settings::get()->print_hyperlinks = true;
-	}
-	if (p.isSet(notify_opt)) {
+	} else if (p.isSet(notify_opt)) {
 		Settings::get()->send_notification = true;
 	}
+
 	if (p.isSet(persistent_opt)) {
 		Settings::get()->disable_always_on_bottom();
 	}

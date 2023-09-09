@@ -5,7 +5,7 @@ blobdrop \- Quickly drag and drop files from the terminal to applications
 
 .SH SYNOPSIS
 .B blobdrop
-[\-hvfklnpt]
+[\-hvfiklnpt]
 [\-x \fINUM\fP]
 .I FILES
 
@@ -26,6 +26,9 @@ Show version information.
 .TP
 .B \-f, \-\-frameless
 Show a frameless window.
+.TP
+.B \-i, \-\-immediate
+Perform the drag operation immediately. The user now only needs to click on the target.
 .TP
 .B \-k, \-\-keep
 When using sink mode, keep dropped files around by default.
