@@ -4,9 +4,9 @@
 
 #include "settings.hpp"
 
-void Backend::quit_delayed() {
+void Backend::quit_delayed(const int delay) {
 	Settings::get()->disable_always_on_bottom();
-	QTimer::singleShot(100, []() { QCoreApplication::quit(); });
+	QTimer::singleShot(delay, []() { QCoreApplication::quit(); });
 }
 
 void Backend::send_drag_notification(const QList<QString> &uris) {

@@ -33,10 +33,8 @@ ListView {
 			Component.onCompleted: {
 				if (Settings.printHyperlinks) {
 					PathModel.print_hyperlinks();
-					Qt.quit();
 				} else if (Settings.sendNotification) {
 					PathModel.send_notification();
-					Qt.quit();
 				}
 			}
 			onPreDragStarted: {
