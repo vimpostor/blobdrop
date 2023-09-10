@@ -18,3 +18,7 @@ void Settings::setAlwaysOnBottom(const bool v) {
 		emit alwaysOnBottomChanged(always_on_bottom);
 	}
 }
+
+bool Settings::needs_gui() const {
+	return !immediate_drag && !send_notification && !print_hyperlinks;
+}

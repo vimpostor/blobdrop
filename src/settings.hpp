@@ -16,6 +16,7 @@ class Settings : public QObject {
 	Q_PROPERTY(bool frameless MEMBER frameless CONSTANT)
 	Q_PROPERTY(bool sendNotification MEMBER send_notification CONSTANT)
 	Q_PROPERTY(bool immediateDrag MEMBER immediate_drag CONSTANT)
+	Q_PROPERTY(bool needsGui READ needs_gui CONSTANT)
 public:
 	enum class AutoQuitBehavior {
 		Never,
@@ -42,4 +43,5 @@ signals:
 	void keepDroppedFilesChanged(bool keepDroppedFiles);
 private:
 	bool supress_always_on_bottom = false;
+	bool needs_gui() const;
 };
