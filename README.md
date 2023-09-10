@@ -50,9 +50,11 @@ Blobdrop implements multiple frontends to drag the files from:
 
 - [From a normal window](https://github.com/vimpostor/blobdrop/assets/21310755/d86f5039-05cd-4444-9e43-cc51cf4073db) (default)
 - [Inside a desktop notification](https://github.com/vimpostor/blobdrop/assets/21310755/482b4bc1-2f15-43e3-b980-1f573c494a91), using the `x-kde-urls` Notifications extension
+- [As an immediate drop to a click location](https://user-images.githubusercontent.com/21310755/266832800-519773b6-d154-4fd7-9faf-dfb25217055c.mp4)
 - As an [OSC8 hyper link](https://github.com/vimpostor/blobdrop/commit/3ba601c690571460fc8cd130abb57c7a15c67cf1) in the terminal emulator, but currently there exists no terminal emulator that can drag and drop OSC8 links
 
 # Alternatives
 
 - [dragon](https://github.com/mwh/dragon), A GTK implementation of the same concept
 - [ripdrag](https://github.com/nik012003/ripdrag), Like dragon with GTK, but rewritten in Rust
+- [clidrag](https://github.com/rkevin-arch/CLIdrag), A CLI-only implementation (equivalent to `blobdrop -i`)
