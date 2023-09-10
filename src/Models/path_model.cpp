@@ -1,7 +1,9 @@
 #include "path_model.hpp"
 
 #include <QDrag>
+#include <QIcon>
 #include <QMimeData>
+#include <QPixmap>
 
 PathModel::PathModel(QObject *parent) {
 	paths = PathRegistry::get()->paths;
@@ -77,6 +79,13 @@ void PathModel::drag_immediately() {
 
 	mimedata->setUrls(urls);
 	drag->setMimeData(mimedata);
+	if (paths.size() == 1) {
+		auto p = paths.front();
+		constexpr const int cursor_size = 24;
+		auto pixmap = QIcon::fromTheme(QString::fromStdString(p.iconName)).pixmap(cursor_size);
+		drag->setPixmap(pixmap);
+	}
+
 	// The object is destroyed by Qt as soon as the drag is finished
 	connect(drag, &QObject::destroyed, this, [this]() { check_should_quit(); });
 
