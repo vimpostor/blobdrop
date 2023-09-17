@@ -3,7 +3,7 @@ _blobdrop() {
 	local opts="
 		-h --help
 		-v --version
-		-f --frameless
+		-b --frameless
 		-i --immediate
 		-k --keep
 		-l --link

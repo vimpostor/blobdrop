@@ -11,7 +11,7 @@ bool parse(QCoreApplication &app) {
 	p.addHelpOption();
 	p.addVersionOption();
 
-	QCommandLineOption frameless_opt(QStringList() << "f"
+	QCommandLineOption frameless_opt(QStringList() << "b"
 												   << "frameless",
 		"Show a frameless window.");
 	QCommandLineOption immediate_opt(QStringList() << "i"
