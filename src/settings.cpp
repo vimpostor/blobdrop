@@ -20,5 +20,5 @@ void Settings::setAlwaysOnBottom(const bool v) {
 }
 
 bool Settings::needs_gui() const {
-	return !immediate_drag && !send_notification && !print_hyperlinks;
+	return frontend == Settings::Frontend::Gui || (frontend == Settings::Frontend::Auto && !hide_gui_flag);
 }

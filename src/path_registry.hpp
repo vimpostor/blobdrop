@@ -4,6 +4,7 @@
 
 #include "Util/util.hpp"
 #include "path.hpp"
+#include "settings.hpp"
 
 class PathRegistry : public QObject {
 	Q_OBJECT

@@ -63,6 +63,23 @@ void PathModel::open(int i) const {
 	};
 }
 
+void PathModel::finish_init() {
+	const auto f = Settings::get()->frontend;
+	if (f == Settings::Frontend::Immediate || (f == Settings::Frontend::Auto && paths.size() == 1)) {
+		drag_immediately();
+	} else if (f == Settings::Frontend::Link) {
+		print_hyperlinks();
+	} else if (f == Settings::Frontend::Notification) {
+		send_notification();
+	}
+}
+
+void PathModel::add_path(Path p) {
+	beginInsertRows(QModelIndex(), paths.size(), paths.size());
+	paths.emplace_back(p);
+	endInsertRows();
+}
+
 void PathModel::drag_immediately() {
 	/**
 	 * Qt takes ownership both over the QDrag as well as the QMimeData
@@ -104,12 +121,6 @@ void PathModel::send_notification() {
 	const auto uri_list = folded_uri_list.split(QChar::LineFeed, Qt::SkipEmptyParts);
 	Backend::get()->send_drag_notification(uri_list);
 	Backend::get()->quit_delayed(0);
-}
-
-void PathModel::add_path(Path p) {
-	beginInsertRows(QModelIndex(), paths.size(), paths.size());
-	paths.emplace_back(p);
-	endInsertRows();
 }
 
 void PathModel::check_should_quit() {

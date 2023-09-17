@@ -31,13 +31,7 @@ ListView {
 			target: dragallDummy
 			dragUri: PathModel.foldedUriList
 			Component.onCompleted: {
-				if (Settings.immediateDrag) {
-					PathModel.drag_immediately();
-				} else if (Settings.printHyperlinks) {
-					PathModel.print_hyperlinks();
-				} else if (Settings.sendNotification) {
-					PathModel.send_notification();
-				}
+				PathModel.finish_init();
 			}
 			onPreDragStarted: {
 				PathModel.refresh_folded_paths();

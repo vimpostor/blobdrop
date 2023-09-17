@@ -26,9 +26,7 @@ public:
 	Q_INVOKABLE void taint_all_used();
 	Q_INVOKABLE void refresh_folded_paths();
 	Q_INVOKABLE void open(int i) const;
-	Q_INVOKABLE void drag_immediately();
-	Q_INVOKABLE void print_hyperlinks();
-	Q_INVOKABLE void send_notification();
+	Q_INVOKABLE void finish_init();
 	void add_path(Path p);
 signals:
 	void foldedUriListChanged(QString foldedUriList);
@@ -45,5 +43,8 @@ private:
 	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {PrettyRole, "pretty"}, {UsedRole, "used"}, {IconRole, "iconName"}, {ThumbnailRole, "thumbnail"}, {ExistsRole, "exists"}};
 	std::vector<Path> paths;
 	QString folded_uri_list;
+	void drag_immediately();
+	void print_hyperlinks();
+	void send_notification();
 	void check_should_quit();
 };

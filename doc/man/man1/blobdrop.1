@@ -17,6 +17,9 @@ It can be used both as a source (files can be dragged from the terminal) and as 
 
 Filenames can either be given as command line arguments or by piping them into stdin, one filename per line.
 
+Several frontends are available to drag files from. By default, blobdrop will automatically determine the best frontend, meaning that for a single given file it will immediately start the drag operation without having to hold down the mouse while showing a window when multiple files are provided.
+The frontend can be manually selected with the \-\-frontend option.
+
 .TP
 .B \-h, \-\-help
 Show help.
@@ -26,6 +29,9 @@ Show version information.
 .TP
 .B \-b, \-\-frameless
 Show a frameless window.
+.TP
+.B \-f, \-\-frontend
+Selects the frontend. Must be one of {auto (default), gui, immediate, notify, link}. Selecting auto will choose gui if there are more than one elements to be dragged and immediate otherwise. Choosing gui starts a window, immediate will start the drag immediately not requiring the user to hold the mouse button, notify will allow to drag from a notification using the x-kde-urls extension and link will print an OSC8 link in the terminal.
 .TP
 .B \-i, \-\-immediate
 Perform the drag operation immediately. The user now only needs to click on the target.

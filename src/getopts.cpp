@@ -14,6 +14,10 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption frameless_opt(QStringList() << "b"
 												   << "frameless",
 		"Show a frameless window.");
+	QCommandLineOption frontend_opt(QStringList() << "f"
+												  << "frontend",
+		"Selects the frontend. Must be one of {auto (default), gui, immediate, notify, link}",
+		"frontend");
 	QCommandLineOption immediate_opt(QStringList() << "i"
 												   << "immediate",
 		"Drag immediately.");
@@ -37,7 +41,7 @@ bool parse(QCoreApplication &app) {
 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
 		"number");
 
-	p.addOptions({frameless_opt, immediate_opt, keep_opt, link_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, frontend_opt, immediate_opt, keep_opt, link_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -54,7 +58,7 @@ bool parse(QCoreApplication &app) {
 			std::cerr << "The integer parameters {0,1,2} are deprecated and will be removed in a future release." << std::endl
 					  << "Please use the equivalent string options {never,first,all} instead." << std::endl;
 			choice = opt.toInt();
-		} else if (choice > 2) {
+		} else if (static_cast<Settings::AutoQuitBehavior>(choice) > Settings::AutoQuitBehavior::All) {
 			std::cerr << "auto-quit needs to be one of {never,first,all}" << std::endl;
 			return false;
 		}
@@ -67,12 +71,29 @@ bool parse(QCoreApplication &app) {
 		Settings::get()->keep_dropped_files = true;
 	}
 
+	bool used_deprecated_frontend_syntax = true;
 	if (p.isSet(immediate_opt)) {
-		Settings::get()->immediate_drag = true;
+		Settings::get()->frontend = Settings::Frontend::Immediate;
 	} else if (p.isSet(link_opt)) {
-		Settings::get()->print_hyperlinks = true;
+		Settings::get()->frontend = Settings::Frontend::Link;
 	} else if (p.isSet(notify_opt)) {
-		Settings::get()->send_notification = true;
+		Settings::get()->frontend = Settings::Frontend::Notification;
+	} else {
+		used_deprecated_frontend_syntax = false;
+	}
+	if (used_deprecated_frontend_syntax) {
+		std::cerr << "This option for choosing the frontend is deprecated and will be reomved in a future release." << std::endl
+				  << "Please use the --frontend option instead." << std::endl;
+	}
+	if (p.isSet(frontend_opt)) {
+		constexpr std::array str_repr = {"auto", "gui", "immediate", "notify", "link"};
+		int choice = std::ranges::find(str_repr, p.value(frontend_opt).toStdString()) - str_repr.cbegin();
+		if (static_cast<Settings::Frontend>(choice) > Settings::Frontend::Link) {
+			std::cerr << "frontend needs to be one of {auto, gui, immediate, notify, link}" << std::endl;
+			return false;
+		} else {
+			Settings::get()->frontend = static_cast<Settings::Frontend>(choice);
+		}
 	}
 
 	if (p.isSet(persistent_opt)) {

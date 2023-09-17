@@ -4,6 +4,7 @@ _blobdrop() {
 		-h --help
 		-v --version
 		-b --frameless
+		-f --frontend
 		-i --immediate
 		-k --keep
 		-l --link
@@ -17,6 +18,10 @@ _blobdrop() {
 	case "$prev" in
 		-x|--auto-quit)
 			COMPREPLY=($(compgen -W 'never first all' -- "$cur"))
+			return
+			;;
+		-f|--frontend)
+			COMPREPLY=($(compgen -W 'auto gui immediate notify link' -- "$cur"))
 			return
 			;;
 	esac
