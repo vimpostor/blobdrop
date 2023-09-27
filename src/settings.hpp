@@ -21,7 +21,7 @@ public:
 		All,
 	};
 	enum class Frontend {
-		Auto, // Immediate for single files, Gui for multiple files
+		Auto, // Gui if no arguments given, Immediate otherwise
 		Gui, // show a window to drag files from
 		Immediate, // perform drag immediately without needing to hold down the mouse
 		Notification, // show a desktop notification to drag from
