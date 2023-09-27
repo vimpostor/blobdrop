@@ -86,7 +86,7 @@ bool parse(QCoreApplication &app) {
 		used_deprecated_frontend_syntax = false;
 	}
 	if (used_deprecated_frontend_syntax) {
-		std::cerr << "This option for choosing the frontend is deprecated and will be reomved in a future release." << std::endl
+		std::cerr << "This option for choosing the frontend is deprecated and will be removed in a future release." << std::endl
 				  << "Please use the --frontend option instead." << std::endl;
 	}
 	if (p.isSet(frontend_opt)) {
