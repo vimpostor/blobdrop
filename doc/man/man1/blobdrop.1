@@ -33,17 +33,8 @@ Show a frameless window.
 .B \-f, \-\-frontend
 Selects the frontend. Must be one of {auto (default), gui, immediate, notify, link}. Selecting auto will choose gui if there are more than one elements to be dragged and immediate otherwise. Choosing gui starts a window, immediate will start the drag immediately not requiring the user to hold the mouse button, notify will allow to drag from a notification using the x-kde-urls extension and link will print an OSC8 link in the terminal.
 .TP
-.B \-i, \-\-immediate
-Perform the drag operation immediately. The user now only needs to click on the target.
-.TP
 .B \-k, \-\-keep
 When using sink mode, keep dropped files around by default.
-.TP
-.B \-l, \-\-link
-Print paths to stdout via OSC8 hyperlinks.
-.TP
-.B \-n, \-\-notification
-Send a notification for dragging.
 .TP
 .B \-p, \-\-persistent
 Do not auto-hide the main window while dragging.

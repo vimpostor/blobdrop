@@ -41,6 +41,10 @@ bool parse(QCoreApplication &app) {
 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
 		"number");
 
+	// hide deprecated legacy options from help
+	const std::array hidden_options = {&immediate_opt, &link_opt, &notify_opt};
+	std::ranges::for_each(hidden_options, [](auto o) { o->setFlags(QCommandLineOption::Flag::HiddenFromHelp); });
+
 	p.addOptions({frameless_opt, frontend_opt, immediate_opt, keep_opt, link_opt, notify_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
