@@ -39,17 +39,7 @@ bool parse(QCoreApplication &app) {
 		const auto opt = p.value(auto_quit_opt);
 		constexpr std::array str_repr = {"never", "first", "all"};
 		int choice = std::ranges::find(str_repr, opt.toStdString()) - str_repr.cbegin();
-		if (std::ranges::all_of(opt.toStdString(), ::isdigit) && opt.toInt() < 3) {
-			/**
-			 * Previously this option used {0,1,2} as parameter instead of strings.
-			 * Eventually we only want to accept the string parameters,
-			 * but for compatibility reasons we accept both for now.
-			 * TODO: Remove this for version 3.0
-			 */
-			std::cerr << "The integer parameters {0,1,2} are deprecated and will be removed in a future release." << std::endl
-					  << "Please use the equivalent string options {never,first,all} instead." << std::endl;
-			choice = opt.toInt();
-		} else if (static_cast<Settings::AutoQuitBehavior>(choice) > Settings::AutoQuitBehavior::All) {
+		if (static_cast<Settings::AutoQuitBehavior>(choice) > Settings::AutoQuitBehavior::All) {
 			std::cerr << "auto-quit needs to be one of {never,first,all}" << std::endl;
 			return false;
 		}
