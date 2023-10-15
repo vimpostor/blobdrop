@@ -81,6 +81,8 @@ void PathModel::add_path(Path p) {
 }
 
 void PathModel::drag_immediately() {
+	Backend::get()->hide_terminal();
+
 	/**
 	 * Qt takes ownership both over the QDrag as well as the QMimeData
 	 * So no, this is not a memory leak.
@@ -104,7 +106,10 @@ void PathModel::drag_immediately() {
 	}
 
 	// The object is destroyed by Qt as soon as the drag is finished
-	connect(drag, &QObject::destroyed, this, [this]() { check_should_quit(); });
+	connect(drag, &QObject::destroyed, this, [this]() {
+		Backend::get()->restore_terminal();
+		check_should_quit();
+	});
 
 	drag->exec();
 }

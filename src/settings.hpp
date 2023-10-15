@@ -41,10 +41,10 @@ public:
 	bool keep_dropped_files = false;
 	bool frameless = false;
 	bool hide_gui_flag = false;
+	bool supress_always_on_bottom = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);
 private:
-	bool supress_always_on_bottom = false;
 	bool needs_gui() const;
 };
