@@ -2,9 +2,9 @@
 
 #include <QCoreApplication>
 #include <QTimer>
-#include <xcb/xproto.h>
 
 #include "Util/util.hpp"
+#include "xcb.hpp"
 
 class Backend {
 public:
@@ -16,5 +16,6 @@ public:
 	void hide_terminal();
 	void restore_terminal();
 private:
+	Xcb xcb;
 	xcb_window_t last_window = 0;
 };

@@ -2,8 +2,6 @@
 
 #include <QDBusInterface>
 #include <QGuiApplication>
-#include <xcb/xcb.h>
-#include <xcb/xcb_ewmh.h>
 
 #include "settings.hpp"
 
@@ -26,28 +24,13 @@ void Backend::send_drag_notification(const QList<QString> &uris) {
 }
 
 void Backend::hide_terminal() {
-	if (Settings::get()->supress_always_on_bottom) {
+	if (Settings::get()->supress_always_on_bottom || !xcb.init()) {
 		return;
 	}
 
-	const auto qt_x11 = qGuiApp->nativeInterface<QNativeInterface::QX11Application>();
-	if (!qt_x11) {
-		return;
-	}
-	auto *xcb_conn = qt_x11->connection();
-
-	xcb_ewmh_connection_t ewmh;
-	xcb_ewmh_init_atoms(xcb_conn, &ewmh);
-	if (!xcb_ewmh_init_atoms_replies(&ewmh, xcb_ewmh_init_atoms(xcb_conn, &ewmh), nullptr)) {
-		qWarning() << "Cannot connect to ewmh";
-	} else {
-		if (!xcb_ewmh_get_active_window_reply(&ewmh, xcb_ewmh_get_active_window_unchecked(&ewmh, 0), &last_window, nullptr)) {
-			qWarning() << "Cannot get active window";
-		} else {
-			std::ignore = xcb_ewmh_request_change_wm_state(&ewmh, 0, last_window, XCB_EWMH_WM_STATE_ADD, ewmh._NET_WM_STATE_BELOW, XCB_ATOM_NONE, XCB_EWMH_CLIENT_SOURCE_TYPE_NORMAL);
-			std::ignore = xcb_get_window_attributes_reply(xcb_conn, xcb_get_window_attributes(xcb_conn, last_window), nullptr);
-			xcb_flush(xcb_conn);
-		}
+	last_window = xcb.active_window();
+	if (last_window) {
+		xcb.set_keep_window_below(last_window);
 	}
 }
 
@@ -56,19 +39,6 @@ void Backend::restore_terminal() {
 		return;
 	}
 
-	const auto qt_x11 = qGuiApp->nativeInterface<QNativeInterface::QX11Application>();
-	if (!qt_x11) {
-		return;
-	}
-	auto *xcb_conn = qt_x11->connection();
-
-	xcb_ewmh_connection_t ewmh;
-	xcb_ewmh_init_atoms(xcb_conn, &ewmh);
-	if (!xcb_ewmh_init_atoms_replies(&ewmh, xcb_ewmh_init_atoms(xcb_conn, &ewmh), nullptr)) {
-		qWarning() << "Cannot connect to ewmh";
-	} else {
-		std::ignore = xcb_ewmh_request_change_wm_state(&ewmh, 0, last_window, XCB_EWMH_WM_STATE_REMOVE, ewmh._NET_WM_STATE_BELOW, XCB_ATOM_NONE, XCB_EWMH_CLIENT_SOURCE_TYPE_NORMAL);
-		std::ignore = xcb_get_window_attributes_reply(xcb_conn, xcb_get_window_attributes(xcb_conn, last_window), nullptr);
-		xcb_flush(xcb_conn);
-	}
+	xcb.set_keep_window_below(last_window, false);
+	last_window = 0;
 }
