@@ -5,7 +5,7 @@
 
 #include "settings.hpp"
 
-void Backend::quit_delayed(const int delay) {
+void Backend::quit_delayed(const std::chrono::milliseconds delay) {
 	Settings::get()->disable_always_on_bottom();
 	QTimer::singleShot(delay, []() { QCoreApplication::quit(); });
 }

@@ -14,7 +14,7 @@ endforeach()
 list(TRANSFORM PKGCONFIG_MODULES PREPEND "PkgConfig::")
 
 list(APPEND QT_MODULES Core Qml Quick QuickControls2 DBus)
-find_package(Qt6 6.5 COMPONENTS ${QT_MODULES} REQUIRED)
+find_package(Qt6 6.6 COMPONENTS ${QT_MODULES} REQUIRED)
 qt_standard_project_setup()
 list(TRANSFORM QT_MODULES PREPEND "Qt6::")
 

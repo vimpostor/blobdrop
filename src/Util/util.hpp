@@ -3,6 +3,8 @@
 #include <filesystem>
 #include <string>
 
+using namespace std::chrono_literals;
+
 #define SINGLETON(TYPE) \
 	static TYPE *get() { \
 		static TYPE s; \
