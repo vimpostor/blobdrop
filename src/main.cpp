@@ -3,8 +3,10 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <signal.h>
 
 #include "getopts.hpp"
+#include "signals.hpp"
 #include "version.hpp"
 
 int main(int argc, char *argv[]) {
@@ -12,6 +14,10 @@ int main(int argc, char *argv[]) {
 	QCoreApplication::setApplicationName("blobdrop");
 	QCoreApplication::setApplicationVersion(Version::version_string());
 	QGuiApplication app(argc, argv);
+
+	// handle unix signals
+	Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}};
+
 	if (!Getopts::parse(app)) {
 		return EXIT_FAILURE;
 	}
