@@ -28,14 +28,8 @@ void Signals::handle_qt_signal() {
 	char a;
 	read(signal_fd[1], &a, sizeof(a));
 
-	// remove the keep-below hint again, as we want to quit now
-	Backend::get()->restore_terminal();
-	// Duplicate quit attempts are required:
-	// The nice attempt over quit_delayed() is ignored, because a drag operation is active.
-	// The exit() forces the drag operation to close.
-	// Then the quit_delayed() causes the program to finally close.
-	QCoreApplication::exit();
-	Backend::get()->quit_delayed(0ms);
+	// force quit
+	Backend::get()->quit_delayed(0ms, true);
 
 	sn->setEnabled(true);
 }

@@ -14,7 +14,7 @@ class Backend {
 public:
 	SINGLETON(Backend)
 
-	void quit_delayed(const std::chrono::milliseconds delay = 100ms);
+	void quit_delayed(const std::chrono::milliseconds delay = 100ms, bool force = false);
 	void send_drag_notification(const QList<QString> &uris);
 
 	void hide_terminal();

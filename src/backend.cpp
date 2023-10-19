@@ -5,7 +5,18 @@
 
 #include "settings.hpp"
 
-void Backend::quit_delayed(const std::chrono::milliseconds delay) {
+void Backend::quit_delayed(const std::chrono::milliseconds delay, bool force) {
+	// remove the possibly set keep-below hint, as we want to quit now
+	Backend::get()->restore_terminal();
+
+	if (force) {
+		// Duplicate quit attempts are required:
+		// The nice attempt with the timer is ignored, because a drag operation is active.
+		// The exit() forces the drag operation to close.
+		// Then the quit() over the timer causes the program to finally close.
+		QCoreApplication::exit();
+	}
+
 	Settings::get()->disable_always_on_bottom();
 	QTimer::singleShot(delay, []() { QCoreApplication::quit(); });
 }
