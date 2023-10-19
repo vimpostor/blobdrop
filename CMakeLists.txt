@@ -6,13 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(PkgConfig REQUIRED)
-list(APPEND PKGCONFIG_MODULES "xcb" "xcb-ewmh")
-foreach(PKG IN LISTS PKGCONFIG_MODULES)
-	pkg_check_modules("${PKG}" REQUIRED IMPORTED_TARGET "${PKG}")
-endforeach()
-list(TRANSFORM PKGCONFIG_MODULES PREPEND "PkgConfig::")
-
 list(APPEND QT_MODULES Core Qml Quick QuickControls2 DBus)
 find_package(Qt6 6.6 COMPONENTS ${QT_MODULES} REQUIRED)
 qt_standard_project_setup()
@@ -32,7 +25,7 @@ qt_add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
 
 qt_add_qml_module(${PROJECT_NAME} URI "Backend" VERSION 1.0 NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_MODULES} ${PKGCONFIG_MODULES})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_MODULES})
 
 # install
 install(TARGETS ${PROJECT_NAME} RUNTIME)

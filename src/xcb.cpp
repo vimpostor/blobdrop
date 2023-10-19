@@ -3,7 +3,8 @@
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
 
 #include <QGuiApplication>
-#include <xcb/xcb.h>
+
+// TODO: Actually resolve the symbols with dlopen(), or by using QLibrary
 
 bool Xcb::init() {
 	if (ok) {
