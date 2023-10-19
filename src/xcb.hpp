@@ -1,5 +1,7 @@
 #pragma once
 
+#include <qglobal.h>
+
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
 
 #include <xcb/xcb_ewmh.h>

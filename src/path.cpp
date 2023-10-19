@@ -22,7 +22,12 @@ Path::Path(const std::string &p)
 }
 
 std::string Path::get_uri() const {
-	return "file://" + static_cast<std::string>(path);
+#ifdef Q_OS_WIN
+	constexpr const auto prefix = "file:///";
+#else
+	constexpr const auto prefix = "file://";
+#endif
+	return prefix + path.native();
 }
 
 QUrl Path::get_url() const {
@@ -30,13 +35,13 @@ QUrl Path::get_url() const {
 }
 
 std::string Path::pretty_print() const {
-	std::string result = path.string();
+	std::string result = path.native();
 
 	const auto pwd = Util::pwd();
 	const auto home = Util::home_dir();
 	if (result.starts_with(pwd)) {
 		result = result.substr(pwd.length());
-	} else if (result.starts_with(home)) {
+	} else if (home && result.starts_with(home)) {
 		result.replace(0, std::strlen(home), "~");
 	}
 

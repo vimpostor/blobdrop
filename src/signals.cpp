@@ -1,5 +1,7 @@
 #include "signals.hpp"
 
+#ifdef Q_OS_UNIX
+
 #include <ranges>
 #include <signal.h>
 #include <sys/socket.h>
@@ -53,3 +55,5 @@ void Signals::setup_signal_handlers(const std::initializer_list<int> &sigs) {
 		}
 	});
 }
+
+#endif

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <filesystem>
+#include <qglobal.h>
 #include <string>
 
 using namespace std::chrono_literals;

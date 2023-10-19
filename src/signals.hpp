@@ -1,5 +1,9 @@
 #pragma once
 
+#include <qglobal.h>
+
+#ifdef Q_OS_UNIX
+
 #include <QSocketNotifier>
 
 class Signals : public QObject {
@@ -18,3 +22,5 @@ private:
 	static inline int signal_fd[2];
 	QSocketNotifier *sn;
 };
+
+#endif

@@ -12,9 +12,11 @@ const char *home_dir() {
 	static const char *result = nullptr;
 	if (!result) {
 		result = getenv("HOME");
+#ifdef Q_OS_UNIX
 		if (!result) {
 			result = getpwuid(getuid())->pw_dir;
 		}
+#endif
 	}
 
 	return result;
@@ -23,7 +25,7 @@ const char *home_dir() {
 std::string pwd() {
 	static std::string result;
 	if (result.empty()) {
-		result = std::filesystem::current_path().string() + "/";
+		result = std::filesystem::current_path().string() + std::filesystem::path::preferred_separator;
 	}
 	return result;
 }
