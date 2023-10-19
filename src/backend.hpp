@@ -5,7 +5,10 @@
 #include <chrono>
 
 #include "Util/util.hpp"
+
+#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
 #include "xcb.hpp"
+#endif
 
 class Backend {
 public:
@@ -17,6 +20,8 @@ public:
 	void hide_terminal();
 	void restore_terminal();
 private:
+#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
 	Xcb xcb;
 	xcb_window_t last_window = 0;
+#endif
 };

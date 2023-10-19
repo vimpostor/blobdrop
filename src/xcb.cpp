@@ -1,5 +1,7 @@
 #include "xcb.hpp"
 
+#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+
 #include <QGuiApplication>
 #include <xcb/xcb.h>
 
@@ -54,3 +56,5 @@ void Xcb::set_keep_window_below(xcb_window_t window, const bool value) {
 	// write pending data to the socket
 	xcb_flush(conn);
 }
+
+#endif

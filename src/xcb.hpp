@@ -1,5 +1,7 @@
 #pragma once
 
+#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+
 #include <xcb/xcb_ewmh.h>
 #include <xcb/xproto.h>
 
@@ -13,3 +15,5 @@ private:
 	xcb_connection_t *conn = nullptr;
 	xcb_ewmh_connection_t ewmh;
 };
+
+#endif

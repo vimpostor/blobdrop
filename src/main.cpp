@@ -3,7 +3,10 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+
+#ifdef Q_OS_UNIX
 #include <signal.h>
+#endif
 
 #include "getopts.hpp"
 #include "signals.hpp"
@@ -15,8 +18,10 @@ int main(int argc, char *argv[]) {
 	QCoreApplication::setApplicationVersion(Version::version_string());
 	QGuiApplication app(argc, argv);
 
+#ifdef Q_OS_UNIX
 	// handle unix signals
 	Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}};
+#endif
 
 	if (!Getopts::parse(app)) {
 		return EXIT_FAILURE;
