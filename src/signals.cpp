@@ -20,13 +20,13 @@ Signals::Signals(const std::initializer_list<int> &sigs) {
 void Signals::handle_unix_signal(int) {
 	char a = 1;
 	// only very few, async-signal-safe methods are allowed in the signal handler
-	write(signal_fd[0], &a, sizeof(a));
+	std::ignore = write(signal_fd[0], &a, sizeof(a));
 }
 
 void Signals::handle_qt_signal() {
 	sn->setEnabled(false);
 	char a;
-	read(signal_fd[1], &a, sizeof(a));
+	std::ignore = read(signal_fd[1], &a, sizeof(a));
 
 	// force quit
 	Backend::get()->quit_delayed(0ms, true);
