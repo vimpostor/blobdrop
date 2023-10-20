@@ -27,6 +27,7 @@
 					buildInputs = with pkgs; [
 						qt6.qtbase
 						qt6.qtdeclarative
+						qt6.qtsvg
 						xorg.libxcb
 						xorg.xcbutilwm
 					];
