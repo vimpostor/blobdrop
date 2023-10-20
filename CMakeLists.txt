@@ -13,7 +13,7 @@ foreach(PKG IN LISTS PKGCONFIG_MODULES)
 endforeach()
 list(TRANSFORM PKGCONFIG_MODULES PREPEND "PkgConfig::")
 
-list(APPEND QT_MODULES Core Qml Quick QuickControls2 DBus)
+list(APPEND QT_MODULES Core Qml Quick QuickControls2 DBus Svg)
 find_package(Qt6 6.6 COMPONENTS ${QT_MODULES} REQUIRED)
 qt_standard_project_setup()
 list(TRANSFORM QT_MODULES PREPEND "Qt6::")
