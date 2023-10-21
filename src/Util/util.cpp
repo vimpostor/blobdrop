@@ -1,5 +1,6 @@
 #include "util.hpp"
 
+#include <QGuiApplication>
 #include <cstdlib>
 #include <format>
 #include <iostream>
@@ -32,5 +33,9 @@ std::string pwd() {
 
 std::string print_osc8_link(const std::string &url, const std::string &text) {
 	return std::format("\e]8;;{}\e\\{}\e]8;;\e\\", url, text);
+}
+
+bool is_wayland() {
+	return QGuiApplication::platformName() == "wayland";
 }
 }

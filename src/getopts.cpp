@@ -55,12 +55,17 @@ bool parse(QCoreApplication &app) {
 	if (p.isSet(frontend_opt)) {
 		constexpr std::array str_repr = {"auto", "gui", "immediate", "notify", "link"};
 		int choice = std::ranges::find(str_repr, p.value(frontend_opt).toStdString()) - str_repr.cbegin();
-		if (static_cast<Settings::Frontend>(choice) > Settings::Frontend::Link) {
+		if (choice > static_cast<int>(Settings::Frontend::Link)) {
 			std::cerr << "frontend needs to be one of {auto, gui, immediate, notify, link}" << std::endl;
 			return false;
-		} else {
-			Settings::get()->frontend = static_cast<Settings::Frontend>(choice);
 		}
+		const auto c = static_cast<Settings::Frontend>(choice);
+		if (c == Settings::Frontend::Immediate && Util::is_wayland()) {
+			std::cerr << "Wayland does not have support for this frontend, as the spec requires an implicit grab for native wl_data_device::start_drag() operations." << std::endl
+					  << "Please switch to X11 to get the optimal usability experience." << std::endl;
+			return false;
+		}
+		Settings::get()->frontend = c;
 	}
 
 	if (p.isSet(persistent_opt)) {
