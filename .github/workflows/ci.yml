@@ -14,5 +14,7 @@ jobs:
       run: docker build --build-arg cxx=$CXX -t blobdrop .
     - name: Format code
       run: docker run blobdrop sh -c 'scripts/format-code.sh'
+    - name: Run tests
+      run: docker run blobdrop sh -c 'ctest --test-dir build'
     - name: Build documentation
       run: docker run blobdrop sh -c 'cd doc && doxygen'

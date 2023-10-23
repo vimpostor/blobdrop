@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.21)
 cmake_policy(SET CMP0048 NEW)
 project(blobdrop VERSION 2.0 DESCRIPTION "Drag and drop files directly out of the terminal")
 
+option(BUILD_TESTING "Build the testing tree.")
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -38,3 +40,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_MODULES} ${PKGCONFIG_MODULES}
 install(TARGETS ${PROJECT_NAME} RUNTIME)
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/doc/man/" TYPE MAN)
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/assets/completions/" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}")
+
+# testing
+if (BUILD_TESTING)
+	enable_testing()
+	add_subdirectory(tests)
+endif()
