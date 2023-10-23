@@ -11,12 +11,15 @@ bool parse(QCoreApplication &app) {
 	p.addHelpOption();
 	p.addVersionOption();
 
+	constexpr std::array frontend_opts = {"auto", "gui", "immediate", "notify", "stdout"};
+	const std::string frontends_descr = std::ranges::fold_left(frontend_opts, std::string(), [](const auto &l, const auto &r) { return l + " " + r; });
+
 	QCommandLineOption frameless_opt(QStringList() << "b"
 												   << "frameless",
 		"Show a frameless window.");
 	QCommandLineOption frontend_opt(QStringList() << "f"
 												  << "frontend",
-		"Selects the frontend. Must be one of {auto (default), gui, immediate, notify, stdout}",
+		"Selects the frontend. Must be one of:" + QString::fromStdString(frontends_descr) + " (auto is default)",
 		"frontend");
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
@@ -53,10 +56,9 @@ bool parse(QCoreApplication &app) {
 	}
 
 	if (p.isSet(frontend_opt)) {
-		constexpr std::array str_repr = {"auto", "gui", "immediate", "notify", "stdout"};
-		int choice = std::ranges::find(str_repr, p.value(frontend_opt).toStdString()) - str_repr.cbegin();
+		int choice = std::ranges::find(frontend_opts, p.value(frontend_opt).toStdString()) - frontend_opts.cbegin();
 		if (choice > static_cast<int>(Settings::Frontend::Stdout)) {
-			std::cerr << "frontend needs to be one of:" << std::ranges::fold_left(str_repr, std::string(), [](const auto &l, const auto &r) { return l + " " + r; }) << std::endl;
+			std::cerr << "frontend needs to be one of the following:" << frontends_descr << std::endl;
 			return false;
 		}
 		const auto c = static_cast<Settings::Frontend>(choice);
