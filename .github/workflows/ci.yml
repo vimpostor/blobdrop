@@ -11,10 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build --build-arg cxx=$CXX -t blobdrop .
+      run: docker build -q --build-arg cxx=$CXX -t blobdrop .
     - name: Format code
       run: docker run blobdrop sh -c 'scripts/format-code.sh'
     - name: Run tests
-      run: docker run blobdrop sh -c 'ctest --test-dir build'
+      run: docker run blobdrop sh -c 'ctest --test-dir build --output-on-failure'
     - name: Build documentation
       run: docker run blobdrop sh -c 'cd doc && doxygen'

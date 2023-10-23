@@ -6,6 +6,7 @@ When filing a bug report, please state clearly what the problem is, i.e. explain
 ## Development
 Code contributions are much welcomed and appreciated.
 Please make sure that the code is formatted according to the `.clang-format` file in the root of the repository. If you have not configured your editor to format automatically, you can use the [format-code.sh](/scripts/format-code.sh) script or `git clang-format`, before committing.
+Additionally make sure that all [tests](/tests) pass.
 
 ### Submitting Patches
 You can either submit your changes as a pull request on Github or send them via email to me. In the latter case make sure that your email client does not break the formatting of your patch, I recommend using `git send-email` for this.
