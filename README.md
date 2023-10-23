@@ -32,10 +32,11 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 ## Features
 
 - Drag files to other applications
-- Pass filenames as trailing optargs
 - Pipe filenames asynchronously into stdin
+- Start drag automatically without a GUI
+- Hide the parent terminal emulator while dragging
 - Automatically quit once all paths have been dragged
-- Auto-hide while dragging
+- Auto-hide the GUI while dragging
 - Show mime icons and thumbnails for media
 - Drag all files at once
 - Act as a sink and print dropped files to the terminal
@@ -57,4 +58,4 @@ Blobdrop implements multiple frontends to drag the files from:
 
 - [dragon](https://github.com/mwh/dragon), A GTK implementation of the same concept
 - [ripdrag](https://github.com/nik012003/ripdrag), Like dragon with GTK, but rewritten in Rust
-- [clidrag](https://github.com/rkevin-arch/CLIdrag), A CLI-only implementation (equivalent to `blobdrop -i`)
+- [clidrag](https://github.com/rkevin-arch/CLIdrag), A CLI-only implementation (similar to `blobdrop -f immediate`)

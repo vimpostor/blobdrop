@@ -15,6 +15,6 @@ jobs:
     - name: Format code
       run: docker run blobdrop sh -c 'scripts/format-code.sh'
     - name: Run tests
-      run: docker run blobdrop sh -c 'ctest --test-dir build --output-on-failure'
+      run: docker run blobdrop sh -c 'QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure'
     - name: Build documentation
       run: docker run blobdrop sh -c 'cd doc && doxygen'

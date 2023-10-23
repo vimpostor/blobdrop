@@ -6,7 +6,7 @@ blobdrop \- Quickly drag and drop files from the terminal to applications
 .SH SYNOPSIS
 .B blobdrop
 [\-hvfiklnpt]
-[\-x \fINUM\fP]
+[\-x \fISTR\fP]
 .I FILES
 
 .SH DESCRIPTION
@@ -42,7 +42,7 @@ Do not auto-hide the main window while dragging.
 .B \-t, \-\-ontop
 Keep the window on top of other windows.
 .TP
-.B \-x, \-\-auto-quit \fINUM
+.B \-x, \-\-auto-quit \fISTR
 Changes the conditions when blobdrop will automatically quit. Must be one of {never, first, all}. For never it will never automatically quit, for first it will quit after the first drag and for all (default value) it will quit once every path has been dragged at least once.
 
 .SH EXIT STATUS
