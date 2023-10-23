@@ -22,16 +22,11 @@ Path::Path(const std::string &p)
 }
 
 std::string Path::get_uri() const {
-#ifdef Q_OS_WIN
-	constexpr const auto prefix = "file:///";
-#else
-	constexpr const auto prefix = "file://";
-#endif
-	return prefix + path.native();
+	return get_url().toString().toStdString();
 }
 
 QUrl Path::get_url() const {
-	return QUrl(QString::fromStdString(get_uri()));
+	return QUrl::fromLocalFile(QString::fromStdString(path.native()));
 }
 
 std::string Path::pretty_print() const {
