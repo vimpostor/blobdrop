@@ -18,7 +18,7 @@ _blobdrop() {
 			return
 			;;
 		-f|--frontend)
-			COMPREPLY=($(compgen -W 'auto gui immediate notify link' -- "$cur"))
+			COMPREPLY=($(compgen -W 'auto gui immediate notify stdout' -- "$cur"))
 			return
 			;;
 	esac
