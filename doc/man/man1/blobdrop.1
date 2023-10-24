@@ -1,7 +1,7 @@
 .TH "blobdrop" 1 "07 July 2022" "" "blobdrop Documentation"
 
 .SH NAME
-blobdrop \- Quickly drag and drop files from the terminal to applications
+blobdrop \- Quickly drag and drop files from the terminal
 
 .SH SYNOPSIS
 .B blobdrop
@@ -31,7 +31,9 @@ Show version information.
 Show a frameless window.
 .TP
 .B \-f, \-\-frontend
-Selects the frontend. Must be one of {auto (default), gui, immediate, notify, stdout}. Selecting auto will choose gui if no files are given and immediate otherwise. Choosing gui starts a window, immediate will start the drag immediately not requiring the user to hold the mouse button, notify will allow to drag from a notification using the x-kde-urls extension and link will print an OSC8 link in the terminal.
+Selects the frontend. Must be one of {auto (default), gui, immediate, notify, stdout}. For a more detailed explanation of the frontend options see
+.B FRONTENDS
+below.
 .TP
 .B \-k, \-\-keep
 When using sink mode, keep dropped files around by default.
@@ -47,3 +49,38 @@ Changes the conditions when blobdrop will automatically quit. Must be one of {ne
 
 .SH EXIT STATUS
 Returns zero on success.
+
+.SH FRONTENDS
+Blobdrop has multiple frontends available that change the behaviour how the drag and drop operation starts.
+.SS "Automatic"
+This is the default frontend and chooses one of the following frontends automatically based on some conditions. On X11, the
+.B immediate
+frontend is used unless no file is passed, in which case the
+.B gui
+frontend is started instead. On Wayland the
+.B gui
+frontend is used in all cases due to limitations of the Wayland protocol.
+
+.SS "Gui"
+This frontend shows an user interface that lists all items. Each item can be conveniently dragged on its own, or alternatively there is a button to drag all items at once.
+
+.SS "Immediate"
+This frontend starts the drag operation automatically without showing a GUI inbetween. The user does not need to hold any mouse button and can just move the mouse cursor to the target location and then click once to drop the files. Due to limitations of Wayland, this option is only available on X11. This option also works over XWayland, but then the target drop location is required to be running in XWayland too. Native Wayland does not support this option, because wl_data_device::start_drag() requires an implicit grab.
+
+.SS "Notify"
+This frontend spawns a notification containing the URLs of the files to drag in the
+.I x\-kde\-urls
+field. Window managers with support for this field then enable the notification to be dragged itself into other application windows. This option is mainly useful on KDE Plasma.
+
+.SS "Stdout"
+This frontend simply prints all files in the terminal as OSC8 links. Terminal emulators with support for OSC8 could allow the user to drag and drop such links directly. This option is equivalent to "ls --hyperlink=always".
+
+.SH EXAMPLE
+The following example drags all png files.
+.PP
+.in +2n
+.EX
+$ blobdrop *.png
+.EE
+.in
+.PP
