@@ -3,7 +3,7 @@
 void PathRegistry::add_path(Path p) {
 	paths.emplace_back(p);
 	if (!Util::is_wayland()) {
-		Settings::get()->hide_gui_flag = true;
+		Settings::get()->can_drag_immediately = true;
 	}
 	emit pathAdded(p);
 }

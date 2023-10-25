@@ -21,7 +21,7 @@ public:
 		All,
 	};
 	enum class Frontend {
-		Auto, // Gui if no arguments given, Immediate otherwise
+		Auto, // choose automatically
 		Gui, // show a window to drag files from
 		Immediate, // perform drag immediately without needing to hold down the mouse
 		Notification, // show a desktop notification to drag from
@@ -35,12 +35,13 @@ public:
 	Frontend frontend = Settings::Frontend::Auto;
 	void disable_always_on_bottom();
 	void setAlwaysOnBottom(const bool v);
+	Frontend effective_frontend() const;
 
 	bool always_on_top = false;
 	bool always_on_bottom = false;
 	bool keep_dropped_files = false;
 	bool frameless = false;
-	bool hide_gui_flag = false;
+	bool can_drag_immediately = false;
 	bool supress_always_on_bottom = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);

@@ -64,8 +64,8 @@ void PathModel::open(int i) const {
 }
 
 void PathModel::finish_init() {
-	const auto f = Settings::get()->frontend;
-	if (f == Settings::Frontend::Immediate || (f == Settings::Frontend::Auto && Settings::get()->hide_gui_flag)) {
+	const auto f = Settings::get()->effective_frontend();
+	if (f == Settings::Frontend::Immediate) {
 		drag_immediately();
 	} else if (f == Settings::Frontend::Stdout) {
 		print_hyperlinks();
