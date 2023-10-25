@@ -1,7 +1,7 @@
 {
 	description = "Drag and drop your files directly out of the terminal";
 	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 		flake-utils.url = "github:numtide/flake-utils";
 	};
 
