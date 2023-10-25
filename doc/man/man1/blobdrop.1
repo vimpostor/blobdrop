@@ -5,8 +5,9 @@ blobdrop \- Quickly drag and drop files from the terminal
 
 .SH SYNOPSIS
 .B blobdrop
-[\-hvfiklnpt]
-[\-x \fISTR\fP]
+[\-hvbkpt]
+[\-f \fIOPT\fP]
+[\-x \fIOPT\fP]
 .I FILES
 
 .SH DESCRIPTION
@@ -17,8 +18,10 @@ It can be used both as a source (files can be dragged from the terminal) and as 
 
 Filenames can either be given as command line arguments or by piping them into stdin, one filename per line.
 
-Several frontends are available to drag files from. By default, blobdrop will automatically determine the best frontend, meaning that for passed files it will immediately start the drag operation without having to hold down the mouse while showing a window when no files are passed.
-The frontend can be manually selected with the \-\-frontend option.
+Several frontends are available to drag files from. By default, blobdrop will immediately start the drag operation without having to hold down the mouse. The user can then just click on the target drop location, meaning by default there is no GUI involved.
+See
+.B FRONTENDS
+for more information.
 
 .TP
 .B \-h, \-\-help
@@ -30,8 +33,8 @@ Show version information.
 .B \-b, \-\-frameless
 Show a frameless window.
 .TP
-.B \-f, \-\-frontend
-Selects the frontend. Must be one of {auto (default), gui, immediate, notify, stdout}. For a more detailed explanation of the frontend options see
+.B \-f, \-\-frontend \fIOPT\fP
+Selects the frontend. Must be one of {"auto" (default), "gui", "immediate", "notify", "stdout"}. For a more detailed explanation of the frontend options see
 .B FRONTENDS
 below.
 .TP
@@ -44,15 +47,19 @@ Do not auto-hide the main window while dragging.
 .B \-t, \-\-ontop
 Keep the window on top of other windows.
 .TP
-.B \-x, \-\-auto-quit \fISTR
-Changes the conditions when blobdrop will automatically quit. Must be one of {never, first, all}. For never it will never automatically quit, for first it will quit after the first drag and for all (default value) it will quit once every path has been dragged at least once.
+.B \-x, \-\-auto-quit \fIOPT\fP
+Changes the conditions when blobdrop will automatically quit. Must be one of {"never", "first", "all" (default)}. See
+.B AUTOQUIT BEHAVIOUR
+below.
 
 .SH EXIT STATUS
 Returns zero on success.
 
 .SH FRONTENDS
-Blobdrop has multiple frontends available that change the behaviour how the drag and drop operation starts.
-.SS "Automatic"
+Blobdrop has multiple frontends available that change the behaviour how the drag and drop operation starts. The frontend can be chosen with the
+.B \-\-frontend
+option.
+.SS "automatic"
 This is the default frontend and chooses one of the following frontends automatically based on some conditions. On X11, the
 .B immediate
 frontend is used unless no file is passed, in which case the
@@ -61,26 +68,83 @@ frontend is started instead. On Wayland the
 .B gui
 frontend is used in all cases due to limitations of the Wayland protocol.
 
-.SS "Gui"
+.SS "gui"
 This frontend shows an user interface that lists all items. Each item can be conveniently dragged on its own, or alternatively there is a button to drag all items at once.
 
-.SS "Immediate"
-This frontend starts the drag operation automatically without showing a GUI inbetween. The user does not need to hold any mouse button and can just move the mouse cursor to the target location and then click once to drop the files. Due to limitations of Wayland, this option is only available on X11. This option also works over XWayland, but then the target drop location is required to be running in XWayland too. Native Wayland does not support this option, because wl_data_device::start_drag() requires an implicit grab.
+.SS "immediate"
+This frontend starts the drag operation automatically without showing a GUI inbetween. The user does not need to hold any mouse button and can just move the mouse cursor to the target location and then click once to drop the files. Due to limitations of Wayland, this option is only available on X11. This option also works over XWayland, but then the target drop location is required to be running in XWayland too. Native Wayland does not support this option, because wl_data_device::start_drag() requires an implicit grab, which means that this workflow is impossible to implement on Wayland.
 
-.SS "Notify"
+.SS "notify"
 This frontend spawns a notification containing the URLs of the files to drag in the
 .I x\-kde\-urls
 field. Window managers with support for this field then enable the notification to be dragged itself into other application windows. This option is mainly useful on KDE Plasma.
 
-.SS "Stdout"
+.SS "stdout"
 This frontend simply prints all files in the terminal as OSC8 links. Terminal emulators with support for OSC8 could allow the user to drag and drop such links directly. This option is equivalent to "ls --hyperlink=always".
 
-.SH EXAMPLE
-The following example drags all png files.
+.SH AUTOQUIT BEHAVIOUR
+Using
+.B \-\-auto-quit
+it is possible to specify the behaviour when blobdrop will automatically quit. The following options are possible,
+.B all
+is the default behaviour.
+.SS "never"
+This option means that blobdrop will never automatically quit.
+.SS "first"
+Using this option causes blobdrop to quit after the first drag operation has finished.
+.SS "all"
+With this option blobdrop keeps track of which items have been dragged already. It quits when all paths have been dragged at least once.
+
+.SH EXAMPLES
+Here are some example usecases.
 .PP
 .in +2n
 .EX
-$ blobdrop *.png
+$ \fBblobdrop\fP *.png
 .EE
 .in
 .PP
+This example drags all png files in the current directory.
+
+.PP
+.in +2n
+.EX
+$ \fBblobdrop\fP -f \fIimmediate\fP upload.mp4
+.EE
+.in
+.PP
+This example drags a single file and explicitly does not show a GUI, always starting the drag operation right away. The user does not need to hold any mouse button. Then the user can just click on the target location to drop the file.
+
+.PP
+.in +2n
+.EX
+$ \fBblobdrop\fP -tb -f \fIgui\fP *
+.EE
+.in
+.PP
+The above example shows a new frameless window that always stays on top of other windows, containing all files inside the current directory ready to be dragged.
+
+.PP
+.in +2n
+.EX
+$ \fBblobdrop\fP -f \fInotify\fP doc.pdf
+.EE
+.in
+.PP
+In this example blobdrop sends a desktop notification containing the URL of the given file and then quits immediately. On supported window managers the desktop notification itself can be dragged and dropped to any application.
+
+.PP
+.in +2n
+.EX
+$ \fBgrep\fP -R --files-with-matches uploadable | \fBblobdrop\fP -f \fIgui\fP
+.EE
+.in
+.PP
+The above example shows a window displaying all files that contain the phrase "uploadable". The UI will show up right away and if the
+.B grep
+command takes a while, then the UI will already display the files that were found so far. The list will be updated live, as all operations are done asynchronously.
+
+.SH HOMEPAGE
+https://github.com/vimpostor/blobdrop
+
+Please report bugs and feature requests in the issue tracker.

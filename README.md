@@ -56,6 +56,6 @@ Blobdrop implements multiple frontends to drag the files from:
 
 # Alternatives
 
-- [dragon](https://github.com/mwh/dragon), A GTK implementation of the same concept
-- [ripdrag](https://github.com/nik012003/ripdrag), Like dragon with GTK, but rewritten in Rust
-- [clidrag](https://github.com/rkevin-arch/CLIdrag), A CLI-only implementation (similar to `blobdrop -f immediate`)
+- [dragon](https://github.com/mwh/dragon) - A GTK implementation of the same concept
+- [clidrag](https://github.com/rkevin-arch/CLIdrag) - A CLI-only implementation (similar to `blobdrop -f immediate`)
+- [ripdrag](https://github.com/nik012003/ripdrag) - Like dragon with GTK, but rewritten in Rust

@@ -33,7 +33,7 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption auto_quit_opt(QStringList() << "x"
 												   << "auto-quit",
 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
-		"number");
+		"behaviour");
 
 	p.addOptions({frameless_opt, frontend_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
@@ -63,8 +63,8 @@ bool parse(QCoreApplication &app) {
 		}
 		const auto c = static_cast<Settings::Frontend>(choice);
 		if (c == Settings::Frontend::Immediate && Util::is_wayland()) {
-			std::cerr << "Wayland does not have support for this frontend, as the spec requires an implicit grab for native wl_data_device::start_drag() operations." << std::endl
-					  << "Please switch to X11 to get the optimal usability experience." << std::endl;
+			std::cerr << "Wayland does not have support for this frontend, as the spec requires an implicit grab for native wl_data_device::start_drag() operations, meaning it is impossible to implement this workflow on Wayland." << std::endl
+					  << "Please switch to X11 to get the optimal usability experience or use another frontend." << std::endl;
 			return false;
 		}
 		Settings::get()->frontend = c;
