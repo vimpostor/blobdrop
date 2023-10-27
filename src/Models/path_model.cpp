@@ -101,7 +101,16 @@ void PathModel::drag_immediately() {
 	if (paths.size() == 1) {
 		auto p = paths.front();
 		constexpr const int cursor_size = 24;
-		auto pixmap = QIcon::fromTheme(QString::fromStdString(p.iconName)).pixmap(cursor_size);
+		QPixmap pixmap;
+		if (!p.thumbnail.isEmpty()) {
+			// try using the thumbnail first
+			constexpr const int max_size = 128;
+			pixmap = QPixmap(p.thumbnail.toLocalFile()).scaled(QSize(max_size, max_size), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		}
+		if (pixmap.isNull()) {
+			// fallback to mime type icon
+			pixmap = QIcon::fromTheme(QString::fromStdString(p.iconName)).pixmap(cursor_size);
+		}
 		drag->setPixmap(pixmap);
 	}
 
