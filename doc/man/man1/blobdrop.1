@@ -124,11 +124,11 @@ This example drags a single file and explicitly does not show a GUI, always star
 .PP
 .in +2n
 .EX
-$ \fBblobdrop\fP -tb -f \fIgui\fP *
+$ \fBblobdrop\fP -tb -f \fIgui\fP $(\fBfzf\fP -m)
 .EE
 .in
 .PP
-The above example shows a new frameless window that always stays on top of other windows, containing all files inside the current directory ready to be dragged.
+The above example shows a new frameless window that always stays on top of other windows, containing all files chosen in the fzf selection selection prompt.
 
 .PP
 .in +2n
@@ -149,6 +149,15 @@ $ \fBgrep\fP -R --files-with-matches uploadable | \fBblobdrop\fP
 The above example shows a window displaying all files that contain the phrase "uploadable". The UI will show up right away and if the
 .B grep
 command takes a while, then the UI will already display the files that were found so far. The list will be updated live, as all operations are done asynchronously.
+
+It is also possible to integrate blobdrop in other external programs. For example if you use the ranger commandline file manager, you can use blobdrop to drag any file with a simple keybinding in your ~/.config/ranger/rc.conf:
+.PP
+.in +2n
+.EX
+map <C-d> shell blobdrop %p
+.EE
+.in
+.PP
 
 .SH HOMEPAGE
 https://github.com/vimpostor/blobdrop
