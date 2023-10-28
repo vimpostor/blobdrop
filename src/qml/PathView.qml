@@ -51,14 +51,6 @@ ListView {
 			anchors.fill: parent
 			Material.elevation: 6
 			padding: 0
-			Label {
-				anchors.centerIn: parent
-				text: pretty
-				ToolTip.text: path
-				ToolTip.visible: dragArea.containsMouse && (count > 1)
-				ToolTip.delay: 1500
-				ToolTip.timeout: 2000
-			}
 			Button {
 				id: iconButton
 				anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
@@ -78,6 +70,14 @@ ListView {
 				source: thumbnail
 				fillMode: Image.PreserveAspectCrop
 				asynchronous: true
+			}
+			Label {
+				anchors { left: iconButton.right; right: parent.right; verticalCenter: parent.verticalCenter }
+				text: pretty
+				ToolTip.text: path
+				ToolTip.visible: dragArea.containsMouse && (count > 1)
+				ToolTip.delay: 1500
+				ToolTip.timeout: 2000
 			}
 			Rectangle {
 				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
