@@ -98,10 +98,11 @@ void PathModel::drag_immediately() {
 
 	mimedata->setUrls(urls);
 	drag->setMimeData(mimedata);
+
+	constexpr const int cursor_size = 24;
+	QPixmap pixmap;
 	if (paths.size() == 1) {
-		auto p = paths.front();
-		constexpr const int cursor_size = 24;
-		QPixmap pixmap;
+		const auto p = paths.front();
 		if (!p.thumbnail.isEmpty()) {
 			// try using the thumbnail first
 			constexpr const int max_size = 128;
@@ -114,6 +115,11 @@ void PathModel::drag_immediately() {
 			// fallback to mime type icon
 			pixmap = QIcon::fromTheme(QString::fromStdString(p.iconName)).pixmap(cursor_size);
 		}
+	} else {
+		// show a collective pseudo thumbnail of all files
+		pixmap = QIcon::fromTheme("emblem-documents").pixmap(cursor_size);
+	}
+	if (!pixmap.isNull()) {
 		drag->setPixmap(pixmap);
 	}
 

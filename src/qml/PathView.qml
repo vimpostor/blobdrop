@@ -20,7 +20,7 @@ ListView {
 			Button {
 				id: dragallDummy
 				visible: false
-				icon.name: "emblem-documents"
+				icon.name: "emblem-documents-symbolic"
 				icon.color: "transparent"
 				width: 64
 				height: 64
