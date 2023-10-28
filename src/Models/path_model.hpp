@@ -4,10 +4,7 @@
 #include <qqml.h>
 #include <vector>
 
-#include "backend.hpp"
 #include "path.hpp"
-#include "path_registry.hpp"
-#include "settings.hpp"
 
 class PathModel : public QAbstractListModel {
 	Q_OBJECT
@@ -43,8 +40,5 @@ private:
 	QHash<int, QByteArray> role_names {{PathRole, "path"}, {UriRole, "uri"}, {PrettyRole, "pretty"}, {UsedRole, "used"}, {IconRole, "iconName"}, {ThumbnailRole, "thumbnail"}, {ExistsRole, "exists"}};
 	std::vector<Path> paths;
 	QString folded_uri_list;
-	void drag_immediately();
-	void print_hyperlinks();
-	void send_notification();
 	void check_should_quit();
 };

@@ -1,13 +1,13 @@
 #include "path_model.hpp"
 
-#include <QDrag>
-#include <QIcon>
-#include <QMimeData>
-#include <QPixmap>
+#include "backend.hpp"
+#include "path_registry.hpp"
+#include "settings.hpp"
 
 PathModel::PathModel(QObject *parent) {
 	paths = PathRegistry::get()->paths;
 	connect(PathRegistry::get(), &PathRegistry::pathAdded, this, &PathModel::add_path);
+	connect(Backend::get(), &Backend::drag_finished, this, &PathModel::taint_all_used);
 }
 
 int PathModel::rowCount(const QModelIndex &) const {
@@ -64,13 +64,16 @@ void PathModel::open(int i) const {
 }
 
 void PathModel::finish_init() {
+	// frontends that have an immediate effect, can do their work now
 	const auto f = Settings::get()->effective_frontend();
 	if (f == Settings::Frontend::Immediate) {
-		drag_immediately();
+		Backend::get()->drag_paths(paths);
 	} else if (f == Settings::Frontend::Stdout) {
-		print_hyperlinks();
+		Backend::get()->print_hyperlinks(paths);
 	} else if (f == Settings::Frontend::Notification) {
-		send_notification();
+		refresh_folded_paths();
+		const auto uri_list = folded_uri_list.split(QChar::LineFeed, Qt::SkipEmptyParts);
+		Backend::get()->send_drag_notification(uri_list);
 	}
 
 	if (f == Settings::Frontend::Stdout || f == Settings::Frontend::Notification) {
@@ -82,70 +85,6 @@ void PathModel::add_path(Path p) {
 	beginInsertRows(QModelIndex(), paths.size(), paths.size());
 	paths.emplace_back(p);
 	endInsertRows();
-}
-
-void PathModel::drag_immediately() {
-	Backend::get()->hide_terminal();
-
-	/**
-	 * Qt takes ownership both over the QDrag as well as the QMimeData
-	 * So no, this is not a memory leak.
-	 */
-	auto drag = new QDrag(this);
-	auto mimedata = new QMimeData();
-
-	QList<QUrl> urls;
-	for (auto &i : paths) {
-		urls.push_back(i.get_url());
-		i.used = true;
-	}
-
-	mimedata->setUrls(urls);
-	drag->setMimeData(mimedata);
-
-	constexpr const int cursor_size = 24;
-	QPixmap pixmap;
-	if (paths.size() == 1) {
-		const auto p = paths.front();
-		if (!p.thumbnail.isEmpty()) {
-			// try using the thumbnail first
-			constexpr const int max_size = 128;
-			pixmap = QPixmap(p.thumbnail.toLocalFile());
-			if (std::max(pixmap.width(), pixmap.height()) > max_size) {
-				pixmap = pixmap.scaled(QSize(max_size, max_size), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-			}
-		}
-		if (pixmap.isNull()) {
-			// fallback to mime type icon
-			pixmap = QIcon::fromTheme(QString::fromStdString(p.iconName)).pixmap(cursor_size);
-		}
-	} else {
-		// show a collective pseudo thumbnail of all files
-		pixmap = QIcon::fromTheme("emblem-documents").pixmap(cursor_size);
-	}
-	if (!pixmap.isNull()) {
-		drag->setPixmap(pixmap);
-	}
-
-	// The object is destroyed by Qt as soon as the drag is finished
-	connect(drag, &QObject::destroyed, this, [this]() {
-		Backend::get()->restore_terminal();
-		check_should_quit();
-	});
-
-	drag->exec();
-}
-
-void PathModel::print_hyperlinks() {
-	for (auto &i : paths) {
-		std::cout << Util::print_osc8_link(i.get_uri(), i.pretty_print()) << std::endl;
-	}
-}
-
-void PathModel::send_notification() {
-	refresh_folded_paths();
-	const auto uri_list = folded_uri_list.split(QChar::LineFeed, Qt::SkipEmptyParts);
-	Backend::get()->send_drag_notification(uri_list);
 }
 
 void PathModel::check_should_quit() {
