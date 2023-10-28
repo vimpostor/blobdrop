@@ -72,7 +72,7 @@ ListView {
 				asynchronous: true
 			}
 			Label {
-				anchors { left: iconButton.right; right: parent.right; verticalCenter: parent.verticalCenter }
+				anchors { left: iconButton.right; right: parent.right; verticalCenter: parent.verticalCenter; margins: 4 }
 				text: pretty
 				ToolTip.text: path
 				ToolTip.visible: dragArea.containsMouse && (count > 1)
