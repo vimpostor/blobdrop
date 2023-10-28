@@ -105,7 +105,10 @@ void PathModel::drag_immediately() {
 		if (!p.thumbnail.isEmpty()) {
 			// try using the thumbnail first
 			constexpr const int max_size = 128;
-			pixmap = QPixmap(p.thumbnail.toLocalFile()).scaled(QSize(max_size, max_size), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			pixmap = QPixmap(p.thumbnail.toLocalFile());
+			if (std::max(pixmap.width(), pixmap.height()) > max_size) {
+				pixmap = pixmap.scaled(QSize(max_size, max_size), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			}
 		}
 		if (pixmap.isNull()) {
 			// fallback to mime type icon
