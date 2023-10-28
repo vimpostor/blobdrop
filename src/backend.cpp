@@ -18,7 +18,7 @@ void Backend::quit_delayed(const std::chrono::milliseconds delay, bool force) {
 	}
 
 	Settings::get()->disable_always_on_bottom();
-	QTimer::singleShot(delay, []() { QGuiApplication::quit(); });
+	QTimer::singleShot(delay, qGuiApp, QGuiApplication::quit);
 }
 
 void Backend::send_drag_notification(const QList<QString> &uris) {
