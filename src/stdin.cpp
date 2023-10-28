@@ -62,7 +62,7 @@ void Stdin::read() {
 			line_complete = true;
 		} else if (c == 0x1B) {
 			// ESC pressed, abort
-			Backend::get()->quit_delayed(0ms, true);
+			Backend::get()->quit_delayed(0ms);
 		} else {
 			current_line += c;
 		}

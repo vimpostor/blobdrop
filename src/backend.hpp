@@ -17,7 +17,7 @@ class Backend : public QObject {
 public:
 	SINGLETON(Backend)
 
-	void quit_delayed(const std::chrono::milliseconds delay = 100ms, bool force = false);
+	void quit_delayed(const std::chrono::milliseconds delay = 100ms);
 	void drag_paths(const std::vector<Path> &paths);
 	void print_hyperlinks(const std::vector<Path> &paths);
 	void send_drag_notification(const QList<QString> &uris);
@@ -27,6 +27,7 @@ public:
 signals:
 	void drag_finished();
 private:
+	QDrag *drag = nullptr;
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
 	Xcb xcb;
 	xcb_window_t last_window = 0;

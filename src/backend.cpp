@@ -8,17 +8,13 @@
 
 #include "settings.hpp"
 
-void Backend::quit_delayed(const std::chrono::milliseconds delay, bool force) {
+void Backend::quit_delayed(const std::chrono::milliseconds delay) {
+	// cancel any pending drags
+	if (drag) {
+		drag->cancel();
+	}
 	// remove the possibly set keep-below hint, as we want to quit now
 	Backend::get()->restore_terminal();
-
-	if (force) {
-		// Duplicate quit attempts are required:
-		// The nice attempt with the timer is ignored, because a drag operation is active.
-		// The exit() forces the drag operation to close.
-		// Then the quit() over the timer causes the program to finally close.
-		QGuiApplication::exit();
-	}
 
 	Settings::get()->disable_always_on_bottom();
 	QTimer::singleShot(delay, qGuiApp, QGuiApplication::quit);
@@ -31,7 +27,7 @@ void Backend::drag_paths(const std::vector<Path> &paths) {
 	 * Qt takes ownership both over the QDrag as well as the QMimeData
 	 * So no, this is not a memory leak.
 	 */
-	auto drag = new QDrag(this);
+	drag = new QDrag(this);
 	auto mimedata = new QMimeData();
 
 	QList<QUrl> urls;
@@ -70,6 +66,7 @@ void Backend::drag_paths(const std::vector<Path> &paths) {
 	connect(drag, &QObject::destroyed, this, [this]() {
 		restore_terminal();
 		emit drag_finished();
+		drag = nullptr;
 	});
 
 	std::ignore = drag->exec();

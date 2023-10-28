@@ -29,7 +29,7 @@ void Signals::handle_qt_signal() {
 	std::ignore = read(signal_fd[1], &a, sizeof(a));
 
 	// force quit
-	Backend::get()->quit_delayed(0ms, true);
+	Backend::get()->quit_delayed(0ms);
 
 	sn->setEnabled(true);
 }
