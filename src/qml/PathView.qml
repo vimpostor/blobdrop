@@ -65,7 +65,6 @@ ListView {
 				enabled: false
 			}
 			Image {
-				id: thumbnailImg
 				anchors.fill: iconButton
 				visible: !iconButton.visible
 				source: thumbnail
@@ -90,7 +89,7 @@ ListView {
 		DragArea {
 			id: dragArea
 			anchors.fill: parent
-			target: iconButton.visible ? iconButton : thumbnailImg
+			target: iconButton
 			dragUri: uri
 			hoverEnabled: true
 			acceptedButtons: Qt.LeftButton | Qt.RightButton
