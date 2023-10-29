@@ -72,8 +72,12 @@ ListView {
 				asynchronous: true
 			}
 			Label {
-				anchors { left: iconButton.right; right: parent.right; verticalCenter: parent.verticalCenter; margins: 4 }
+				anchors { left: iconButton.right; right: parent.right; margins: 4 }
 				text: pretty
+				elide: Text.ElideRight
+				height: parent.height
+				verticalAlignment: Text.AlignVCenter
+				wrapMode: Text.Wrap
 				ToolTip.text: path
 				ToolTip.visible: dragArea.containsMouse && (count > 1)
 				ToolTip.delay: 1500
