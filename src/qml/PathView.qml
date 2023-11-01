@@ -69,6 +69,7 @@ ListView {
 				visible: !iconButton.visible
 				source: thumbnail
 				fillMode: Image.PreserveAspectCrop
+				mipmap: true
 				asynchronous: true
 			}
 			Label {
