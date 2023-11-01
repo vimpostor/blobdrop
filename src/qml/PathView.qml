@@ -78,6 +78,7 @@ ListView {
 				elide: Text.ElideRight
 				height: parent.height
 				verticalAlignment: Text.AlignVCenter
+				horizontalAlignment: Text.AlignHCenter
 				wrapMode: Text.Wrap
 				ToolTip.text: path
 				ToolTip.visible: dragArea.containsMouse && (count > 1)
