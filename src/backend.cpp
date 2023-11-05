@@ -80,6 +80,10 @@ void Backend::print_hyperlinks(const std::vector<Path> &paths) {
 
 void Backend::send_drag_notification(const QList<QString> &uris) {
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+	if (uris.empty()) {
+		return;
+	}
+
 	auto session = QDBusConnection::sessionBus();
 	auto msg = QDBusMessage::createMethodCall("org.freedesktop.Notifications", "/org/freedesktop/Notifications", "org.freedesktop.Notifications", "Notify");
 	QVariantMap hints;
