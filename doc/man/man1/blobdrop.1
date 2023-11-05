@@ -47,7 +47,7 @@ Do not auto-hide the main window while dragging.
 .B \-t, \-\-ontop
 Keep the window on top of other windows.
 .TP
-.B \-x, \-\-auto-quit \fIOPT\fP
+.B \-x, \-\-auto\-quit \fIOPT\fP
 Changes the conditions when blobdrop will automatically quit. Must be one of {"never", "first", "all" (default)}. See
 .B AUTOQUIT BEHAVIOUR
 below.
@@ -86,11 +86,11 @@ This frontend spawns a notification containing the URLs of the files to drag in 
 field. Window managers with support for this field then enable the notification to be dragged itself into other application windows. This option is mainly useful on KDE Plasma.
 
 .SS "stdout"
-This frontend simply prints all files in the terminal as OSC8 links. Terminal emulators with support for OSC8 could allow the user to drag and drop such links directly. This option is equivalent to "ls --hyperlink=always".
+This frontend simply prints all files in the terminal as OSC8 links. Terminal emulators with support for OSC8 could allow the user to drag and drop such links directly. This option is equivalent to "ls \-\-hyperlink=always".
 
 .SH AUTOQUIT BEHAVIOUR
 Using
-.B \-\-auto-quit
+.B \-\-auto\-quit
 it is possible to specify the behaviour when blobdrop will automatically quit. The following options are possible,
 .B all
 is the default behaviour.
@@ -115,7 +115,7 @@ This example drags all png files in the current directory.
 .PP
 .in +2n
 .EX
-$ \fBblobdrop\fP -f \fIimmediate\fP upload.mp4
+$ \fBblobdrop\fP \-f \fIimmediate\fP upload.mp4
 .EE
 .in
 .PP
@@ -124,7 +124,7 @@ This example drags a single file and explicitly does not show a GUI, always star
 .PP
 .in +2n
 .EX
-$ \fBblobdrop\fP -tb -f \fIgui\fP $(\fBfzf\fP -m)
+$ \fBblobdrop\fP \-tb \-f \fIgui\fP $(\fBfzf\fP \-m)
 .EE
 .in
 .PP
@@ -133,7 +133,7 @@ The above example shows a new frameless window that always stays on top of other
 .PP
 .in +2n
 .EX
-$ \fBblobdrop\fP -f \fInotify\fP doc.pdf
+$ \fBblobdrop\fP \-f \fInotify\fP doc.pdf
 .EE
 .in
 .PP
@@ -142,7 +142,7 @@ In this example blobdrop sends a desktop notification containing the URL of the 
 .PP
 .in +2n
 .EX
-$ \fBgrep\fP -R --files-with-matches uploadable | \fBblobdrop\fP
+$ \fBgrep\fP \-R \-\-files\-with\-matches uploadable | \fBblobdrop\fP
 .EE
 .in
 .PP
@@ -154,7 +154,7 @@ It is also possible to integrate blobdrop in other external programs. For exampl
 .PP
 .in +2n
 .EX
-map <C-d> shell blobdrop %p
+map <C\-d> shell blobdrop %p
 .EE
 .in
 .PP
