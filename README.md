@@ -4,7 +4,8 @@
 
 Drag and drop your files directly from the terminal.
 
-![Screenshot](https://user-images.githubusercontent.com/21310755/252060266-04120929-fa7b-4534-9b89-dd3fb7a2e605.png)
+https://github.com/vimpostor/blobdrop/assets/21310755/518b453c-b5e9-4f01-a112-535363e841c0
+
 # Installation
 
 Note: For Arch Linux users there is an [AUR package](https://aur.archlinux.org/packages/blobdrop-git), for Nix users there is a [flake](flake.nix) available.
