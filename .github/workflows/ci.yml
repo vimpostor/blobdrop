@@ -4,17 +4,15 @@ jobs:
   build:
     strategy:
       matrix:
-        cxx: [g++, clang++]
+        cxx: [gcc]
+        # cxx: [gcc, clang]
     runs-on: ubuntu-latest
     env:
-      CXX: ${{ matrix.cxx }}
+      NIX_STDENV: ${{ matrix.cxx }}
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build --build-arg cxx=$CXX -t blobdrop .
-    - name: Format code
-      run: docker run blobdrop sh -c 'scripts/format-code.sh'
-    - name: Run tests
-      run: docker run blobdrop sh -c 'QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure'
-    - name: Build documentation
-      run: docker run blobdrop sh -c 'cd doc && doxygen'
+    - uses: cachix/install-nix-action@v20
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - run: nix flake check
