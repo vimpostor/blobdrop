@@ -12,7 +12,7 @@
 			defaultStdenv = (builtins.head stdenvs).name;
 			makeStdenvPkg = env: env.mkDerivation {
 				pname = "blobdrop";
-				version = "2.0";
+				version = builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile ./CMakeLists.txt));
 
 				src = ./.;
 
