@@ -10,7 +10,7 @@
 
 Signals::Signals(const std::initializer_list<int> &sigs) {
 	if (socketpair(AF_UNIX, SOCK_STREAM, 0, signal_fd)) {
-		qWarning() << "Could not create HUP socketpair";
+		std::cerr << "Could not create HUP socketpair" << std::endl;
 	}
 	sn = new QSocketNotifier(signal_fd[1], QSocketNotifier::Read, this);
 	connect(sn, &QSocketNotifier::activated, this, &Signals::handle_qt_signal);
@@ -44,7 +44,7 @@ void Signals::setup_signal_handlers(const std::initializer_list<int> &sigs) {
 
 	std::ranges::for_each(sigs, [&](const auto &s) {
 		if (sigaction(SIGINT, &act, nullptr)) {
-			qWarning() << "Could not setup signal handler";
+			std::cerr << "Could not setup signal handler" << std::endl;
 			return;
 		}
 	});
