@@ -18,14 +18,21 @@ ApplicationWindow {
 		onActivated: Qt.quit();
 	}
 	DropArea {
+		property int mouseX: 0
+		property int mouseY: 0
 		anchors.fill: parent
 		onDropped: (drop) => {
 			Stdout.print_urls(drop.urls);
 		}
-		Rectangle {
+		onPositionChanged: (drag) => {
+			mouseX = drag.x;
+			mouseY = drag.y;
+		}
+		Wave {
 			anchors.fill: parent
-			color: parent.containsDrag && parent.drag.source === null ? Material.primary : Material.background
-			Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
+			size: parent.containsDrag && parent.drag.source === null ? 1.0 : 0.0
+			centreX: parent.mouseX
+			centreY: parent.mouseY
 		}
 	}
 	Welcome {
