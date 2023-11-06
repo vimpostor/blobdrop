@@ -12,7 +12,9 @@ bool parse(QCoreApplication &app) {
 	p.addVersionOption();
 
 	constexpr std::array frontend_opts = {"auto", "gui", "immediate", "notify", "stdout"};
-	const std::string frontends_descr = std::ranges::fold_left(frontend_opts, std::string(), [](const auto &l, const auto &r) { return l + " " + r; });
+	// TODO: Uncomment this, once we move to C++23
+	// const std::string frontends_descr = std::ranges::fold_left(frontend_opts, std::string(), [](const auto &l, const auto &r) { return l + " " + r; });
+	const std::string frontends_descr = std::accumulate(frontend_opts.cbegin(), frontend_opts.cend(), std::string(), [](const auto &l, const auto &r) { return l + "" + r; });
 
 	QCommandLineOption frameless_opt(QStringList() << "b"
 												   << "frameless",
