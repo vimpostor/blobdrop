@@ -4,8 +4,11 @@
 #include <cstdlib>
 #include <format>
 #include <iostream>
-#include <pwd.h>
 #include <unistd.h>
+
+#ifdef Q_OS_UNIX
+#include <pwd.h>
+#endif
 
 namespace Util {
 
