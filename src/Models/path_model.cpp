@@ -18,7 +18,7 @@ QVariant PathModel::data(const QModelIndex &index, int role) const {
 	const auto &p = paths[index.row()];
 	switch (role) {
 	case PathRole:
-		return QString::fromStdString(p.path);
+		return QString::fromStdString(p.path.string());
 	case UriRole:
 		return QString::fromStdString(p.get_uri());
 	case PrettyRole:

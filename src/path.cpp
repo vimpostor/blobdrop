@@ -26,11 +26,11 @@ std::string Path::get_uri() const {
 }
 
 QUrl Path::get_url() const {
-	return QUrl::fromLocalFile(QString::fromStdString(path.native()));
+	return QUrl::fromLocalFile(QString::fromStdString(path.string()));
 }
 
 std::string Path::pretty_print() const {
-	std::string result = path.native();
+	std::string result = path.string();
 
 	const auto pwd = Util::pwd() + std::string(1, std::filesystem::path::preferred_separator);
 	const auto home = Util::home_dir();
