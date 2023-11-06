@@ -32,7 +32,7 @@ QUrl Path::get_url() const {
 std::string Path::pretty_print() const {
 	std::string result = path.native();
 
-	const auto pwd = Util::pwd();
+	const auto pwd = Util::pwd() + std::string(1, std::filesystem::path::preferred_separator);
 	const auto home = Util::home_dir();
 	if (result.starts_with(pwd)) {
 		result = result.substr(pwd.length());

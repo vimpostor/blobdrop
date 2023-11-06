@@ -1,5 +1,6 @@
 #include <QTest>
 
+#include "Util/util.hpp"
 #include "path.hpp"
 
 class PathTest : public QObject {
@@ -8,10 +9,11 @@ private:
 	std::string pwd;
 private slots:
 	void initTestCase() {
-		pwd = std::filesystem::current_path().native();
+		pwd = Util::pwd();
 	}
 
 	void test_path_uris() {
+		QVERIFY(!pwd.empty());
 		const std::string filename = "test.txt";
 		const auto path = pwd + "/" + filename;
 		const auto uri = "file://" + path;

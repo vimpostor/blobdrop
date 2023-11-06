@@ -26,7 +26,7 @@ const char *home_dir() {
 std::string pwd() {
 	static std::string result;
 	if (result.empty()) {
-		result = std::filesystem::current_path().string() + std::filesystem::path::preferred_separator;
+		result = std::filesystem::current_path().string();
 	}
 	return result;
 }
