@@ -10,7 +10,7 @@ Rectangle {
 	color: Material.primary
 	visible: size > 0.0
 	Behavior on size {
-		NumberAnimation { duration: 300; easing.type: Easing.InOutSine; }
+		NumberAnimation { duration: 300; easing.type: Easing.OutCirc; }
 	}
 	layer.enabled: true
 	layer.effect: MultiEffect {
