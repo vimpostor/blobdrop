@@ -73,7 +73,7 @@ ListView {
 				asynchronous: true
 			}
 			Label {
-				anchors { left: iconButton.right; right: parent.right; margins: 4 }
+				anchors { left: iconButton.right; right: parent.right; }
 				text: pretty
 				elide: Text.ElideRight
 				height: parent.height
