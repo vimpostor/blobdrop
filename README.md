@@ -4,7 +4,8 @@
 
 Drag and drop your files directly from the terminal.
 
-https://github.com/vimpostor/blobdrop/assets/21310755/518b453c-b5e9-4f01-a112-535363e841c0
+https://github.com/vimpostor/blobdrop/assets/21310755/1957b6a7-475c-4930-80b9-18564ef39eb9
+
 
 # Installation
 
