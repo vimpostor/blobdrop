@@ -74,7 +74,7 @@ This frontend shows an user interface that lists all items. Each item can be con
 .SS "immediate"
 This frontend starts the drag operation automatically without showing a GUI inbetween. The user does not need to hold any mouse button and can just move the mouse cursor to the target location and then click once to drop the files.
 .br
-Due to limitations in Wayland, this option is only available on X11. This option also works over XWayland, but then the target drop location is required to be running in XWayland too. Native Wayland does not support this option, because wl_data_device::start_drag() requires an implicit grab, which means that this workflow is impossible to implement on Wayland.
+Due to limitations in Wayland, this option is only available on X11. This option also works over XWayland, but then the target drop location is required to be running in XWayland too. Native Wayland does not have support for this frontend, because the spec requires an implicit grab for native wl_data_device::start_drag() operations, thus making it impossible to implement this workflow on Wayland.
 .br
 Another feature implemented in immediate mode is that the parent terminal window will be hidden automatically during the drag operation, unless the
 .B \-\-persistent
@@ -103,6 +103,8 @@ With this option blobdrop keeps track of which items have been dragged already. 
 
 .SH EXAMPLES
 Here are some example usecases.
+
+The following example drags all png files in the current directory.
 .PP
 .in +2n
 .EX
@@ -110,8 +112,8 @@ $ \fBblobdrop\fP *.png
 .EE
 .in
 .PP
-This example drags all png files in the current directory.
 
+The next example drags a single file and explicitly does not show a GUI, always starting the drag operation right away. The user does not need to hold any mouse button. Then the user can just click on the target location to drop the file.
 .PP
 .in +2n
 .EX
@@ -119,8 +121,8 @@ $ \fBblobdrop\fP \-f \fIimmediate\fP upload.mp4
 .EE
 .in
 .PP
-This example drags a single file and explicitly does not show a GUI, always starting the drag operation right away. The user does not need to hold any mouse button. Then the user can just click on the target location to drop the file.
 
+The example below shows a new frameless window that always stays on top of other windows, containing all files chosen in the fzf selection selection prompt.
 .PP
 .in +2n
 .EX
@@ -128,8 +130,8 @@ $ \fBblobdrop\fP \-tb \-f \fIgui\fP $(\fBfzf\fP \-m)
 .EE
 .in
 .PP
-The above example shows a new frameless window that always stays on top of other windows, containing all files chosen in the fzf selection selection prompt.
 
+In this example blobdrop sends a desktop notification containing the URL of the given file and then quits immediately. On supported window managers the desktop notification itself can be dragged and dropped to any application.
 .PP
 .in +2n
 .EX
@@ -137,8 +139,10 @@ $ \fBblobdrop\fP \-f \fInotify\fP doc.pdf
 .EE
 .in
 .PP
-In this example blobdrop sends a desktop notification containing the URL of the given file and then quits immediately. On supported window managers the desktop notification itself can be dragged and dropped to any application.
 
+The below example shows a window displaying all files that contain the phrase "uploadable". The UI will show up right away and if the
+.B grep
+command takes a while, then the UI will already display the files that were found so far. The list will be updated live, as all operations are done asynchronously.
 .PP
 .in +2n
 .EX
@@ -146,9 +150,6 @@ $ \fBgrep\fP \-R \-\-files\-with\-matches uploadable | \fBblobdrop\fP
 .EE
 .in
 .PP
-The above example shows a window displaying all files that contain the phrase "uploadable". The UI will show up right away and if the
-.B grep
-command takes a while, then the UI will already display the files that were found so far. The list will be updated live, as all operations are done asynchronously.
 
 It is also possible to integrate blobdrop in other external programs. For example if you use the ranger commandline file manager, you can use blobdrop to drag any file with a simple keybinding in your ~/.config/ranger/rc.conf:
 .PP
