@@ -73,7 +73,7 @@ ListView {
 				asynchronous: true
 			}
 			Label {
-				anchors { left: iconButton.right; right: parent.right; }
+				anchors { left: iconButton.right; right: usedIndicator.left; rightMargin: 4; }
 				text: pretty
 				elide: Text.ElideRight
 				height: parent.height
@@ -86,6 +86,7 @@ ListView {
 				ToolTip.timeout: 2000
 			}
 			Rectangle {
+				id: usedIndicator
 				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
 				width: 8
 				color: used ? Material.primary : exists ? Material.color(Material.Grey) : Material.color(Material.Red)
