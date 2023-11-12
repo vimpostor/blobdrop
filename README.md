@@ -13,7 +13,7 @@ Note: For Arch Linux users there is an [AUR package](https://aur.archlinux.org/p
 
 ## Building from source
 
-Make sure you have the latest Qt with the Declarative and Svg modules installed.
+Make sure you have the latest Qt with the Declarative and SVG modules installed.
 
 ```bash
 cmake -B build
@@ -22,6 +22,13 @@ cmake --build build
 # install the build/blobdrop binary
 cmake --install build
 ```
+
+From Docker or Podman.
+
+```bash
+docker build -t blobdrop .
+```
+
 
 # Usage
 

@@ -1,4 +1,4 @@
-FROM vimpostor/arch-qt6
+FROM docker.io/vimpostor/arch-qt6
 
 # default compiler
 ARG cxx=g++
