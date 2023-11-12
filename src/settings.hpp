@@ -25,7 +25,7 @@ public:
 		Gui, // show a window to drag files from
 		Immediate, // perform drag immediately without needing to hold down the mouse
 		Notification, // show a desktop notification to drag from
-		Stdout, // print a link in the terminal usin OSC8
+		Stdout, // print a link in the terminal using OSC8
 	};
 
 	STRICT_SINGLETON(Settings)
@@ -42,7 +42,7 @@ public:
 	bool keep_dropped_files = false;
 	bool frameless = false;
 	bool can_drag_immediately = false;
-	bool supress_always_on_bottom = false;
+	bool suppress_always_on_bottom = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);
