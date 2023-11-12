@@ -6,15 +6,6 @@ cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
 cmake --build build
 DESTDIR=AppDir cmake --install build
 
-wget -q -nc https://github.com/linuxdeploy/linuxdeploy/releases/latest/download/linuxdeploy-x86_64.AppImage https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
-chmod +x linuxdeploy-*.AppImage
-./linuxdeploy-x86_64.AppImage --appimage-extract
-mv squashfs-root linuxdeploy
-./linuxdeploy-plugin-qt-x86_64.AppImage --appimage-extract
-mv squashfs-root linuxdeploy-plugin-qt
-rm linuxdeploy-*.AppImage
-export PATH="$PWD/linuxdeploy/usr/bin:$PWD/linuxdeploy-plugin-qt/usr/bin:$PATH"
-
 # create fake desktop file
 mkdir -p AppDir/usr/share/applications
 cat > AppDir/usr/share/applications/blobdrop.desktop <<'EOF'
@@ -31,4 +22,4 @@ EOF
 mkdir -p AppDir/usr/share/icons/hicolor/scalable/apps
 cp assets/blobdrop.svg AppDir/usr/share/icons/hicolor/scalable/apps/
 
-QML_SOURCES_PATHS="$PWD/src/qml" QMAKE="$(which qmake)" linuxdeploy/AppRun --appdir AppDir --plugin qt --output appimage
+QML_SOURCES_PATHS="$PWD/src/qml" QMAKE="$(which qmake)" linuxdeploy --appdir AppDir --plugin qt --output appimage
