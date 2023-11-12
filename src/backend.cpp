@@ -99,7 +99,7 @@ void Backend::send_drag_notification(const QList<QString> &uris) {
 
 void Backend::hide_terminal() {
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
-	if (Settings::get()->supress_always_on_bottom || !xcb.init()) {
+	if (Settings::get()->suppress_always_on_bottom || !xcb.init()) {
 		return;
 	}
 

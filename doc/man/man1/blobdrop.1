@@ -72,7 +72,7 @@ frontend is used in all cases due to limitations of the Wayland protocol.
 This frontend shows an user interface that lists all items. Each item can be conveniently dragged on its own, or alternatively there is a button to drag all items at once.
 
 .SS "immediate"
-This frontend starts the drag operation automatically without showing a GUI inbetween. The user does not need to hold any mouse button and can just move the mouse cursor to the target location and then click once to drop the files.
+This frontend starts the drag operation automatically without showing a GUI in between. The user does not need to hold any mouse button and can just move the mouse cursor to the target location and then click once to drop the files.
 .br
 Due to limitations in Wayland, this option is only available on X11. This option also works over XWayland, but then the target drop location is required to be running in XWayland too. Native Wayland does not have support for this frontend, because the spec requires an implicit grab for native wl_data_device::start_drag() operations, thus making it impossible to implement this workflow on Wayland.
 .br
