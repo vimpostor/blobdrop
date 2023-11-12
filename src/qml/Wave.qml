@@ -12,7 +12,7 @@ Rectangle {
 	Behavior on size {
 		NumberAnimation { duration: 300; easing.type: Easing.OutCirc; }
 	}
-	layer.enabled: true
+	layer.enabled: visible
 	layer.effect: MultiEffect {
 		maskEnabled: true
 		maskSource: ShaderEffectSource {

@@ -3,6 +3,7 @@ import QtQuick
 MouseArea {
 	property var target
 	property string dragUri: ""
+	property bool active: draggable.Drag.active
 	signal dragStarted()
 	signal dragFinished(var dropAction)
 	signal preDragStarted()
