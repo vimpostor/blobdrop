@@ -10,7 +10,7 @@ https://github.com/vimpostor/blobdrop/assets/21310755/1957b6a7-475c-4930-80b9-18
 # Installation
 
 Note: For Arch Linux users there is an [AUR package](https://aur.archlinux.org/packages/blobdrop-git), for Nix users there is a [flake](flake.nix) available.
-You can also download the AppImage from the [latest release](https://github.com/vimpostor/blobdrop/releases/latest).
+You can also download an AppImage from the [latest release](https://github.com/vimpostor/blobdrop/releases/latest).
 
 ## Building from source
 
@@ -60,5 +60,7 @@ Blobdrop implements multiple frontends to drag the files from:
 # Alternatives
 
 - [dragon](https://github.com/mwh/dragon) - A GTK implementation of the same concept
-- [clidrag](https://github.com/rkevin-arch/CLIdrag) - A CLI-only implementation (similar to `blobdrop -f immediate`)
+- [clidrag](https://github.com/rkevin-arch/CLIdrag) - A CLI-only implementation
 - [ripdrag](https://github.com/nik012003/ripdrag) - Like dragon with GTK, but rewritten in Rust
+
+Note that none of these alternatives provide a workflow similar to blobdrop's immediate frontend (except clidrag, but it lacks many UX improvements).
