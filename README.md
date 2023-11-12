@@ -10,6 +10,7 @@ https://github.com/vimpostor/blobdrop/assets/21310755/1957b6a7-475c-4930-80b9-18
 # Installation
 
 Note: For Arch Linux users there is an [AUR package](https://aur.archlinux.org/packages/blobdrop-git), for Nix users there is a [flake](flake.nix) available.
+You can also download the AppImage from the [latest release](https://github.com/vimpostor/blobdrop/releases/latest).
 
 ## Building from source
 
