@@ -22,4 +22,4 @@ EOF
 mkdir -p AppDir/usr/share/icons/hicolor/scalable/apps
 cp assets/blobdrop.svg AppDir/usr/share/icons/hicolor/scalable/apps/
 
-QML_SOURCES_PATHS="$PWD/src/qml" QMAKE="$(which qmake)" linuxdeploy --appdir AppDir --plugin qt --output appimage
+QML_SOURCES_PATHS="$PWD/src/qml" linuxdeploy --appdir AppDir --plugin qt --output appimage
