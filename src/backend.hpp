@@ -18,9 +18,8 @@ class Backend : public QObject {
 	QML_ELEMENT
 	QML_SINGLETON
 public:
-	STRICT_SINGLETON(Backend)
+	QML_CPP_SINGLETON(Backend)
 
-	static Backend *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 	void quit_delayed(const std::chrono::milliseconds delay = 100ms);
 	void drag_paths(const std::vector<Path> &paths);
 	void print_hyperlinks(const std::vector<Path> &paths);

@@ -14,12 +14,17 @@ using namespace std::chrono_literals;
 		return &s; \
 	}
 
-#define STRICT_SINGLETON(TYPE) \
+#define QML_CPP_SINGLETON(TYPE) \
 	TYPE() = delete; \
 	explicit TYPE(bool singleton_constructor) {}; \
 	static TYPE *get() { \
 		static TYPE s {true}; \
 		return &s; \
+	} \
+	static TYPE *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) { \
+		auto res = get(); \
+		QJSEngine::setObjectOwnership(res, QJSEngine::CppOwnership); \
+		return res; \
 	}
 
 namespace Util {

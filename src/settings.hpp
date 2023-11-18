@@ -27,9 +27,8 @@ public:
 		Stdout, // print a link in the terminal using OSC8
 	};
 
-	STRICT_SINGLETON(Settings)
+	QML_CPP_SINGLETON(Settings)
 
-	static Settings *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
 	Frontend frontend = Settings::Frontend::Auto;
 	void setAlwaysOnBottom(const bool v);

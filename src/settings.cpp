@@ -1,11 +1,5 @@
 #include "settings.hpp"
 
-Settings *Settings::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) {
-	auto res = Settings::get();
-	QJSEngine::setObjectOwnership(res, QJSEngine::CppOwnership);
-	return res;
-}
-
 void Settings::setAlwaysOnBottom(const bool v) {
 	if (!suppress_always_on_bottom) {
 		always_on_bottom = v;
