@@ -32,7 +32,6 @@ public:
 	static Settings *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
 	Frontend frontend = Settings::Frontend::Auto;
-	void disable_always_on_bottom();
 	void setAlwaysOnBottom(const bool v);
 	Frontend effective_frontend() const;
 

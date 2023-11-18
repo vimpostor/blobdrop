@@ -6,10 +6,6 @@ Settings *Settings::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) {
 	return res;
 }
 
-void Settings::disable_always_on_bottom() {
-	suppress_always_on_bottom = true;
-}
-
 void Settings::setAlwaysOnBottom(const bool v) {
 	if (!suppress_always_on_bottom) {
 		always_on_bottom = v;

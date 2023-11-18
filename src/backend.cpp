@@ -23,7 +23,7 @@ void Backend::quit_delayed(const std::chrono::milliseconds delay) {
 	// remove the possibly set keep-below hint, as we want to quit now
 	Backend::get()->restore_terminal();
 
-	Settings::get()->disable_always_on_bottom();
+	Settings::get()->suppress_always_on_bottom = true;
 	QTimer::singleShot(delay, qGuiApp, QGuiApplication::quit);
 }
 

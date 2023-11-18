@@ -51,12 +51,8 @@ bool parse(QCoreApplication &app) {
 		}
 		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
 	}
-	if (p.isSet(ontop_opt)) {
-		Settings::get()->always_on_top = true;
-	}
-	if (p.isSet(keep_opt)) {
-		Settings::get()->keep_dropped_files = true;
-	}
+	Settings::get()->always_on_top = p.isSet(ontop_opt);
+	Settings::get()->keep_dropped_files = p.isSet(keep_opt);
 
 	if (p.isSet(frontend_opt)) {
 		int choice = std::ranges::find(frontend_opts, p.value(frontend_opt).toStdString()) - frontend_opts.cbegin();
@@ -73,15 +69,9 @@ bool parse(QCoreApplication &app) {
 		Settings::get()->frontend = c;
 	}
 
-	if (p.isSet(persistent_opt)) {
-		Settings::get()->disable_always_on_bottom();
-	}
-	if (p.isSet(frameless_opt)) {
-		Settings::get()->frameless = true;
-	}
-	if (p.isSet(cursor_opt)) {
-		Settings::get()->spawn_on_cursor = true;
-	}
+	Settings::get()->suppress_always_on_bottom = p.isSet(persistent_opt);
+	Settings::get()->frameless = p.isSet(frameless_opt);
+	Settings::get()->spawn_on_cursor = p.isSet(cursor_opt);
 
 	// add all trailing arguments to the path list
 	std::ranges::for_each(p.positionalArguments(), [](auto i) { PathRegistry::get()->add_path(i.toStdString()); });
