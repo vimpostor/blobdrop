@@ -2,6 +2,7 @@
 
 #include <QCoreApplication>
 #include <QDrag>
+#include <QPoint>
 #include <QTimer>
 #include <chrono>
 
@@ -27,6 +28,8 @@ public:
 
 	void hide_terminal();
 	void restore_terminal();
+
+	Q_INVOKABLE QPoint get_mouse_pos() const;
 signals:
 	void drag_finished();
 private:

@@ -17,6 +17,9 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption frameless_opt(QStringList() << "b"
 												   << "frameless",
 		"Show a frameless window.");
+	QCommandLineOption cursor_opt(QStringList() << "c"
+												<< "cursor",
+		"Spawn window at the mouse cursor.");
 	QCommandLineOption frontend_opt(QStringList() << "f"
 												  << "frontend",
 		"Selects the frontend. Must be one of:" + QString::fromStdString(frontends_descr) + " (auto is default)",
@@ -35,7 +38,7 @@ bool parse(QCoreApplication &app) {
 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
 		"behaviour");
 
-	p.addOptions({frameless_opt, frontend_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, cursor_opt, frontend_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -75,6 +78,9 @@ bool parse(QCoreApplication &app) {
 	}
 	if (p.isSet(frameless_opt)) {
 		Settings::get()->frameless = true;
+	}
+	if (p.isSet(cursor_opt)) {
+		Settings::get()->spawn_on_cursor = true;
 	}
 
 	// add all trailing arguments to the path list

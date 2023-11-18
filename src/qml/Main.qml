@@ -13,6 +13,12 @@ ApplicationWindow {
 	Material.theme: Material.System
 	Material.primary: Material.Green
 	Material.accent: Material.Pink
+	Component.onCompleted: {
+		if (Settings.spawnOnCursor) {
+			root.x = Backend.get_mouse_pos().x - width / 2;
+			root.y = Backend.get_mouse_pos().y - height / 2;
+		}
+	}
 	Shortcut {
 		sequences: [StandardKey.Quit, StandardKey.Cancel, "Q"]
 		onActivated: Qt.quit();

@@ -1,5 +1,6 @@
 #include "backend.hpp"
 
+#include <QCursor>
 #include <QDBusInterface>
 #include <QGuiApplication>
 #include <QIcon>
@@ -125,4 +126,8 @@ void Backend::restore_terminal() {
 	xcb.set_keep_window_below(last_window, false);
 	last_window = 0;
 #endif
+}
+
+QPoint Backend::get_mouse_pos() const {
+	return QCursor::pos();
 }

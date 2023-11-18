@@ -4,6 +4,7 @@ _blobdrop() {
 		-h --help
 		-v --version
 		-b --frameless
+		-c --cursor
 		-f --frontend
 		-k --keep
 		-p --persistent
