@@ -64,6 +64,11 @@ void PathModel::open(int i) const {
 }
 
 void PathModel::finish_init() {
+	if (paths.empty()) {
+		// nothing to do for now
+		return;
+	}
+
 	// frontends that have an immediate effect, can do their work now
 	const auto f = Settings::get()->effective_frontend();
 	if (f == Settings::Frontend::Immediate) {
