@@ -1,7 +1,5 @@
 #pragma once
 
-#include <qqml.h>
-
 #include "Util/util.hpp"
 
 class Settings : public QObject {

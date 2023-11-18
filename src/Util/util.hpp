@@ -1,7 +1,9 @@
 #pragma once
 
+#include <QJSEngine>
 #include <filesystem>
 #include <qglobal.h>
+#include <qqml.h>
 #include <string>
 
 using namespace std::chrono_literals;

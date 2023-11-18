@@ -8,6 +8,12 @@
 
 #include "settings.hpp"
 
+Backend *Backend::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) {
+	auto res = Backend::get();
+	QJSEngine::setObjectOwnership(res, QJSEngine::CppOwnership);
+	return res;
+}
+
 void Backend::quit_delayed(const std::chrono::milliseconds delay) {
 	// cancel any pending drags
 	if (drag) {
