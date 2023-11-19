@@ -11,7 +11,7 @@ class Settings : public QObject {
 	Q_PROPERTY(bool alwaysOnBottom MEMBER always_on_bottom WRITE setAlwaysOnBottom NOTIFY alwaysOnBottomChanged)
 	Q_PROPERTY(bool keepDroppedFiles MEMBER keep_dropped_files NOTIFY keepDroppedFilesChanged)
 	Q_PROPERTY(bool frameless MEMBER frameless CONSTANT)
-	Q_PROPERTY(bool needsGui READ needs_gui CONSTANT)
+	Q_PROPERTY(bool needsGui READ needs_gui NOTIFY hideGuiChanged)
 	Q_PROPERTY(bool spawnOnCursor MEMBER spawn_on_cursor CONSTANT)
 public:
 	enum class AutoQuitBehavior {
@@ -33,6 +33,7 @@ public:
 	Frontend frontend = Settings::Frontend::Auto;
 	void setAlwaysOnBottom(const bool v);
 	Frontend effective_frontend(bool outgoing = false) const;
+	void setHideGui(const bool h);
 
 	bool always_on_top = false;
 	bool always_on_bottom = false;
@@ -45,6 +46,8 @@ public:
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);
+	void hideGuiChanged(bool hide);
 private:
 	bool needs_gui() const;
+	bool hide_gui = false;
 };

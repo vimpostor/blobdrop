@@ -28,5 +28,10 @@ bool Settings::needs_gui() const {
 	// so this boolean would change to false for the Auto frontend,
 	// meaning the GUI could hide again.
 	// Of course in that case the GUI should stay visible if it was visible once.
-	return effective_frontend() == Settings::Frontend::Gui;
+	return effective_frontend() == Settings::Frontend::Gui && !hide_gui;
+}
+
+void Settings::setHideGui(const bool h) {
+	hide_gui = h;
+	emit hideGuiChanged(h);
 }

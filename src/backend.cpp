@@ -26,6 +26,8 @@ void Backend::quit_delayed(const std::chrono::milliseconds delay) {
 
 void Backend::drag_paths(const std::vector<Path> &paths) {
 	hide_terminal();
+	// needed for intercept mode
+	Settings::get()->setHideGui(true);
 
 	/**
 	 * Qt takes ownership both over the QDrag as well as the QMimeData
