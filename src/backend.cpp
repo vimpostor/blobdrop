@@ -167,7 +167,7 @@ void Backend::handle_dropped_urls(const QList<QUrl> &urls) {
 		Backend::get()->print_hyperlinks(paths);
 	}
 
-	if (Settings::get()->auto_quit_behavior == Settings::AutoQuitBehavior::First) {
+	if (Settings::get()->auto_quit_behavior == Settings::AutoQuitBehavior::First && Settings::get()->effective_frontend(true) != Settings::Frontend::Immediate) {
 		Backend::get()->quit_delayed();
 	}
 }
