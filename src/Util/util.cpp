@@ -2,7 +2,6 @@
 
 #include <QGuiApplication>
 #include <cstdlib>
-#include <format>
 #include <iostream>
 #include <unistd.h>
 
@@ -32,10 +31,6 @@ std::string pwd() {
 		result = std::filesystem::current_path().string();
 	}
 	return result;
-}
-
-std::string print_osc8_link(const std::string &url, const std::string &text) {
-	return std::format("\e]8;;{}\e\\{}\e]8;;\e\\", url, text);
 }
 
 bool is_wayland() {

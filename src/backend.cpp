@@ -8,6 +8,7 @@
 #include <QPixmap>
 
 #include "settings.hpp"
+#include "stdout.hpp"
 
 void Backend::quit_delayed(const std::chrono::milliseconds delay) {
 	// cancel any pending drags
@@ -75,7 +76,7 @@ void Backend::drag_paths(const std::vector<Path> &paths) {
 
 void Backend::print_hyperlinks(const std::vector<Path> &paths) {
 	for (auto &i : paths) {
-		std::cout << Util::print_osc8_link(i.get_uri(), i.pretty_print()) << std::endl;
+		Stdout::print_osc8_link(i.get_uri(), i.pretty_print());
 	}
 }
 
