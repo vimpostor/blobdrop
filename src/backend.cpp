@@ -7,6 +7,7 @@
 #include <QMimeData>
 #include <QPixmap>
 
+#include "path_registry.hpp"
 #include "settings.hpp"
 #include "stdout.hpp"
 
@@ -80,7 +81,7 @@ void Backend::print_hyperlinks(const std::vector<Path> &paths) {
 	}
 }
 
-void Backend::send_drag_notification(const QList<QString> &uris) {
+void Backend::send_drag_notification(const std::vector<Path> &uris) {
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
 	if (uris.empty()) {
 		return;
@@ -88,8 +89,14 @@ void Backend::send_drag_notification(const QList<QString> &uris) {
 
 	auto session = QDBusConnection::sessionBus();
 	auto msg = QDBusMessage::createMethodCall("org.freedesktop.Notifications", "/org/freedesktop/Notifications", "org.freedesktop.Notifications", "Notify");
+
+	QList<QString> urls;
+	for (const auto &u : uris) {
+		urls.push_back(QString::fromStdString(u.get_uri()));
+	}
+
 	QVariantMap hints;
-	hints["x-kde-urls"] = uris;
+	hints["x-kde-urls"] = urls;
 	QString title = "Drag file";
 	if (uris.size() > 1) {
 		title += "s";
@@ -123,6 +130,44 @@ void Backend::restore_terminal() {
 #endif
 }
 
+void Backend::exec_frontend(const std::vector<Path> &paths) {
+	const auto f = Settings::get()->effective_frontend(true);
+	if (f == Settings::Frontend::Immediate) {
+		Backend::get()->drag_paths(paths);
+	} else if (f == Settings::Frontend::Stdout) {
+		Backend::get()->print_hyperlinks(paths);
+	} else if (f == Settings::Frontend::Notification) {
+		Backend::get()->send_drag_notification(paths);
+	}
+}
+
 QPoint Backend::get_mouse_pos() const {
 	return QCursor::pos();
+}
+
+void Backend::handle_dropped_urls(const QList<QUrl> &urls) {
+	std::vector<Path> paths;
+	for (auto &u : urls) {
+		auto url = u.toString().toStdString();
+		if (url.starts_with("file://")) {
+			url = url.substr(7);
+		}
+		paths.push_back(url);
+	}
+
+	if (Settings::get()->keep_dropped_files) {
+		for (auto &i : paths) {
+			PathRegistry::get()->add_path(i);
+		}
+	}
+
+	if (Settings::get()->intercept) {
+		exec_frontend(paths);
+	} else {
+		Backend::get()->print_hyperlinks(paths);
+	}
+
+	if (Settings::get()->auto_quit_behavior == Settings::AutoQuitBehavior::First) {
+		Backend::get()->quit_delayed();
+	}
 }

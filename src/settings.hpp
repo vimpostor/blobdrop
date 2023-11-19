@@ -32,7 +32,7 @@ public:
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
 	Frontend frontend = Settings::Frontend::Auto;
 	void setAlwaysOnBottom(const bool v);
-	Frontend effective_frontend() const;
+	Frontend effective_frontend(bool outgoing = false) const;
 
 	bool always_on_top = false;
 	bool always_on_bottom = false;
@@ -41,6 +41,7 @@ public:
 	bool can_drag_immediately = false;
 	bool suppress_always_on_bottom = false;
 	bool spawn_on_cursor = false;
+	bool intercept = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);

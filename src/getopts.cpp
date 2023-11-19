@@ -24,6 +24,9 @@ bool parse(QCoreApplication &app) {
 												  << "frontend",
 		"Selects the frontend. Must be one of:" + QString::fromStdString(frontends_descr) + " (auto is default)",
 		"frontend");
+	QCommandLineOption intercept_opt(QStringList() << "i"
+												   << "intercept",
+		"Intercept another drag and drop.");
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
@@ -38,7 +41,7 @@ bool parse(QCoreApplication &app) {
 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
 		"behaviour");
 
-	p.addOptions({frameless_opt, cursor_opt, frontend_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -72,6 +75,7 @@ bool parse(QCoreApplication &app) {
 	Settings::get()->suppress_always_on_bottom = p.isSet(persistent_opt);
 	Settings::get()->frameless = p.isSet(frameless_opt);
 	Settings::get()->spawn_on_cursor = p.isSet(cursor_opt);
+	Settings::get()->intercept = p.isSet(intercept_opt);
 
 	// add all trailing arguments to the path list
 	std::ranges::for_each(p.positionalArguments(), [](auto i) { PathRegistry::get()->add_path(i.toStdString()); });

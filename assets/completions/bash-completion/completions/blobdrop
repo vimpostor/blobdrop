@@ -6,6 +6,7 @@ _blobdrop() {
 		-b --frameless
 		-c --cursor
 		-f --frontend
+		-i --intercept
 		-k --keep
 		-p --persistent
 		-t --ontop

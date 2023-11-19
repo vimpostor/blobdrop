@@ -28,7 +28,7 @@ ApplicationWindow {
 		property int mouseY: 0
 		anchors.fill: parent
 		onDropped: (drop) => {
-			Stdout.print_urls(drop.urls);
+			Backend.handle_dropped_urls(drop.urls);
 		}
 		onPositionChanged: (drag) => {
 			mouseX = drag.x;

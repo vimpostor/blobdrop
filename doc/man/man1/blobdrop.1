@@ -41,6 +41,11 @@ Selects the frontend. Must be one of {"auto" (default), "gui", "immediate", "not
 .B FRONTENDS
 below.
 .TP
+.B \-i, \-\-intercept
+Intercept another drag and drop operation. This option is useful to convert other external drag and drop events into drag and drop events that use any of the available frontends. Using this option will unconditionally start the
+.B gui
+frontend. The \-\-frontend option in this case determines the frontend of outgoing intercepted drag and drop events.
+.TP
 .B \-k, \-\-keep
 When using sink mode, keep dropped files around by default.
 .TP
@@ -154,6 +159,15 @@ $ \fBgrep\fP \-R \-\-files\-with\-matches uploadable | \fBblobdrop\fP
 .in
 .PP
 
+The example below spawns a window under the cursor that intercepts any existing drag and drop operation and converts it into an outgoing immediate drag and drop operation.
+.PP
+.in +2n
+.EX
+$ \fBblobdrop\fP \-ic \-f \fIimmediate\fP \-x \fIfirst\fP
+.EE
+.in
+.PP
+
 It is also possible to integrate blobdrop in other external programs. For example if you use the ranger commandline file manager, you can use blobdrop to drag any file with a simple keybinding in your ~/.config/ranger/rc.conf:
 .PP
 .in +2n
@@ -167,7 +181,7 @@ In tmux it is possible to setup a keybinding to drag the file under the cursor o
 .PP
 .in +2n
 .EX
-bind -n DoubleClick1Pane run-shell "blobdrop '#{pane_current_path}/#{mouse_word}'"
+bind \-n DoubleClick1Pane run\-shell "blobdrop '#{pane_current_path}/#{mouse_word}'"
 .EE
 .in
 .PP

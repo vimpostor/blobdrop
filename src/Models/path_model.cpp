@@ -70,17 +70,9 @@ void PathModel::finish_init() {
 	}
 
 	// frontends that have an immediate effect, can do their work now
-	const auto f = Settings::get()->effective_frontend();
-	if (f == Settings::Frontend::Immediate) {
-		Backend::get()->drag_paths(paths);
-	} else if (f == Settings::Frontend::Stdout) {
-		Backend::get()->print_hyperlinks(paths);
-	} else if (f == Settings::Frontend::Notification) {
-		refresh_folded_paths();
-		const auto uri_list = folded_uri_list.split(QChar::LineFeed, Qt::SkipEmptyParts);
-		Backend::get()->send_drag_notification(uri_list);
-	}
+	Backend::get()->exec_frontend(paths);
 
+	const auto f = Settings::get()->effective_frontend();
 	if (f == Settings::Frontend::Stdout || f == Settings::Frontend::Notification) {
 		taint_all_used();
 	}

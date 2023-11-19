@@ -7,9 +7,12 @@ void Settings::setAlwaysOnBottom(const bool v) {
 	}
 }
 
-Settings::Frontend Settings::effective_frontend() const {
-	if (frontend == Settings::Frontend::Auto) {
-		return can_drag_immediately ? Settings::Frontend::Immediate : Settings::Frontend::Gui;
+Settings::Frontend Settings::effective_frontend(bool outgoing) const {
+	if (intercept && !outgoing) {
+		return Settings::Frontend::Gui;
+	} else if (frontend == Settings::Frontend::Auto) {
+		return intercept ? Settings::Frontend::Stdout : can_drag_immediately ? Settings::Frontend::Immediate :
+																			   Settings::Frontend::Gui;
 	}
 	return frontend;
 }
