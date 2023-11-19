@@ -162,7 +162,7 @@ void Backend::handle_dropped_urls(const QList<QUrl> &urls) {
 	}
 
 	if (Settings::get()->intercept) {
-		exec_frontend(paths);
+		QTimer::singleShot(0, qGuiApp, [this, paths]() { exec_frontend(paths); });
 	} else {
 		Backend::get()->print_hyperlinks(paths);
 	}
