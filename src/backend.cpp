@@ -108,7 +108,7 @@ void Backend::send_drag_notification(const std::vector<Path> &uris) {
 
 void Backend::hide_terminal() {
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
-	if (Settings::get()->suppress_always_on_bottom || !xcb.init()) {
+	if (Settings::get()->suppress_always_on_bottom || Settings::get()->intercept || !xcb.init()) {
 		return;
 	}
 
