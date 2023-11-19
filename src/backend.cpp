@@ -9,6 +9,7 @@
 
 #include "path_registry.hpp"
 #include "settings.hpp"
+#include "stdin.hpp"
 #include "stdout.hpp"
 
 void Backend::quit_delayed(const std::chrono::milliseconds delay) {
@@ -108,7 +109,7 @@ void Backend::send_drag_notification(const std::vector<Path> &uris) {
 
 void Backend::hide_terminal() {
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
-	if (Settings::get()->suppress_always_on_bottom || Settings::get()->intercept || !xcb.init()) {
+	if (Settings::get()->suppress_always_on_bottom || Settings::get()->intercept || !Stdin::get()->is_tty || !xcb.init()) {
 		return;
 	}
 

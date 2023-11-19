@@ -16,8 +16,13 @@ class Stdin : public QObject {
 	QML_SINGLETON
 	Q_PROPERTY(bool closed MEMBER m_closed NOTIFY closedChanged)
 public:
-	Stdin(QObject *parent = nullptr);
+	explicit Stdin(bool);
 	~Stdin();
+
+	static Stdin *get();
+	static Stdin *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
+
+	bool is_tty = true;
 signals:
 	void closedChanged();
 private:

@@ -2,7 +2,7 @@
 
 #include "backend.hpp"
 
-Stdin::Stdin(QObject *parent) {
+Stdin::Stdin(bool) {
 	stdin_nb = fileno(stdin);
 	// do not buffer stdin line-wise
 	disable_canonical_mode();
@@ -15,11 +15,26 @@ Stdin::~Stdin() {
 	reset_terminal_mode();
 }
 
+Stdin *Stdin::get() {
+	static Stdin s {true};
+	return &s;
+}
+
+Stdin *Stdin::create(QQmlEngine *qmlEngine, QJSEngine *jsEngine) {
+	auto res = get();
+	QJSEngine::setObjectOwnership(res, QJSEngine::CppOwnership);
+	return res;
+}
+
 void Stdin::disable_canonical_mode() {
 #ifdef Q_OS_UNIX
 	struct termios term;
 
 	if (tcgetattr(stdin_nb, &orig_term)) {
+		// Failed, this likely means that no tty is attached
+		// Also suppress hiding the parent terminal automatically,
+		// as we were likely not started from a terminal
+		is_tty = false;
 		return;
 	}
 	term = orig_term;

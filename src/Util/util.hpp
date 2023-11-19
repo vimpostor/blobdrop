@@ -16,7 +16,7 @@ using namespace std::chrono_literals;
 
 #define QML_CPP_SINGLETON(TYPE) \
 	TYPE() = delete; \
-	explicit TYPE(bool singleton_constructor) {}; \
+	explicit TYPE(bool) {}; \
 	static TYPE *get() { \
 		static TYPE s {true}; \
 		return &s; \
