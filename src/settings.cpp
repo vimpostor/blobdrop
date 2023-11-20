@@ -11,8 +11,13 @@ Settings::Frontend Settings::effective_frontend(bool outgoing) const {
 	if (intercept && !outgoing) {
 		return Settings::Frontend::Gui;
 	} else if (frontend == Settings::Frontend::Auto) {
-		return intercept ? Settings::Frontend::Stdout : can_drag_immediately ? Settings::Frontend::Immediate :
-																			   Settings::Frontend::Gui;
+		if (intercept) {
+			// for intercept and outgoing prefer Immediate as default frontend
+			return Util::is_wayland() ? Settings::Frontend::Stdout : Settings::Frontend::Immediate;
+		} else {
+			// in general (not outgoing), prefer immediate and fallback to GUI
+			return can_drag_immediately ? Settings::Frontend::Immediate : Settings::Frontend::Gui;
+		}
 	}
 	return frontend;
 }
