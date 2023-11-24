@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls.Material
+import Quartz
 
 import Backend
 
@@ -24,21 +25,8 @@ ApplicationWindow {
 		onActivated: Qt.quit();
 	}
 	DropArea {
-		property int mouseX: 0
-		property int mouseY: 0
-		anchors.fill: parent
 		onDropped: (drop) => {
 			Backend.handle_dropped_urls(drop.urls);
-		}
-		onPositionChanged: (drag) => {
-			mouseX = drag.x;
-			mouseY = drag.y;
-		}
-		Wave {
-			anchors.fill: parent
-			size: parent.containsDrag && parent.drag.source === null ? 1.0 : 0.0
-			centreX: parent.mouseX
-			centreY: parent.mouseY
 		}
 	}
 	Welcome {
