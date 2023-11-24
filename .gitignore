@@ -50,3 +50,4 @@ latex/
 
 .cache/
 .gitattributes
+/result
