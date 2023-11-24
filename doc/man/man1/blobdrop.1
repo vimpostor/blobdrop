@@ -67,7 +67,7 @@ Returns zero on success.
 Blobdrop has multiple frontends available that change the behaviour how the drag and drop operation starts. The frontend can be chosen with the
 .B \-\-frontend
 option.
-.SS "automatic"
+.SS "auto"
 This is the default frontend and chooses one of the following frontends automatically based on some conditions. On X11, the
 .B immediate
 frontend is used unless no file is passed, in which case the
@@ -159,7 +159,7 @@ $ \fBgrep\fP \-R \-\-files\-with\-matches uploadable | \fBblobdrop\fP
 .in
 .PP
 
-The example below spawns a window under the cursor that intercepts any existing drag and drop operation and converts it into an outgoing immediate drag and drop operation.
+The example below spawns a window under the cursor that intercepts any existing drag and drop operation and converts it into an outgoing immediate drag and drop operation. This can be helpful for touchpad users.
 .PP
 .in +2n
 .EX
