@@ -24,7 +24,11 @@ if (UNIX)
 	list(TRANSFORM PKGCONFIG_MODULES PREPEND "PkgConfig::")
 endif()
 
-list(APPEND LINK_LIBS ${PKGCONFIG_MODULES})
+include(FetchContent)
+FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.1)
+FetchContent_MakeAvailable(quartz)
+
+list(APPEND LINK_LIBS ${PKGCONFIG_MODULES} quartz quartzplugin)
 
 include_directories("src" "src/Models")
 add_compile_definitions(BLOBDROP_VERSION="${PROJECT_VERSION}")
@@ -41,11 +45,7 @@ qt_add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
 qt_add_qml_module(${PROJECT_NAME} URI "Backend" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
 set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
-include(FetchContent)
-FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.1)
-FetchContent_MakeAvailable(quartz)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIBS} quartz quartzplugin)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIBS})
 
 # install
 install(TARGETS ${PROJECT_NAME} RUNTIME)
