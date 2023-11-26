@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <qglobal.h>
 #include <qqml.h>
+#include <quartz/util.hpp>
 #include <string>
 
 using namespace std::chrono_literals;
@@ -31,5 +32,4 @@ namespace Util {
 
 const char *home_dir();
 std::string pwd();
-bool is_wayland();
 }

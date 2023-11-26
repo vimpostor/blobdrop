@@ -64,7 +64,7 @@ bool parse(QCoreApplication &app) {
 			return false;
 		}
 		const auto c = static_cast<Settings::Frontend>(choice);
-		if (c == Settings::Frontend::Immediate && Util::is_wayland()) {
+		if (c == Settings::Frontend::Immediate && quartz::util::is_wayland()) {
 			std::cerr << "Wayland does not have support for this frontend, as the spec requires an implicit grab for native wl_data_device::start_drag() operations, thus making it impossible to implement this workflow on Wayland." << std::endl
 					  << "This frontend might work over XWayland (force it with QT_QPA_PLATFORM=xcb) but will likely be very buggy. Please switch to X11 to get the optimal usability experience or use another frontend." << std::endl;
 			return false;

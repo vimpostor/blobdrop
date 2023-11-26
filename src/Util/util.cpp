@@ -32,8 +32,4 @@ std::string pwd() {
 	}
 	return result;
 }
-
-bool is_wayland() {
-	return QGuiApplication::platformName() == "wayland";
-}
 }
