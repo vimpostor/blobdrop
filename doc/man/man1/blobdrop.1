@@ -177,11 +177,11 @@ map <C\-d> shell blobdrop %p
 .in
 .PP
 
-In tmux it is possible to setup a keybinding to drag the file under the cursor on double click:
+In tmux it is possible to drag the file under the cursor on double click with this cursed oneliner keybinding:
 .PP
 .in +2n
 .EX
-bind \-n DoubleClick1Pane run\-shell "blobdrop '#{pane_current_path}/#{mouse_word}'"
+bind \-n DoubleClick1Pane run\-shell "blobdrop \\"#{pane_current_path}/$(echo '#{mouse_line}' | cut \-c \-$((#{mouse_x} \- 1)) | grep \-o '\\\\S*$' )\\"\\"$(echo '#{mouse_line}' | cut \-c #{mouse_x}\- | grep \-o '^\\\\S*')\\""
 .EE
 .in
 .PP
