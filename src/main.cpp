@@ -3,6 +3,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <quartz/signals.hpp>
 
 #ifdef Q_OS_UNIX
 #include <signal.h>
@@ -10,7 +11,6 @@
 
 #include "backend.hpp"
 #include "getopts.hpp"
-#include "signals.hpp"
 #include "version.hpp"
 
 int main(int argc, char *argv[]) {
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef Q_OS_UNIX
 	// handle unix signals
-	Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}, []() { Backend::get()->quit_delayed(0ms); }};
+	quartz::Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}, []() { Backend::get()->quit_delayed(0ms); }};
 #endif
 
 	if (!Getopts::parse(app)) {
