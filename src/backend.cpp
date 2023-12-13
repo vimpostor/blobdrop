@@ -1,5 +1,6 @@
 #include "backend.hpp"
 
+#include <QClipboard>
 #include <QCursor>
 #include <QDBusInterface>
 #include <QGuiApplication>
@@ -29,10 +30,7 @@ void Backend::drag_paths(const std::vector<Path> &paths) {
 	// needed for intercept mode
 	Settings::get()->setHideGui(true);
 
-	/**
-	 * Qt takes ownership both over the QDrag as well as the QMimeData
-	 * So no, this is not a memory leak.
-	 */
+	// Not a memory leak, Qt takes ownership both over the QDrag as well as the QMimeData
 	drag = new QDrag(this);
 	auto mimedata = new QMimeData();
 
@@ -109,6 +107,20 @@ void Backend::send_drag_notification(const std::vector<Path> &uris) {
 #endif
 }
 
+void Backend::copy_to_clipboard(const std::vector<Path> &paths) {
+	// not a memory leak, ownership is later transferred to Qt with setMimeData()
+	auto *mime = new QMimeData;
+
+	QList<QUrl> urls;
+	for (auto &i : paths) {
+		urls.push_back(i.get_url());
+	}
+
+	mime->setUrls(urls);
+	auto *clip = QGuiApplication::clipboard();
+	clip->setMimeData(mime);
+}
+
 void Backend::hide_terminal() {
 #if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
 	if (Settings::get()->suppress_always_on_bottom || Settings::get()->intercept || !Stdin::get()->is_tty || !xcb.init()) {
@@ -141,6 +153,8 @@ void Backend::exec_frontend(const std::vector<Path> &paths) {
 		Backend::get()->print_hyperlinks(paths);
 	} else if (f == Settings::Frontend::Notification) {
 		Backend::get()->send_drag_notification(paths);
+	} else if (f == Settings::Frontend::Clipboard) {
+		Backend::get()->copy_to_clipboard(paths);
 	}
 }
 

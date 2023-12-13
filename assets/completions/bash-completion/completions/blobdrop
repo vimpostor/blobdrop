@@ -20,7 +20,7 @@ _blobdrop() {
 			return
 			;;
 		-f|--frontend)
-			COMPREPLY=($(compgen -W 'auto gui immediate notify stdout' -- "$cur"))
+			COMPREPLY=($(compgen -W 'auto gui immediate notify clipboard stdout' -- "$cur"))
 			return
 			;;
 	esac

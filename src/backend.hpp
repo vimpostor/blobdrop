@@ -24,6 +24,7 @@ public:
 	void drag_paths(const std::vector<Path> &paths);
 	void print_hyperlinks(const std::vector<Path> &paths);
 	void send_drag_notification(const std::vector<Path> &uris);
+	void copy_to_clipboard(const std::vector<Path> &paths);
 
 	void hide_terminal();
 	void restore_terminal();

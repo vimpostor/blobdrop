@@ -73,7 +73,7 @@ void PathModel::finish_init() {
 	Backend::get()->exec_frontend(paths);
 
 	const auto f = Settings::get()->effective_frontend();
-	if (f == Settings::Frontend::Stdout || f == Settings::Frontend::Notification) {
+	if (f == Settings::Frontend::Stdout || f == Settings::Frontend::Notification || f == Settings::Frontend::Clipboard) {
 		taint_all_used();
 	}
 }

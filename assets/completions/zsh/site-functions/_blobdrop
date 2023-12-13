@@ -1,7 +1,7 @@
 #compdef blobdrop
 
 _blobdrop() {
-	_arguments {-h,--help}'[show help]' {-v,--version}'[show version]' {-b,--frameless}'[show frameless window]' {-c,--cursor}'[spawn window at mouse cursor]' {-f,--frontend}'[selects frontend]:arg:((auto\:"Automatic" gui\:"show window" immediate\:"drag immediately" notify\:"drag from notification" stdout\:"print OSC8 link"))' {-i,--intercept}'[intercept another DnD]' {-k,--keep}'[keep dropped files]' {-p,--persistent}'[disable autohiding during drag]' {-t,--ontop}'[keep window on top]' {-x,--auto-quit}'[autoquit behaviour]:num:((never\:"do not autoquit" first\:"after first drag" all\:"after all items have been dragged"))' '*: arg:_files'
+	_arguments {-h,--help}'[show help]' {-v,--version}'[show version]' {-b,--frameless}'[show frameless window]' {-c,--cursor}'[spawn window at mouse cursor]' {-f,--frontend}'[selects frontend]:arg:((auto\:"automatic" gui\:"show window" immediate\:"drag immediately" notify\:"drag from notification" clipboard\:"copy to clipboard" stdout\:"print OSC8 link"))' {-i,--intercept}'[intercept another DnD]' {-k,--keep}'[keep dropped files]' {-p,--persistent}'[disable autohiding during drag]' {-t,--ontop}'[keep window on top]' {-x,--auto-quit}'[autoquit behaviour]:num:((never\:"do not autoquit" first\:"after first drag" all\:"after all items have been dragged"))' '*: arg:_files'
 	return 0
 }
 

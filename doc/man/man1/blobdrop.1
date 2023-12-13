@@ -37,7 +37,7 @@ Show a frameless window.
 Spawn the window at the location of the mouse cursor.
 .TP
 .B \-f, \-\-frontend \fIOPT\fP
-Selects the frontend. Must be one of {"auto" (default), "gui", "immediate", "notify", "stdout"}. For a more detailed explanation of the frontend options see
+Selects the frontend. Must be one of {"auto" (default), "gui", "immediate", "notify", "clipboard", "stdout"}. For a more detailed explanation of the frontend options see
 .B FRONTENDS
 below.
 .TP
@@ -92,6 +92,9 @@ option is set. This is useful for usecases where the target application is hidde
 This frontend spawns a notification containing the URLs of the files to drag in the
 .I x\-kde\-urls
 field. Window managers with support for this field then enable the notification to be dragged itself into other application windows. This option is mainly useful on KDE Plasma.
+
+.SS "clipboard"
+This copies the file URIs (not the content) to the clipboard, which can then be pasted in supported programs.
 
 .SS "stdout"
 This frontend simply prints all files in the terminal as OSC8 links. Terminal emulators with support for OSC8 could allow the user to drag and drop such links directly. This option is equivalent to "ls \-\-hyperlink=always".

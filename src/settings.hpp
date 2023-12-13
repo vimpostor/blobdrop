@@ -24,6 +24,7 @@ public:
 		Gui, // show a window to drag files from
 		Immediate, // perform drag immediately without needing to hold down the mouse
 		Notification, // show a desktop notification to drag from
+		Clipboard, // copy URI to clipboard
 		Stdout, // print a link in the terminal using OSC8
 	};
 

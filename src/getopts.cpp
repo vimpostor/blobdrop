@@ -11,7 +11,8 @@ bool parse(QCoreApplication &app) {
 	p.addHelpOption();
 	p.addVersionOption();
 
-	constexpr std::array frontend_opts = {"auto", "gui", "immediate", "notify", "stdout"};
+	// must be in the same order as the enum
+	constexpr std::array frontend_opts = {"auto", "gui", "immediate", "notify", "clipboard", "stdout"};
 	const std::string frontends_descr = std::ranges::fold_left(frontend_opts, std::string(), [](const auto &l, const auto &r) { return l + " " + r; });
 
 	QCommandLineOption frameless_opt(QStringList() << "b"
