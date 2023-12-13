@@ -8,6 +8,7 @@
 #include <signal.h>
 #endif
 
+#include "backend.hpp"
 #include "getopts.hpp"
 #include "signals.hpp"
 #include "version.hpp"
@@ -20,7 +21,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef Q_OS_UNIX
 	// handle unix signals
-	Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}};
+	Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}, []() { Backend::get()->quit_delayed(0ms); }};
 #endif
 
 	if (!Getopts::parse(app)) {

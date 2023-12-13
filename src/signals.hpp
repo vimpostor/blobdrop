@@ -9,7 +9,7 @@
 class Signals : public QObject {
 	Q_OBJECT
 public:
-	Signals(const std::initializer_list<int> &sigs);
+	Signals(const std::initializer_list<int> &sigs, std::function<void(void)> callback);
 
 	// Unix signal handler
 	static void handle_unix_signal(int);
@@ -21,6 +21,7 @@ private:
 
 	static inline int signal_fd[2];
 	QSocketNotifier *sn;
+	std::function<void(void)> callback;
 };
 
 #endif

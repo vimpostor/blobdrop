@@ -2,13 +2,13 @@
 
 #ifdef Q_OS_UNIX
 
+#include <iostream>
 #include <ranges>
 #include <signal.h>
 #include <sys/socket.h>
 
-#include "backend.hpp"
-
-Signals::Signals(const std::initializer_list<int> &sigs) {
+Signals::Signals(const std::initializer_list<int> &sigs, std::function<void(void)> callback) {
+	this->callback = callback;
 	if (socketpair(AF_UNIX, SOCK_STREAM, 0, signal_fd)) {
 		std::cerr << "Could not create HUP socketpair" << std::endl;
 	}
@@ -28,8 +28,7 @@ void Signals::handle_qt_signal() {
 	char a;
 	std::ignore = read(signal_fd[1], &a, sizeof(a));
 
-	// force quit
-	Backend::get()->quit_delayed(0ms);
+	this->callback();
 
 	sn->setEnabled(true);
 }
@@ -43,7 +42,7 @@ void Signals::setup_signal_handlers(const std::initializer_list<int> &sigs) {
 	act.sa_flags |= SA_RESTART;
 
 	std::ranges::for_each(sigs, [&](const auto &s) {
-		if (sigaction(SIGINT, &act, nullptr)) {
+		if (sigaction(s, &act, nullptr)) {
 			std::cerr << "Could not setup signal handler" << std::endl;
 			return;
 		}
