@@ -8,7 +8,7 @@
 	outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system:
 		let
 			pkgs = nixpkgs.legacyPackages.${system};
-			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc13Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_16.stdenv; } ];
+			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc13Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_17.stdenv; } ];
 			defaultStdenv = (builtins.head stdenvs).name;
 			quartz = pkgs.fetchFromGitHub {
 				owner = "vimpostor";
