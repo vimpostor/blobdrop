@@ -37,7 +37,8 @@ bool Xcb::init() {
 	}
 
 	// init ewmh connection
-	return xcb_ewmh_init_atoms_replies(&ewmh, xcb_ewmh_init_atoms(conn, &ewmh), nullptr);
+	ok = xcb_ewmh_init_atoms_replies(&ewmh, xcb_ewmh_init_atoms(conn, &ewmh), nullptr);
+	return ok;
 }
 
 xcb_window_t Xcb::active_window() {
