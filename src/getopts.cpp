@@ -1,7 +1,7 @@
 #include "getopts.hpp"
 #include "settings.hpp"
 
-#include <bits/ranges_algo.h>
+#include <ranges>
 
 namespace Getopts {
 
@@ -59,12 +59,14 @@ bool parse(QCoreApplication &app) {
 	Settings::get()->keep_dropped_files = p.isSet(keep_opt);
 
 	if (p.isSet(frontend_opt)) {
-		int choice = std::ranges::find(frontend_opts, p.value(frontend_opt).toStdString()) - frontend_opts.cbegin();
-		if (choice > static_cast<int>(Settings::Frontend::Stdout)) {
+		// find frontend, even if only a prefix matches
+		auto frontend_selection = std::views::zip(frontend_opts, std::views::iota(0UZ, frontend_opts.size() - 1)) | std::views::filter([&](const auto &i) { return std::string(std::get<0>(i)).starts_with(p.value(frontend_opt).toStdString()); });
+		if (frontend_selection.empty()) {
+			// match must be unique
 			std::cerr << "frontend needs to be one of the following:" << frontends_descr << std::endl;
 			return false;
 		}
-		const auto c = static_cast<Settings::Frontend>(choice);
+		const auto c = static_cast<Settings::Frontend>(std::get<1>(frontend_selection.front()));
 		if (c == Settings::Frontend::Immediate && quartz::util::is_wayland()) {
 			std::cerr << "Wayland does not have support for this frontend, as the spec requires an implicit grab for native wl_data_device::start_drag() operations, thus making it impossible to implement this workflow on Wayland." << std::endl
 					  << "This frontend might work over XWayland (force it with QT_QPA_PLATFORM=xcb) but will likely be very buggy. Please switch to X11 to get the optimal usability experience or use another frontend." << std::endl;
