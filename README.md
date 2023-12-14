@@ -14,7 +14,7 @@ You can also download an AppImage from the [latest release](https://github.com/v
 
 ## Building from source
 
-Make sure you have the latest Qt with the Declarative and Svg modules installed.
+Make sure you have a C++23 compiler and the latest Qt with the Declarative and Svg modules installed.
 
 ```bash
 cmake -B build

@@ -38,7 +38,7 @@ file(GLOB_RECURSE HDRS "src/*.hpp")
 file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_SOURCE_DIR}" "src/qml/*.qml")
 
 list(APPEND RSRC "icons.qrc")
-qt6_add_resources(RESOURCES ${RSRC})
+qt_add_resources(RESOURCES ${RSRC})
 
 qt_add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
 
