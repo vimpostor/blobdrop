@@ -14,17 +14,14 @@ ListView {
 		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
 		visible: pathView.count > 1
 		highlighted: true
-		Label {
-			anchors.centerIn: parent
-			text: "Drag all " + pathView.count + " items"
-			Button {
-				id: dragallDummy
-				visible: false
-				icon.name: "emblem-documents-symbolic"
-				icon.color: "transparent"
-				width: 64
-				height: 64
-			}
+		text: "Drag all " + pathView.count + " items"
+		Button {
+			id: dragallDummy
+			visible: false
+			icon.name: "emblem-documents-symbolic"
+			icon.color: "transparent"
+			width: 64
+			height: 64
 		}
 		DragArea {
 			anchors.fill: parent
