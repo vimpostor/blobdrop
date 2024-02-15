@@ -13,6 +13,7 @@ class Settings : public QObject {
 	Q_PROPERTY(bool frameless MEMBER frameless CONSTANT)
 	Q_PROPERTY(bool needsGui READ needs_gui NOTIFY hideGuiChanged)
 	Q_PROPERTY(bool spawnOnCursor MEMBER spawn_on_cursor CONSTANT)
+	Q_PROPERTY(bool intercept MEMBER intercept CONSTANT)
 public:
 	enum class AutoQuitBehavior {
 		Never,
