@@ -44,7 +44,9 @@ below.
 .B \-i, \-\-intercept
 Intercept another drag and drop operation. This option is useful to convert other external drag and drop events into drag and drop events that use any of the available frontends. Using this option will unconditionally start the
 .B gui
-frontend. The \-\-frontend option in this case determines the frontend of outgoing intercepted drag and drop events.
+frontend to intercept another drag and drop operation. Once an element is dropped into the window, the
+.B \-\-frontend
+option determines the frontend of the outgoing converted drag and drop event.
 .TP
 .B \-k, \-\-keep
 When using sink mode, keep dropped files around by default.

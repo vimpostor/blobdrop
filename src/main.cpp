@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef Q_OS_UNIX
 	// handle unix signals
-	quartz::Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}, []() { Backend::get()->quit_delayed(0ms); }};
+	quartz::Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}, [](int) { Backend::get()->quit_delayed(0ms); }};
 #endif
 
 	if (!Getopts::parse(app)) {

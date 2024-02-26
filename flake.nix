@@ -14,7 +14,7 @@
 				owner = "vimpostor";
 				repo = "quartz";
 				rev = builtins.head (builtins.match ".*FetchContent_Declare\\(.*GIT_TAG ([[:alnum:]\\.]+).*" (builtins.readFile ./CMakeLists.txt));
-				hash = "sha256-UFXqkyXQYp0LjffeqocIJEP8u3vdgl/xzezuzae8YXA=";
+				hash = "sha256-gni+5kQkjU1LhoEK6/yVC0x6K36Ra30xM47w893nGJ4=";
 			};
 			makeStdenvPkg = env: env.mkDerivation {
 				pname = "blobdrop";

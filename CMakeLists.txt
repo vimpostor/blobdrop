@@ -25,7 +25,7 @@ if (UNIX)
 endif()
 
 include(FetchContent)
-FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG bc6e73ec22e6ebd10e4704957b14a7ca5bb2f74a)
+FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.4)
 FetchContent_MakeAvailable(quartz)
 
 list(APPEND LINK_LIBS ${PKGCONFIG_MODULES})
