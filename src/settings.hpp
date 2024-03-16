@@ -45,6 +45,7 @@ public:
 	bool suppress_always_on_bottom = false;
 	bool spawn_on_cursor = false;
 	bool intercept = false;
+	bool remote = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);
 	void keepDroppedFilesChanged(bool keepDroppedFiles);

@@ -34,6 +34,9 @@ bool parse(QCoreApplication &app) {
 	QCommandLineOption persistent_opt(QStringList() << "p"
 													<< "persistent",
 		"Do not auto-hide the window while dragging.");
+	QCommandLineOption remote_opt(QStringList() << "R"
+												<< "remote",
+		"Enable ssh remote transparency.");
 	QCommandLineOption ontop_opt(QStringList() << "t"
 											   << "ontop",
 		"Keep the window on top of other windows.");
@@ -42,7 +45,7 @@ bool parse(QCoreApplication &app) {
 		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
 		"behaviour");
 
-	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, remote_opt, ontop_opt, auto_quit_opt});
 	p.process(app);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -55,6 +58,7 @@ bool parse(QCoreApplication &app) {
 		}
 		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
 	}
+	Settings::get()->remote = p.isSet(remote_opt);
 	Settings::get()->always_on_top = p.isSet(ontop_opt);
 	Settings::get()->keep_dropped_files = p.isSet(keep_opt);
 

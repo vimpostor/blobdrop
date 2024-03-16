@@ -14,4 +14,6 @@ namespace Util {
 
 const char *home_dir();
 std::string pwd();
+bool get_local_domain(std::string &result);
+std::string get_username();
 }

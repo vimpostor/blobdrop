@@ -4,6 +4,7 @@
 
 #include "Util/util.hpp"
 #include "mimedb.hpp"
+#include "settings.hpp"
 
 Path::Path(const std::string &p)
 	: path(std::filesystem::absolute(p)) {
@@ -26,7 +27,21 @@ std::string Path::get_uri() const {
 }
 
 QUrl Path::get_url() const {
-	return QUrl::fromLocalFile(QString::fromStdString(path.string()));
+	auto res = QUrl::fromLocalFile(QString::fromStdString(path.string()));
+
+	if (Settings::get()->remote) {
+		std::string host;
+		if (Util::get_local_domain(host)) {
+			res.setScheme("sftp");
+			res.setUserName(QString::fromStdString(Util::get_username()));
+			res.setHost(QString::fromStdString(host));
+			// TODO: Consider supporting custom ports, e.g. parse $SSH_CLIENT
+		} else {
+			std::cerr << "Failed deducing remote prefix" << std::endl;
+		}
+	}
+
+	return res;
 }
 
 std::string Path::pretty_print() const {
