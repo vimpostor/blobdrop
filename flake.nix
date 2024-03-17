@@ -5,7 +5,7 @@
 	};
 
 	outputs = { self, nixpkgs }:
-	let eachSystem = g: (a: nixpkgs.lib.genAttrs (builtins.attrNames (builtins.getAttr (builtins.head (builtins.attrNames a)) a)) (d: nixpkgs.lib.genAttrs (builtins.attrNames a) (s: a.${s}.${d}))) (nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (y: g y));
+	let eachSystem = with nixpkgs.lib; f: foldAttrs mergeAttrs {} (map (s: mapAttrs (_: v: { ${s} = v; }) (f s)) systems.flakeExposed);
 	in eachSystem (system:
 		let
 			pkgs = nixpkgs.legacyPackages.${system};
