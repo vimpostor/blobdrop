@@ -2,10 +2,11 @@
 	description = "Drag and drop your files directly out of the terminal";
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-		flake-utils.url = "github:numtide/flake-utils";
 	};
 
-	outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system:
+	outputs = { self, nixpkgs }:
+	let eachSystem = g: (a: nixpkgs.lib.genAttrs (builtins.attrNames (builtins.getAttr (builtins.head (builtins.attrNames a)) a)) (d: nixpkgs.lib.genAttrs (builtins.attrNames a) (s: a.${s}.${d}))) (nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (y: g y));
+	in eachSystem (system:
 		let
 			pkgs = nixpkgs.legacyPackages.${system};
 			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc13Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_17.stdenv; } ];
@@ -38,7 +39,7 @@
 				cmakeFlags = [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + quartz)];
 			};
 		in {
-			packages = rec {
+			packages = {
 				default = self.outputs.packages.${system}.${defaultStdenv};
 			} // builtins.listToAttrs (map (x: { name = x.name; value = makeStdenvPkg x.pkg; }) stdenvs);
 			checks = {
