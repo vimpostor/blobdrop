@@ -4,6 +4,7 @@
 
 #include "Util/util.hpp"
 #include "mimedb.hpp"
+#include "remote.hpp"
 #include "settings.hpp"
 
 Path::Path(const std::string &p)
@@ -30,15 +31,7 @@ QUrl Path::get_url() const {
 	auto res = QUrl::fromLocalFile(QString::fromStdString(path.string()));
 
 	if (Settings::get()->remote) {
-		std::string host;
-		if (Util::get_local_domain(host)) {
-			res.setScheme("sftp");
-			res.setUserName(QString::fromStdString(Util::get_username()));
-			res.setHost(QString::fromStdString(host));
-			res.setPort(Util::get_port());
-		} else {
-			std::cerr << "Failed deducing remote prefix" << std::endl;
-		}
+		std::ignore = Remote::get()->rewire_url(res);
 	}
 
 	return res;
