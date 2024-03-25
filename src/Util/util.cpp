@@ -93,4 +93,20 @@ std::string get_username() {
 	return {};
 #endif
 }
+
+int get_port() {
+	const auto env = std::getenv("SSH_CONNECTION");
+	if (env) {
+		std::string ssh_connection {env};
+		const auto n = ssh_connection.rfind(' ');
+		if (n != std::string::npos) {
+			try {
+				return std::stoi(ssh_connection.substr(n + 1));
+			} catch (std::invalid_argument const &) {
+				std::cerr << "Failed to parse port number " << ssh_connection << std::endl;
+			}
+		}
+	}
+	return -1;
+}
 }

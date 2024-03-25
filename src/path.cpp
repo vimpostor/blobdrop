@@ -35,7 +35,7 @@ QUrl Path::get_url() const {
 			res.setScheme("sftp");
 			res.setUserName(QString::fromStdString(Util::get_username()));
 			res.setHost(QString::fromStdString(host));
-			// TODO: Consider supporting custom ports, e.g. parse $SSH_CLIENT
+			res.setPort(Util::get_port());
 		} else {
 			std::cerr << "Failed deducing remote prefix" << std::endl;
 		}
