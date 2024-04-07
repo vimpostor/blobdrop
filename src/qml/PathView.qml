@@ -5,6 +5,8 @@ import Backend
 
 ListView {
 	id: pathView
+	property bool dragActive: false
+
 	model: PathModel
 	visible: count
 	spacing: 6
@@ -33,10 +35,14 @@ ListView {
 			onPreDragStarted: {
 				PathModel.refresh_folded_paths();
 			}
-			onDragStarted: Settings.alwaysOnBottom = true
+			onDragStarted: {
+				Settings.alwaysOnBottom = true;
+				pathView.dragActive = true;
+			}
 			onDragFinished: (dropAction) => {
 				PathModel.taint_all_used();
 				Settings.alwaysOnBottom = false;
+				pathview.dragActive = false;
 			}
 		}
 	}
@@ -98,10 +104,14 @@ ListView {
 			hoverEnabled: true
 			acceptedButtons: Qt.LeftButton | Qt.RightButton
 			onClicked: PathModel.open(index);
-			onDragStarted: Settings.alwaysOnBottom = true
+			onDragStarted: {
+				Settings.alwaysOnBottom = true;
+				pathView.dragActive = true;
+			}
 			onDragFinished: (dropAction) => {
 				PathModel.taint_used(index)
 				Settings.alwaysOnBottom = false;
+				pathView.dragActive = false;
 			}
 		}
 	}

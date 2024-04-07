@@ -25,6 +25,7 @@ ApplicationWindow {
 		onActivated: Qt.quit();
 	}
 	DropArea {
+		enabled: !pathView.dragActive
 		onDropped: (drop) => {
 			Backend.handle_dropped_urls(drop.urls);
 		}
