@@ -7,7 +7,7 @@ import Backend
 ApplicationWindow {
 	id: root
 	visible: Settings.needsGui
-	flags: Qt.Window | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0) | (Settings.alwaysOnBottom ? Qt.WindowStaysOnBottomHint : 0) | (Settings.frameless ? Qt.FramelessWindowHint : 0)
+	flags: Qt.Dialog | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0) | (Settings.alwaysOnBottom ? Qt.WindowStaysOnBottomHint : 0) | (Settings.frameless ? Qt.FramelessWindowHint : 0)
 	title: Stdin.closed ? "Blobdrop" : "Reading from stdin..."
 	width: 400
 	height: Math.max(48, Math.min(800, pathView.count ? pathView.contentHeight + 2 * pathView.anchors.topMargin : 350))
