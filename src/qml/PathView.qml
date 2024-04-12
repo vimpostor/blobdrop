@@ -62,8 +62,8 @@ ListView {
 				icon.name: iconName
 				icon.source: "qrc:///blobdrop" // fallback icon
 				icon.color: "transparent"
-				icon.width: 2 * parent.height
-				icon.height: 2 * parent.height
+				icon.width: parent.height
+				icon.height: parent.height
 				flat: true
 				enabled: false
 			}
