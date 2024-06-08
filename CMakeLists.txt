@@ -15,7 +15,7 @@ list(TRANSFORM QT_MODULES PREPEND "Qt6::")
 
 list(APPEND LINK_LIBS ${QT_MODULES})
 
-if (UNIX)
+if (UNIX AND NOT APPLE)
 	find_package(PkgConfig REQUIRED)
 	list(APPEND PKGCONFIG_MODULES "xcb" "xcb-ewmh")
 	foreach(PKG IN LISTS PKGCONFIG_MODULES)
