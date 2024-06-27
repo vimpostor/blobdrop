@@ -48,8 +48,8 @@ QString Remote::get_local_domain() {
 #ifndef Q_OS_UNIX
 	return {};
 #else
-	char host[HOST_NAME_MAX];
-	if (gethostname(host, HOST_NAME_MAX)) {
+	char host[_POSIX_HOST_NAME_MAX];
+	if (gethostname(host, _POSIX_HOST_NAME_MAX)) {
 		std::cerr << "gethostname failed" << std::endl;
 		return {};
 	}
@@ -70,7 +70,7 @@ QString Remote::get_local_domain() {
 	const auto fqdn = res->ai_canonname;
 	std::string result;
 
-	if (!strncmp(fqdn, host, HOST_NAME_MAX)) {
+	if (!strncmp(fqdn, host, _POSIX_HOST_NAME_MAX)) {
 		std::cerr << "failed to retreive a proper FQDN for " << host << std::endl;
 	} else {
 		result = fqdn;
