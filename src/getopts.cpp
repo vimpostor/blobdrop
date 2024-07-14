@@ -11,9 +11,12 @@ bool parse(QCoreApplication &app) {
 	p.addHelpOption();
 	p.addVersionOption();
 
+	const auto make_descr = [](const std::ranges::range auto &opts) { return std::ranges::fold_left(opts, std::string(), [](const auto &l, const auto &r) { return l + " " + r; }); };
 	// must be in the same order as the enum
 	constexpr std::array frontend_opts = {"auto", "gui", "immediate", "notify", "clipboard", "stdout"};
-	const std::string frontends_descr = std::ranges::fold_left(frontend_opts, std::string(), [](const auto &l, const auto &r) { return l + " " + r; });
+	const std::string frontends_descr = make_descr(frontend_opts);
+	constexpr std::array auto_quit_opts = {"never", "first", "all"};
+	const std::string auto_quit_descr = make_descr(auto_quit_opts);
 
 	QCommandLineOption frameless_opt(QStringList() << "b"
 												   << "frameless",
@@ -42,7 +45,7 @@ bool parse(QCoreApplication &app) {
 		"Keep the window on top of other windows.");
 	QCommandLineOption auto_quit_opt(QStringList() << "x"
 												   << "auto-quit",
-		"The amount of drags after which the program should automatically close. Must be one of {never, first, all (default)}",
+		"The amount of drags after which the program should automatically close. Must be one of:" + QString::fromStdString(auto_quit_descr) + " (all is default)",
 		"behaviour");
 
 	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, remote_opt, ontop_opt, auto_quit_opt});
@@ -50,10 +53,9 @@ bool parse(QCoreApplication &app) {
 
 	if (p.isSet(auto_quit_opt)) {
 		const auto opt = p.value(auto_quit_opt);
-		constexpr std::array str_repr = {"never", "first", "all"};
-		int choice = std::ranges::find(str_repr, opt.toStdString()) - str_repr.cbegin();
+		int choice = std::ranges::find(auto_quit_opts, opt.toStdString()) - auto_quit_opts.cbegin();
 		if (static_cast<Settings::AutoQuitBehavior>(choice) > Settings::AutoQuitBehavior::All) {
-			std::cerr << "auto-quit needs to be one of {never,first,all}" << std::endl;
+			std::cerr << "auto-quit needs to be one of:" << auto_quit_descr << std::endl;
 			return false;
 		}
 		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
