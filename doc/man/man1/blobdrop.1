@@ -119,6 +119,22 @@ Using this option causes blobdrop to quit after the first drag operation has fin
 .SS "all"
 With this option blobdrop keeps track of which items have been dragged already. It quits when all paths have been dragged at least once.
 
+.SH DEFAULT ARGUMENTS
+The
+.B $BLOBDROP_ARGS
+environment variable can be used to provide default arguments. The default arguments will be prepended to the actually passed arguments, for example:
+.PP
+.in +2n
+.EX
+$ \fBBLOBDROP_ARGS\fP=\fI"\-f gui \-p"\fP \fBblobdrop\fP \-x \fInever\fP image.png
+$ # is equivalent to:
+$ \fBblobdrop\fP \-f \fIgui\fP \-p \-x \fInever\fP image.png
+.EE
+.in
+.PP
+
+This can be useful to change the default value of some options permanently.
+
 .SH EXAMPLES
 Here are some example usecases.
 

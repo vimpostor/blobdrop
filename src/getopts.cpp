@@ -5,7 +5,12 @@
 
 namespace Getopts {
 
-bool parse(QCoreApplication &app) {
+QStringList setup_args(int argc, char *argv[]) {
+	const auto *env = std::getenv("BLOBDROP_ARGS");
+	return quartz::getopts::prepend_args(argc, argv, env);
+}
+
+bool parse(const QStringList &args) {
 	QCommandLineParser p;
 	p.setApplicationDescription("Quickly drag and drop files from the terminal to applications.");
 	p.addHelpOption();
@@ -49,7 +54,7 @@ bool parse(QCoreApplication &app) {
 		"behaviour");
 
 	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, remote_opt, ontop_opt, auto_quit_opt});
-	p.process(app);
+	p.process(args);
 
 	if (p.isSet(auto_quit_opt)) {
 		const auto opt = p.value(auto_quit_opt);
@@ -90,5 +95,4 @@ bool parse(QCoreApplication &app) {
 	std::ranges::for_each(p.positionalArguments(), [](auto i) { PathRegistry::get()->add_path(i.toStdString()); });
 	return true;
 }
-
 }

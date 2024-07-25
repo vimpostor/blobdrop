@@ -24,7 +24,8 @@ int main(int argc, char *argv[]) {
 	quartz::Signals signal_handler {{SIGINT, SIGHUP, SIGTERM, SIGQUIT}, [](int) { Backend::get()->quit_delayed(0ms); }};
 #endif
 
-	if (!Getopts::parse(app)) {
+	const auto &args = Getopts::setup_args(argc, argv);
+	if (!Getopts::parse(args)) {
 		return EXIT_FAILURE;
 	}
 
