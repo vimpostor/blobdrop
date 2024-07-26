@@ -23,6 +23,15 @@ bool Remote::rewire_url(QUrl &url) {
 	return true;
 }
 
+void Remote::hardcode_prefix(const QString &prefix) {
+	init_done = true;
+	QUrl url {prefix};
+	username = url.userName();
+	host = url.host();
+	port = url.port();
+	ok = url.isValid();
+}
+
 void Remote::init() {
 	init_done = true;
 

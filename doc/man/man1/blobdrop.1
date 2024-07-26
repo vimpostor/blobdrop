@@ -7,6 +7,7 @@ blobdrop \- Quickly drag and drop files from the terminal
 .B blobdrop
 [\-hvbcikpRt]
 [\-f \fIOPT\fP]
+[\-P \fIOPT\fP]
 [\-x \fIOPT\fP]
 .I FILES
 
@@ -54,10 +55,13 @@ When using sink mode, keep dropped files around by default.
 .B \-p, \-\-persistent
 Do not auto-hide the window while dragging.
 .TP
+.B \-P, \-\-prefix
+Manually specify a remote prefix to be used with the \-\-remote option instead of using a heuristic.
+.TP
 .B \-R, \-\-remote
 Enable ssh remote transparency. This sets the URI scheme to
 .B sftp://
-and the username, hostname and port based on heuristics, thus making it possible to drag and drop across a forwarded X11 session from a remote host. DnD requires trusted X11 forwarding (ssh -Y).
+and the username, hostname and port based on heuristics, thus making it possible to drag and drop across a forwarded X11 session from a remote host. DnD requires trusted X11 forwarding (ssh -Y). In case of the heuristic failing, the \-\-prefix option can be used to manually set a value.
 .TP
 .B \-t, \-\-ontop
 Keep the window on top of other windows.

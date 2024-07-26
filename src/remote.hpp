@@ -8,6 +8,7 @@ class Remote {
 public:
 	SINGLETON(Remote)
 	bool rewire_url(QUrl &url);
+	void hardcode_prefix(const QString &prefix);
 private:
 	void init();
 	QString get_local_domain();

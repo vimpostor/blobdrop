@@ -9,6 +9,7 @@ _blobdrop() {
 		-i --intercept
 		-k --keep
 		-p --persistent
+		-P --prefix
 		-R --remote
 		-t --ontop
 		-x --auto-quit

@@ -3,6 +3,8 @@
 
 #include <ranges>
 
+#include "remote.hpp"
+
 namespace Getopts {
 
 QStringList setup_args(int argc, char *argv[]) {
@@ -42,6 +44,10 @@ bool parse(const QStringList &args) {
 	QCommandLineOption persistent_opt(QStringList() << "p"
 													<< "persistent",
 		"Do not auto-hide the window while dragging.");
+	QCommandLineOption prefix_opt(QStringList() << "P"
+												<< "prefix",
+		"Specify a remote prefix",
+		"prefix");
 	QCommandLineOption remote_opt(QStringList() << "R"
 												<< "remote",
 		"Enable ssh remote transparency.");
@@ -53,7 +59,7 @@ bool parse(const QStringList &args) {
 		"The amount of drags after which the program should automatically close. Must be one of:" + QString::fromStdString(auto_quit_descr) + " (all is default)",
 		"behaviour");
 
-	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, remote_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, prefix_opt, remote_opt, ontop_opt, auto_quit_opt});
 	p.process(args);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -66,6 +72,13 @@ bool parse(const QStringList &args) {
 		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
 	}
 	Settings::get()->remote = p.isSet(remote_opt);
+	if (p.isSet(prefix_opt)) {
+		if (!Settings::get()->remote) {
+			std::cerr << "This option has no effect if remote support is not enabled" << std::endl;
+			return false;
+		}
+		Remote::get()->hardcode_prefix(p.value(prefix_opt));
+	}
 	Settings::get()->always_on_top = p.isSet(ontop_opt);
 	Settings::get()->keep_dropped_files = p.isSet(keep_opt);
 
