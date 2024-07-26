@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
-cmake_policy(SET CMP0048 NEW)
+cmake_minimum_required(VERSION 3.30)
 project(blobdrop VERSION 2.1 DESCRIPTION "Drag and drop files directly out of the terminal")
 
 option(BUILD_TESTING "Build the testing tree.")
