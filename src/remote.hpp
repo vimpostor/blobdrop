@@ -18,6 +18,7 @@ private:
 	bool init_done = false;
 	bool ok = false;
 
+	QString scheme = "sftp";
 	QString username;
 	QString host;
 	int port = -1;

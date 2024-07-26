@@ -15,7 +15,7 @@ bool Remote::rewire_url(QUrl &url) {
 		return false;
 	}
 
-	url.setScheme("sftp");
+	url.setScheme(scheme);
 	url.setUserName(username);
 	url.setHost(host);
 	url.setPort(port);
@@ -26,6 +26,9 @@ bool Remote::rewire_url(QUrl &url) {
 void Remote::hardcode_prefix(const QString &prefix) {
 	init_done = true;
 	QUrl url {prefix};
+	if (!url.scheme().isEmpty()) {
+		scheme = url.scheme();
+	}
 	username = url.userName();
 	host = url.host();
 	port = url.port();
