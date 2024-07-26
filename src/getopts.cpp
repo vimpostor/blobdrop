@@ -46,7 +46,7 @@ bool parse(const QStringList &args) {
 		"Do not auto-hide the window while dragging.");
 	QCommandLineOption prefix_opt(QStringList() << "P"
 												<< "prefix",
-		"Specify a remote prefix.",
+		"Specify a remote prefix",
 		"prefix");
 	QCommandLineOption remote_opt(QStringList() << "R"
 												<< "remote",
