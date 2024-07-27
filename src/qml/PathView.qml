@@ -43,7 +43,7 @@ ListView {
 			onDragFinished: (dropAction) => {
 				PathModel.taint_all_used();
 				Settings.alwaysOnBottom = false;
-				pathview.dragActive = false;
+				pathView.dragActive = false;
 			}
 		}
 	}
