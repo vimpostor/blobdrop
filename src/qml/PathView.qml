@@ -17,7 +17,7 @@ ListView {
 		Behavior on height { NumberAnimation { duration: 300; easing.type: Easing.InOutSine }}
 		visible: pathView.count > 1
 		highlighted: true
-		text: "Drag all " + pathView.count + " items"
+		text: "Drag all " + (PathModel.multiSelected ? PathModel.multiSelected : pathView.count) + " items"
 		Button {
 			id: dragallDummy
 			visible: false
@@ -93,8 +93,9 @@ ListView {
 			Rectangle {
 				id: usedIndicator
 				anchors { right: parent.right; top: parent.top; bottom: parent.bottom }
-				width: 8
+				width: 8 + multiselect * 40
 				color: used ? Material.primary : exists ? Material.color(Material.Grey) : Material.color(Material.Red)
+				Behavior on width { NumberAnimation { duration: 200; easing.type: Easing.InOutSine }}
 				Behavior on color { ColorAnimation { duration: 200; easing.type: Easing.InOutSine }}
 			}
 		}
@@ -105,7 +106,13 @@ ListView {
 			dragUri: uri
 			hoverEnabled: true
 			acceptedButtons: Qt.LeftButton | Qt.RightButton
-			onClicked: PathModel.open(index);
+			onClicked: (ev) => {
+				if (ev.modifiers & Qt.ControlModifier) {
+					PathModel.multiselect(index);
+				} else {
+					PathModel.open(index);
+				}
+			}
 			onDragStarted: {
 				Settings.alwaysOnBottom = true;
 				pathView.dragActive = true;

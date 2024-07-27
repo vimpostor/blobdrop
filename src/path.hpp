@@ -12,6 +12,7 @@ public:
 	QUrl thumbnail;
 	bool exists = false;
 	std::string iconName;
+	bool multiselect = false;
 
 	std::string get_uri() const;
 	QUrl get_url() const;

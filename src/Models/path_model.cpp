@@ -1,5 +1,7 @@
 #include "path_model.hpp"
 
+#include <ranges>
+
 #include "backend.hpp"
 #include "path_registry.hpp"
 #include "settings.hpp"
@@ -25,6 +27,8 @@ QVariant PathModel::data(const QModelIndex &index, int role) const {
 		return QString::fromStdString(p.pretty_print());
 	case UsedRole:
 		return p.used;
+	case MultiselectRole:
+		return p.multiselect;
 	case IconRole:
 		return QString::fromStdString(p.iconName);
 	case ThumbnailRole:
@@ -52,8 +56,17 @@ void PathModel::taint_all_used() {
 	check_should_quit();
 }
 
+void PathModel::multiselect(int i) {
+	paths[i].multiselect = !paths[i].multiselect;
+	multiselected += (2 * paths[i].multiselect) - 1;
+	emit dataChanged(index(i, 0), index(i, 0));
+	refresh_folded_paths();
+}
+
 void PathModel::refresh_folded_paths() {
-	folded_uri_list = std::accumulate(paths.cbegin(), paths.cend(), QString(), [&](QString s, const auto p) { return s.append(QString::fromStdString(p.get_uri()) + "\n"); });
+	// only add multiselected items in multiselect mode
+	auto v = paths | std::views::filter([&](const auto &i) { return !multiselected || i.multiselect; });
+	folded_uri_list = std::accumulate(v.cbegin(), v.cend(), QString(), [](QString s, const auto p) { return s.append(QString::fromStdString(p.get_uri()) + "\n"); });
 	emit foldedUriListChanged(folded_uri_list);
 }
 
