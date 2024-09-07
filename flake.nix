@@ -44,12 +44,12 @@
 			} // builtins.listToAttrs (map (x: { name = x.name; value = makeStdenvPkg x.pkg; }) stdenvs);
 			checks = {
 				format = pkgs.runCommand "format" { src = ./.; nativeBuildInputs = [ pkgs.clang-tools pkgs.git ]; } "mkdir $out && cd $src && find . -type f -path './*\\.[hc]pp' -exec clang-format -style=file --dry-run --Werror {} \\;";
-				tests = (makeStdenvPkg pkgs.gcc14Stdenv).overrideAttrs (finalAttrs: previousAttrs: {
+			} // builtins.listToAttrs (map (x: { name = "tests-" + x.name; value = (makeStdenvPkg x.pkg).overrideAttrs (finalAttrs: previousAttrs: {
 					doCheck = true;
 					cmakeFlags = previousAttrs.cmakeFlags ++ ["-DBUILD_TESTING=ON"];
 					QT_QPA_PLATFORM = "offscreen";
-				});
-			};
+				}
+			); }) stdenvs);
 		}
 	);
 }
