@@ -9,7 +9,7 @@
 	in eachSystem (system:
 		let
 			pkgs = nixpkgs.legacyPackages.${system};
-			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc13Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_17.stdenv; } ];
+			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc14Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_18.stdenv; } ];
 			defaultStdenv = (builtins.head stdenvs).name;
 			quartz = pkgs.fetchFromGitHub {
 				owner = "vimpostor";
@@ -44,7 +44,7 @@
 			} // builtins.listToAttrs (map (x: { name = x.name; value = makeStdenvPkg x.pkg; }) stdenvs);
 			checks = {
 				format = pkgs.runCommand "format" { src = ./.; nativeBuildInputs = [ pkgs.clang-tools pkgs.git ]; } "mkdir $out && cd $src && find . -type f -path './*\\.[hc]pp' -exec clang-format -style=file --dry-run --Werror {} \\;";
-				tests = (makeStdenvPkg pkgs.gcc13Stdenv).overrideAttrs (finalAttrs: previousAttrs: {
+				tests = (makeStdenvPkg pkgs.gcc14Stdenv).overrideAttrs (finalAttrs: previousAttrs: {
 					doCheck = true;
 					cmakeFlags = previousAttrs.cmakeFlags ++ ["-DBUILD_TESTING=ON"];
 					QT_QPA_PLATFORM = "offscreen";
