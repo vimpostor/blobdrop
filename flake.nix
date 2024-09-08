@@ -1,16 +1,15 @@
 {
 	description = "Drag and drop your files directly out of the terminal";
 	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 		quartz.url = "github:vimpostor/quartz";
 	};
 
-	outputs = { self, nixpkgs, quartz }: quartz.lib.eachSystem (system:
+	outputs = { self, quartz }: quartz.lib.eachSystem (system:
 		let
-			pkgs = nixpkgs.legacyPackages.${system};
+			pkgs = quartz.inputs.nixpkgs.legacyPackages.${system};
 			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc14Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_18.stdenv; } ];
 			defaultStdenv = (builtins.head stdenvs).name;
-			quartz = pkgs.fetchFromGitHub {
+			quartzCode = pkgs.fetchFromGitHub {
 				owner = "vimpostor";
 				repo = "quartz";
 				rev = builtins.head (builtins.match ".*FetchContent_Declare\\(.*GIT_TAG ([[:alnum:]\\.]+).*" (builtins.readFile ./CMakeLists.txt));
@@ -35,7 +34,7 @@
 					xorg.xcbutilwm
 				];
 
-				cmakeFlags = [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + quartz)];
+				cmakeFlags = [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + quartzCode)];
 			};
 		in {
 			packages = {
