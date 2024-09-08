@@ -21,11 +21,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1725808560,
-        "narHash": "sha256-p3qoI4EFzdzTNx2eMSphl11rMPZjOTTe8JNV7vobNIQ=",
+        "lastModified": 1725809942,
+        "narHash": "sha256-A0X4Ivp82kZ635k4yoTwT++3ZuHn6T487b1bNAb8pLA=",
         "owner": "vimpostor",
         "repo": "quartz",
-        "rev": "543e218aea96758c003fca209e2681c8ffc48864",
+        "rev": "d8bcaef01af8ca8ea6a8f93311c95096b33e90d1",
         "type": "github"
       },
       "original": {

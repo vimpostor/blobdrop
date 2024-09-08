@@ -9,12 +9,6 @@
 			pkgs = quartz.inputs.nixpkgs.legacyPackages.${system};
 			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc14Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_18.stdenv; } ];
 			defaultStdenv = (builtins.head stdenvs).name;
-			quartzCode = pkgs.fetchFromGitHub {
-				owner = "vimpostor";
-				repo = "quartz";
-				rev = builtins.head (builtins.match ".*FetchContent_Declare\\(.*GIT_TAG ([[:alnum:]\\.]+).*" (builtins.readFile ./CMakeLists.txt));
-				hash = "sha256-N4wdoZx6sQejfy/9tqtQIOcT9q9fB1DnSSnegnWDtXo=";
-			};
 			makeStdenvPkg = env: env.mkDerivation {
 				pname = "blobdrop";
 				version = builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile ./CMakeLists.txt));
@@ -34,7 +28,7 @@
 					xorg.xcbutilwm
 				];
 
-				cmakeFlags = [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + quartzCode)];
+				cmakeFlags = [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + quartz.src)];
 			};
 		in {
 			packages = {
