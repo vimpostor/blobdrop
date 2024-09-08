@@ -28,7 +28,7 @@
 					xorg.xcbutilwm
 				];
 
-				cmakeFlags = [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + quartz.src)];
+				cmakeFlags = quartz.cmakeFlags { inherit pkgs; icons = false; };
 			};
 		in {
 			packages = {
