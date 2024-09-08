@@ -2,11 +2,10 @@
 	description = "Drag and drop your files directly out of the terminal";
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+		quartz.url = "github:vimpostor/quartz";
 	};
 
-	outputs = { self, nixpkgs }:
-	let eachSystem = with nixpkgs.lib; f: foldAttrs mergeAttrs {} (map (s: mapAttrs (_: v: { ${s} = v; }) (f s)) systems.flakeExposed);
-	in eachSystem (system:
+	outputs = { self, nixpkgs, quartz }: quartz.lib.eachSystem (system:
 		let
 			pkgs = nixpkgs.legacyPackages.${system};
 			stdenvs = [ { name = "gcc"; pkg = pkgs.gcc14Stdenv; } { name = "clang"; pkg = pkgs.llvmPackages_18.stdenv; } ];
