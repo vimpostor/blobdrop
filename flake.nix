@@ -28,7 +28,7 @@
 					xorg.xcbutilwm
 				];
 
-				cmakeFlags = quartz.cmakeFlags { inherit pkgs; icons = false; };
+				cmakeFlags = quartz.cmakeWrapper { inherit pkgs; cmakeFile = ./CMakeLists.txt; };
 			};
 		in {
 			packages = {
