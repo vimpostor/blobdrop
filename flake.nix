@@ -11,7 +11,7 @@
 			defaultStdenv = (builtins.head stdenvs).name;
 			makeStdenvPkg = env: env.mkDerivation {
 				pname = "blobdrop";
-				version = builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile ./CMakeLists.txt));
+				version = quartz.lib.cmakeProjectVersion ./CMakeLists.txt;
 
 				src = ./.;
 
@@ -28,7 +28,7 @@
 					xorg.xcbutilwm
 				];
 
-				cmakeFlags = quartz.cmakeWrapper { inherit pkgs; cmakeFile = ./CMakeLists.txt; };
+				cmakeFlags = quartz.lib.cmakeWrapper { inherit pkgs; cmakeFile = ./CMakeLists.txt; };
 			};
 		in {
 			packages = {
