@@ -7,6 +7,7 @@ _blobdrop() {
 		-c --cursor
 		-f --frontend
 		-i --intercept
+		-I --icon-only
 		-k --keep
 		-p --persistent
 		-P --prefix

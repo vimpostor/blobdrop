@@ -5,7 +5,7 @@ blobdrop \- Quickly drag and drop files from the terminal
 
 .SH SYNOPSIS
 .B blobdrop
-[\-hvbcikpRt]
+[\-hvbciIkpRt]
 [\-f \fIOPT\fP]
 [\-P \fIOPT\fP]
 [\-s \fIOPT\fP]
@@ -49,6 +49,11 @@ Intercept another drag and drop operation. This option is useful to convert othe
 frontend to intercept another drag and drop operation. Once an element is dropped into the window, the
 .B \-\-frontend
 option determines the frontend of the outgoing converted drag and drop event.
+.TP
+.B \-I, \-\-icon-only
+Show only the thumbnail icons in windows. This option has no effect if a frontend other than the
+.B gui
+frontend is active.
 .TP
 .B \-k, \-\-keep
 When using sink mode, keep dropped files around by default.

@@ -85,6 +85,7 @@ ListView {
 				verticalAlignment: Text.AlignVCenter
 				horizontalAlignment: Text.AlignHCenter
 				wrapMode: Text.Wrap
+				visible: !Settings.iconOnly
 				ToolTip.text: path
 				ToolTip.visible: dragArea.containsMouse && (count > 1)
 				ToolTip.delay: 1500

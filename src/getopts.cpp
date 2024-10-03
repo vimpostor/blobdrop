@@ -38,6 +38,9 @@ bool parse(const QStringList &args) {
 	QCommandLineOption intercept_opt(QStringList() << "i"
 												   << "intercept",
 		"Intercept another drag and drop.");
+	QCommandLineOption icononly_opt(QStringList() << "I"
+												  << "icon-only",
+		"Only show icons.");
 	QCommandLineOption keep_opt(QStringList() << "k"
 											  << "keep",
 		"Keep dropped files around in sink mode.");
@@ -46,7 +49,7 @@ bool parse(const QStringList &args) {
 		"Do not auto-hide the window while dragging.");
 	QCommandLineOption prefix_opt(QStringList() << "P"
 												<< "prefix",
-		"Specify a remote prefix",
+		"Specify a remote prefix.",
 		"prefix");
 	QCommandLineOption remote_opt(QStringList() << "R"
 												<< "remote",
@@ -63,7 +66,7 @@ bool parse(const QStringList &args) {
 		"The amount of drags after which the program should automatically close. Must be one of:" + QString::fromStdString(auto_quit_descr) + " (all is default)",
 		"behaviour");
 
-	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, prefix_opt, remote_opt, thumbnailsize_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, icononly_opt, keep_opt, persistent_opt, prefix_opt, remote_opt, thumbnailsize_opt, ontop_opt, auto_quit_opt});
 	p.process(args);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -116,6 +119,7 @@ bool parse(const QStringList &args) {
 	Settings::get()->frameless = p.isSet(frameless_opt);
 	Settings::get()->spawn_on_cursor = p.isSet(cursor_opt);
 	Settings::get()->intercept = p.isSet(intercept_opt);
+	Settings::get()->icon_only = p.isSet(icononly_opt);
 
 	// add all trailing arguments to the path list
 	std::ranges::for_each(p.positionalArguments(), [](auto i) { PathRegistry::get()->add_path(i.toStdString()); });

@@ -9,7 +9,7 @@ ApplicationWindow {
 	visible: Settings.needsGui
 	flags: Qt.Dialog | (Settings.alwaysOnTop ? Qt.WindowStaysOnTopHint : 0) | (Settings.alwaysOnBottom ? Qt.WindowStaysOnBottomHint : 0) | (Settings.frameless ? Qt.FramelessWindowHint : 0)
 	title: Stdin.closed ? "Blobdrop" : "Reading from stdin..."
-	width: 400
+	width: Settings.iconOnly ? Settings.thumbnailSize + 16 : 400
 	height: Math.max(48, Math.min(800, pathView.count ? pathView.contentHeight + 2 * pathView.anchors.topMargin : 350))
 	Material.theme: Material.System
 	Material.primary: Material.Green
