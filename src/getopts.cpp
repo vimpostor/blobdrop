@@ -51,6 +51,10 @@ bool parse(const QStringList &args) {
 	QCommandLineOption remote_opt(QStringList() << "R"
 												<< "remote",
 		"Enable ssh remote transparency.");
+	QCommandLineOption thumbnailsize_opt(QStringList() << "s"
+													   << "thumb-size",
+		"Set thumbnail size (default 64)",
+		"size");
 	QCommandLineOption ontop_opt(QStringList() << "t"
 											   << "ontop",
 		"Keep the window on top of other windows.");
@@ -59,7 +63,7 @@ bool parse(const QStringList &args) {
 		"The amount of drags after which the program should automatically close. Must be one of:" + QString::fromStdString(auto_quit_descr) + " (all is default)",
 		"behaviour");
 
-	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, prefix_opt, remote_opt, ontop_opt, auto_quit_opt});
+	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, keep_opt, persistent_opt, prefix_opt, remote_opt, thumbnailsize_opt, ontop_opt, auto_quit_opt});
 	p.process(args);
 
 	if (p.isSet(auto_quit_opt)) {
@@ -72,6 +76,15 @@ bool parse(const QStringList &args) {
 		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
 	}
 	Settings::get()->remote = p.isSet(remote_opt);
+	if (p.isSet(thumbnailsize_opt)) {
+		const auto v = p.value(thumbnailsize_opt).toInt();
+		if (v) {
+			Settings::get()->thumbnail_size = v;
+		} else {
+			std::cerr << "Thumbnail size must be an integer." << std::endl;
+			return false;
+		}
+	}
 	if (p.isSet(prefix_opt)) {
 		if (!Settings::get()->remote) {
 			std::cerr << "This option has no effect if remote support is not enabled" << std::endl;

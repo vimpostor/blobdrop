@@ -14,6 +14,7 @@ class Settings : public QObject {
 	Q_PROPERTY(bool needsGui READ needs_gui NOTIFY hideGuiChanged)
 	Q_PROPERTY(bool spawnOnCursor MEMBER spawn_on_cursor CONSTANT)
 	Q_PROPERTY(bool intercept MEMBER intercept CONSTANT)
+	Q_PROPERTY(int thumbnailSize MEMBER thumbnail_size CONSTANT)
 public:
 	enum class AutoQuitBehavior {
 		Never,
@@ -45,6 +46,7 @@ public:
 	bool suppress_always_on_bottom = false;
 	bool spawn_on_cursor = false;
 	bool intercept = false;
+	int thumbnail_size = 64;
 	bool remote = false;
 signals:
 	void alwaysOnBottomChanged(bool alwaysOnBottom);

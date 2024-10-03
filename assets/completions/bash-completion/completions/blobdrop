@@ -11,6 +11,7 @@ _blobdrop() {
 		-p --persistent
 		-P --prefix
 		-R --remote
+		-s --thumb-size
 		-t --ontop
 		-x --auto-quit
 	"

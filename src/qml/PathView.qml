@@ -23,8 +23,8 @@ ListView {
 			visible: false
 			icon.name: "emblem-documents-symbolic"
 			icon.color: "transparent"
-			width: 64
-			height: 64
+			width: Settings.thumbnailSize
+			height: Settings.thumbnailSize
 		}
 		DragArea {
 			anchors.fill: parent
@@ -48,7 +48,7 @@ ListView {
 		}
 	}
 	delegate: Item {
-		height: 64
+		height: Settings.thumbnailSize
 		width: ListView.view.width
 		Pane {
 			id: pane
