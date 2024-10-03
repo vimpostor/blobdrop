@@ -100,7 +100,7 @@ bool parse(const QStringList &args) {
 
 	if (p.isSet(frontend_opt)) {
 		// find frontend, even if only a prefix matches
-		auto frontend_selection = std::views::zip(frontend_opts, std::views::iota(0UZ, frontend_opts.size() - 1)) | std::views::filter([&](const auto &i) { return std::string(std::get<0>(i)).starts_with(p.value(frontend_opt).toStdString()); });
+		auto frontend_selection = std::views::zip(frontend_opts, std::views::iota(0UZ, frontend_opts.size())) | std::views::filter([&](const auto &i) { return std::string(std::get<0>(i)).starts_with(p.value(frontend_opt).toStdString()); });
 		if (frontend_selection.empty()) {
 			// match must be unique
 			std::cerr << "frontend needs to be one of the following:" << frontends_descr << std::endl;
