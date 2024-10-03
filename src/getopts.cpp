@@ -33,7 +33,7 @@ bool parse(const QStringList &args) {
 		"Spawn window at the mouse cursor.");
 	QCommandLineOption frontend_opt(QStringList() << "f"
 												  << "frontend",
-		"Selects the frontend. Must be one of:" + QString::fromStdString(frontends_descr) + " (auto is default)",
+		"Selects the frontend. Must be one of:" + QString::fromStdString(frontends_descr) + " (default auto).",
 		"frontend");
 	QCommandLineOption intercept_opt(QStringList() << "i"
 												   << "intercept",
@@ -56,14 +56,14 @@ bool parse(const QStringList &args) {
 		"Enable ssh remote transparency.");
 	QCommandLineOption thumbnailsize_opt(QStringList() << "s"
 													   << "thumb-size",
-		"Set thumbnail size (default 64)",
+		"Set thumbnail size (default 64).",
 		"size");
 	QCommandLineOption ontop_opt(QStringList() << "t"
 											   << "ontop",
 		"Keep the window on top of other windows.");
 	QCommandLineOption auto_quit_opt(QStringList() << "x"
 												   << "auto-quit",
-		"The amount of drags after which the program should automatically close. Must be one of:" + QString::fromStdString(auto_quit_descr) + " (all is default)",
+		"The amount of drags after which the program should automatically close. Must be one of:" + QString::fromStdString(auto_quit_descr) + " (default all).",
 		"behaviour");
 
 	p.addOptions({frameless_opt, cursor_opt, frontend_opt, intercept_opt, icononly_opt, keep_opt, persistent_opt, prefix_opt, remote_opt, thumbnailsize_opt, ontop_opt, auto_quit_opt});
