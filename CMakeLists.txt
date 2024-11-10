@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 list(APPEND QT_MODULES Core Qml Quick QuickControls2 DBus Svg)
-find_package(Qt6 6.7 COMPONENTS ${QT_MODULES} REQUIRED)
+find_package(Qt6 6.8 COMPONENTS ${QT_MODULES} REQUIRED)
 qt_standard_project_setup()
 list(TRANSFORM QT_MODULES PREPEND "Qt6::")
 
