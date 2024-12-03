@@ -42,7 +42,7 @@ qt_add_resources(RESOURCES ${RSRC})
 
 qt_add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
 
-qt_add_qml_module(${PROJECT_NAME} URI "Backend" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
+qt_add_qml_module(${PROJECT_NAME} URI "Blobdrop" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
 set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIBS})

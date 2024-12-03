@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 	QQmlApplicationEngine engine;
 	engine.addImportPath(QStringLiteral(":/"));
 
-	engine.loadFromModule("Backend", "Main");
+	engine.loadFromModule("Blobdrop", "Main");
 	if (engine.rootObjects().isEmpty()) {
 		return EXIT_FAILURE;
 	}
