@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.31)
 cmake_policy(SET CMP0048 NEW)
 project(blobdrop VERSION 2.1 DESCRIPTION "Drag and drop files directly out of the terminal")
 
@@ -25,7 +25,7 @@ if (UNIX AND NOT APPLE)
 endif()
 
 include(FetchContent)
-FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.8)
+FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.9)
 FetchContent_MakeAvailable(quartz)
 
 list(APPEND LINK_LIBS ${PKGCONFIG_MODULES})
