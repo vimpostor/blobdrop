@@ -28,7 +28,7 @@ public:
 	Q_INVOKABLE void finish_init();
 	void add_path(Path p);
 signals:
-	void foldedUriListChanged(QString foldedUriList);
+	void foldedUriListChanged();
 private:
 	enum RoleNames {
 		PathRole = Qt::UserRole,
