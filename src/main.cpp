@@ -32,7 +32,6 @@ int main(int argc, char *argv[]) {
 	QGuiApplication::setWindowIcon(QIcon::fromTheme("blobdrop", QIcon(":/blobdrop")));
 
 	QQmlApplicationEngine engine;
-	engine.addImportPath(QStringLiteral(":/"));
 
 	engine.loadFromModule("Blobdrop", "Main");
 	if (engine.rootObjects().isEmpty()) {

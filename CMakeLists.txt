@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.31)
 cmake_policy(SET CMP0048 NEW)
 project(blobdrop VERSION 2.1 DESCRIPTION "Drag and drop files directly out of the terminal")
 
@@ -9,8 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 list(APPEND QT_MODULES Core Qml Quick QuickControls2 DBus Svg)
-find_package(Qt6 6.8 COMPONENTS ${QT_MODULES} REQUIRED)
-qt_standard_project_setup()
+find_package(Qt6 6.9 COMPONENTS ${QT_MODULES} REQUIRED)
+qt_standard_project_setup(REQUIRES ${Qt6_VERSION})
 list(TRANSFORM QT_MODULES PREPEND "Qt6::")
 
 list(APPEND LINK_LIBS ${QT_MODULES})
@@ -25,7 +25,7 @@ if (UNIX AND NOT APPLE)
 endif()
 
 include(FetchContent)
-FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.8)
+FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.9.1)
 FetchContent_MakeAvailable(quartz)
 
 list(APPEND LINK_LIBS ${PKGCONFIG_MODULES})
@@ -35,14 +35,13 @@ add_compile_definitions(BLOBDROP_VERSION="${PROJECT_VERSION}")
 
 file(GLOB_RECURSE SRCS "src/*.cpp")
 file(GLOB_RECURSE HDRS "src/*.hpp")
-file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_SOURCE_DIR}" "src/qml/*.qml")
+file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.qml")
 
-list(APPEND RSRC "icons.qrc")
-qt_add_resources(RESOURCES ${RSRC})
+qt_add_resources(RESOURCES "${CMAKE_SOURCE_DIR}/icons.qrc")
 
 qt_add_executable(${PROJECT_NAME} ${SRCS} ${RESOURCES})
 
-qt_add_qml_module(${PROJECT_NAME} URI "Blobdrop" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
+qt_add_qml_module(${PROJECT_NAME} URI "Blobdrop" VERSION "${PROJECT_VERSION}" QML_FILES ${QMLS} SOURCES "src/Models/path_model.cpp")
 set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIBS})
