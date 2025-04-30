@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls.Material
 import Quartz
 
-import Blobdrop
+import Backend
 
 ListView {
 	id: pathView

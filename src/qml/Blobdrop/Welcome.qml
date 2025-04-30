@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls.Material
 
-import Blobdrop
+import Backend
 
 Column {
 	spacing: 64

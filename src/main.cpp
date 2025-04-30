@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 
 	QQmlApplicationEngine engine;
 
-	engine.loadFromModule("Blobdrop", "Main");
+	engine.loadFromModule("Backend", "Main");
 	if (engine.rootObjects().isEmpty()) {
 		return EXIT_FAILURE;
 	}
