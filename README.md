@@ -34,19 +34,16 @@ For more options see `blobdrop -h` or the man page `blobdrop(1)`.
 
 ## Features
 
-- Drag files to other applications
-- Pipe filenames asynchronously into stdin
 - Start drag automatically without a GUI
 - Hide the parent terminal emulator while dragging
 - Automatically quit once all paths have been dragged
 - Auto-hide the GUI while dragging
 - Show mime icons and thumbnails for media
 - Drag all files at once
-- Act as a sink and print dropped files to the terminal
-- Optionally keep the window on top
-- Quickly open files with a single click
-- Respect system dark mode
+- Preview files with a single click
 - Shell completions
+- Act as a sink and print dropped files to the terminal
+- Pipe filenames asynchronously into stdin
 
 ### Frontends
 
