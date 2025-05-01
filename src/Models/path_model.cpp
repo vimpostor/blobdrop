@@ -66,7 +66,7 @@ void PathModel::multiselect(int i) {
 void PathModel::refresh_folded_paths() {
 	// only add multiselected items in multiselect mode
 	auto v = paths | std::views::filter([&](const auto &i) { return !multiselected || i.multiselect; });
-	folded_uri_list = std::accumulate(v.cbegin(), v.cend(), QString(), [](QString s, const auto p) { return s.append(QString::fromStdString(p.get_uri()) + "\r\n"); });
+	folded_uri_list = std::ranges::fold_left(v, QString(), [](QString s, const auto p) { return s.append(QString::fromStdString(p.get_uri()) + "\r\n"); });
 	emit foldedUriListChanged();
 }
 
