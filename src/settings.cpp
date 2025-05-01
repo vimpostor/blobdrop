@@ -1,5 +1,12 @@
 #include "settings.hpp"
 
+bool Settings::supportsImmediate() const {
+#if defined(Q_OS_WIN)
+	return false;
+#endif
+	return !quartz::util::is_wayland();
+}
+
 void Settings::setAlwaysOnBottom(const bool v) {
 	if (!suppress_always_on_bottom) {
 		always_on_bottom = v;
@@ -13,7 +20,7 @@ Settings::Frontend Settings::effective_frontend(bool outgoing) const {
 	} else if (frontend == Settings::Frontend::Auto) {
 		if (intercept) {
 			// for intercept and outgoing prefer Immediate as default frontend
-			return quartz::util::is_wayland() ? Settings::Frontend::Stdout : Settings::Frontend::Immediate;
+			return supportsImmediate() ? Settings::Frontend::Immediate : Settings::Frontend::Stdout;
 		} else {
 			// in general (not outgoing), prefer immediate and fallback to GUI
 			return can_drag_immediately ? Settings::Frontend::Immediate : Settings::Frontend::Gui;

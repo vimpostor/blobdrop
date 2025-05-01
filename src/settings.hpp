@@ -35,6 +35,7 @@ public:
 
 	AutoQuitBehavior auto_quit_behavior = Settings::AutoQuitBehavior::All;
 	Frontend frontend = Settings::Frontend::Auto;
+	bool supportsImmediate() const;
 	void setAlwaysOnBottom(const bool v);
 	Frontend effective_frontend(bool outgoing = false) const;
 	void setHideGui(const bool h);
