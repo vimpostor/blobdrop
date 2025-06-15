@@ -21,20 +21,19 @@ if (UNIX AND NOT APPLE)
 		pkg_check_modules("${PKG}" REQUIRED IMPORTED_TARGET "${PKG}")
 	endforeach()
 	list(TRANSFORM PKGCONFIG_MODULES PREPEND "PkgConfig::")
+	list(APPEND LINK_LIBS ${PKGCONFIG_MODULES})
 endif()
 
 include(FetchContent)
 FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG v0.9.1)
 FetchContent_MakeAvailable(quartz)
 
-list(APPEND LINK_LIBS ${PKGCONFIG_MODULES})
-
 include_directories("src" "src/Models")
 add_compile_definitions(BLOBDROP_VERSION="${PROJECT_VERSION}")
 
 file(GLOB_RECURSE SRCS "src/*.cpp")
 file(GLOB_RECURSE HDRS "src/*.hpp")
-file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.qml")
+file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "src/qml/*.qml")
 
 qt_add_resources(RESOURCES "${CMAKE_SOURCE_DIR}/icons.qrc")
 
