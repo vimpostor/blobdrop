@@ -72,7 +72,7 @@ void PathModel::refresh_folded_paths() {
 
 void PathModel::open(int i) const {
 	if (!paths[i].open()) {
-		std::cerr << "Failed to open path" << paths[i].get_uri();
+		std::println(stderr, "Failed to open path {}", paths[i].get_uri());
 	};
 }
 

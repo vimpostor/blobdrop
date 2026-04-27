@@ -4,6 +4,7 @@
 
 #include <QGuiApplication>
 #include <iostream>
+#include <print>
 #include <xcb/xcb.h>
 
 // Is 0 really quite correct here?
@@ -45,7 +46,7 @@ xcb_window_t Xcb::active_window() {
 	xcb_window_t res;
 	// try to get the currently active/focused window
 	if (!xcb_ewmh_get_active_window_reply(&ewmh, xcb_ewmh_get_active_window_unchecked(&ewmh, default_screen), &res, nullptr)) {
-		std::cerr << "Cannot get active window" << std::endl;
+		std::println(stderr, "Cannot get active window");
 		return 0;
 	}
 	return res;

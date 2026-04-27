@@ -12,7 +12,7 @@ Path::Path(const std::string &p)
 	try {
 		exists = std::filesystem::exists(path);
 	} catch (const std::filesystem::filesystem_error &ex) {
-		std::cerr << ex.what() << std::endl;
+		std::println(stderr, "{}", ex.what());
 	}
 	iconName = MimeDb::get()->getIcon(path);
 

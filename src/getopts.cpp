@@ -73,7 +73,7 @@ bool parse(const QStringList &args) {
 		const auto opt = p.value(auto_quit_opt);
 		int choice = std::ranges::find(auto_quit_opts, opt.toStdString()) - auto_quit_opts.cbegin();
 		if (static_cast<Settings::AutoQuitBehavior>(choice) > Settings::AutoQuitBehavior::All) {
-			std::cerr << "auto-quit needs to be one of:" << auto_quit_descr << std::endl;
+			std::println(stderr, "auto-quit needs to be one of:{}", auto_quit_descr);
 			return false;
 		}
 		Settings::get()->auto_quit_behavior = static_cast<Settings::AutoQuitBehavior>(choice);
@@ -84,13 +84,13 @@ bool parse(const QStringList &args) {
 		if (v) {
 			Settings::get()->thumbnail_size = v;
 		} else {
-			std::cerr << "Thumbnail size must be an integer." << std::endl;
+			std::println(stderr, "Thumbnail size must be an integer.");
 			return false;
 		}
 	}
 	if (p.isSet(prefix_opt)) {
 		if (!Settings::get()->remote) {
-			std::cerr << "This option has no effect if remote support is not enabled" << std::endl;
+			std::println(stderr, "This option has no effect if remote support is not enabled");
 			return false;
 		}
 		Remote::get()->hardcode_prefix(p.value(prefix_opt));
@@ -103,13 +103,12 @@ bool parse(const QStringList &args) {
 		auto frontend_selection = std::views::zip(frontend_opts, std::views::iota(0UZ, frontend_opts.size())) | std::views::filter([&](const auto &i) { return std::string(std::get<0>(i)).starts_with(p.value(frontend_opt).toStdString()); });
 		if (frontend_selection.empty()) {
 			// match must be unique
-			std::cerr << "frontend needs to be one of the following:" << frontends_descr << std::endl;
+			std::println(stderr, "frontend needs to be one of the following:{}", frontends_descr);
 			return false;
 		}
 		const auto c = static_cast<Settings::Frontend>(std::get<1>(frontend_selection.front()));
 		if (c == Settings::Frontend::Immediate && quartz::util::is_wayland()) {
-			std::cerr << "Wayland does not have support for this frontend, as the spec requires an implicit grab for native wl_data_device::start_drag() operations, thus making it impossible to implement this workflow on Wayland." << std::endl
-					  << "This frontend might work over XWayland (force it with QT_QPA_PLATFORM=xcb) but will likely be very buggy. Please switch to X11 to get the optimal usability experience or use another frontend." << std::endl;
+			std::println(stderr, "Wayland does not have support for this frontend, as the spec requires an implicit grab for native wl_data_device::start_drag() operations, thus making it impossible to implement this workflow on Wayland.\nThis frontend might work over XWayland (force it with QT_QPA_PLATFORM=xcb) but will likely be very buggy. Please switch to X11 to get the optimal usability experience or use another frontend.");
 			return false;
 		}
 		Settings::get()->frontend = c;

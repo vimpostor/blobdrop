@@ -40,13 +40,13 @@ void Remote::init() {
 
 	username = get_username();
 	if (username.isEmpty()) {
-		std::cerr << "Could not read username" << std::endl;
+		std::println(stderr, "Could not read username");
 		return;
 	}
 
 	host = get_local_domain();
 	if (host.isEmpty()) {
-		std::cerr << "Could not read host" << std::endl;
+		std::println(stderr, "Could not read host");
 		return;
 	}
 
@@ -62,7 +62,7 @@ QString Remote::get_local_domain() {
 #else
 	char host[_POSIX_HOST_NAME_MAX];
 	if (gethostname(host, _POSIX_HOST_NAME_MAX)) {
-		std::cerr << "gethostname failed" << std::endl;
+		std::println(stderr, "gethostname failed");
 		return {};
 	}
 
@@ -75,7 +75,7 @@ QString Remote::get_local_domain() {
 
 	int err = getaddrinfo(host, "http", &hints, &res);
 	if (err) {
-		std::cerr << "getaddrinfo failed: " << gai_strerror(err) << std::endl;
+		std::println(stderr, "getaddrinfo failed: {}", gai_strerror(err));
 		return {};
 	}
 
@@ -83,7 +83,7 @@ QString Remote::get_local_domain() {
 	std::string result;
 
 	if (!strncmp(fqdn, host, _POSIX_HOST_NAME_MAX)) {
-		std::cerr << "failed to retreive a proper FQDN for " << host << std::endl;
+		std::println(stderr, "failed to retreive a proper FQDN for {}", host);
 	} else {
 		result = fqdn;
 
@@ -115,7 +115,7 @@ int Remote::get_port() {
 			try {
 				return std::stoi(ssh_connection.substr(n + 1));
 			} catch (std::invalid_argument const &) {
-				std::cerr << "Failed to parse port number " << ssh_connection << std::endl;
+				std::println(stderr, "Failed to parse port number {}", ssh_connection);
 			}
 		}
 	}

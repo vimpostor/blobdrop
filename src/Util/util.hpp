@@ -2,6 +2,7 @@
 
 #include <QJSEngine>
 #include <filesystem>
+#include <print>
 #include <qglobal.h>
 #include <qqml.h>
 #include <quartz/macros.hpp>
