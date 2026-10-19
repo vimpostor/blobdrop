@@ -122,7 +122,7 @@ void Backend::copy_to_clipboard(const std::vector<Path> &paths) {
 }
 
 void Backend::hide_terminal() {
-#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+#ifdef BLOBDROP_WITH_X11
 	if (Settings::get()->suppress_always_on_bottom || Settings::get()->intercept || !Stdin::get()->is_tty || !xcb.init()) {
 		return;
 	}
@@ -135,7 +135,7 @@ void Backend::hide_terminal() {
 }
 
 void Backend::restore_terminal() {
-#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+#ifdef BLOBDROP_WITH_X11
 	if (!last_window) {
 		return;
 	}

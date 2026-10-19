@@ -104,7 +104,7 @@ This frontend starts the drag operation automatically without showing a GUI in b
 .br
 Due to limitations in Wayland, this option is only available on X11. This option also works over XWayland, but then the target drop location is required to be running in XWayland too. Native Wayland does not have support for this frontend, because the spec requires an implicit grab for native wl_data_device::start_drag() operations, thus making it impossible to implement this workflow on Wayland.
 .br
-Another feature implemented in immediate mode is that the parent terminal window will be hidden automatically during the drag operation, unless the
+When built with the optional xcb and xcb-ewmh dependencies available, another feature implemented in immediate mode is that the parent terminal window will be hidden automatically during the drag operation, unless the
 .B \-\-persistent
 option is set. This is useful for usecases where the target application is hidden behind the terminal where blobdrop was started from, which is often the case with floating window managers. This is an additional second usability improvement that is unfortunately also not possible to implement on Wayland due to "security" restrictions.
 

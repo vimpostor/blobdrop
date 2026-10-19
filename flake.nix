@@ -24,8 +24,6 @@
 					qt6.qtbase
 					qt6.qtdeclarative
 					qt6.qtsvg
-					xorg.libxcb
-					xorg.xcbutilwm
 				];
 
 				cmakeFlags = quartz.lib.cmakeWrapper { inherit pkgs; cmakeFile = ./CMakeLists.txt; };

@@ -2,7 +2,7 @@
 
 #include <qglobal.h>
 
-#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+#ifdef BLOBDROP_WITH_X11
 
 #include <xcb/xcb_ewmh.h>
 #include <xcb/xproto.h>

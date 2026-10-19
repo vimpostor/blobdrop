@@ -9,7 +9,7 @@
 #include "Util/util.hpp"
 #include "path.hpp"
 
-#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+#ifdef BLOBDROP_WITH_X11
 #include "xcb.hpp"
 #endif
 
@@ -36,7 +36,7 @@ signals:
 	void drag_finished();
 private:
 	QDrag *drag = nullptr;
-#if !defined(Q_OS_WIN) && !defined(Q_OS_DARWIN)
+#ifdef BLOBDROP_WITH_X11
 	Xcb xcb;
 	xcb_window_t last_window = 0;
 #endif

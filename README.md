@@ -24,6 +24,8 @@ cmake --build build
 cmake --install build
 ```
 
+X11 terminal lowering is enabled automatically on Unix (except macOS) when `pkg-config` finds the `xcb` and `xcb-ewmh` development packages. Otherwise, it is omitted; Qt still supports running Blobdrop on X11 without it.
+
 # Usage
 
 ```bash
